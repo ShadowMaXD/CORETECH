@@ -18,7 +18,14 @@
             z-index: 2;
         }
 
-     
+        .hero-subtitle {
+            font-size: 14px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #a0a0a0;
+            margin-bottom: 10px;
+        }
 
         .hero-title {
             font-size: clamp(40px, 5vw, 85px); /* Адаптивный размер шрифта */
@@ -122,4 +129,3 @@
             .hero-description { margin: 0 auto 40px; }
             .hero-image img { max-width: 90%; margin-top: 40px; }
         }
-        
