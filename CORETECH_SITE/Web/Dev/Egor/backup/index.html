@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="ru">
+</head>
+</style>
+<body>
+
+    <header class="site-header">
+        <div class="header-logo">
+            <img src="images/logo_ipc.png" alt="IPC">
+        </div>
+
+        <nav class="header-nav">
+            <a href="#">Каталог ПК</a>
+            <a href="#">Этапы работы</a>
+            <a href="#">Фото</a>
+            <a href="#">Команда</a>
+            <a href="#">Новости</a>
+            <a href="#">Отзывы</a>
+        </nav>
+
+        <div class="header-actions">
+            <div class="social-circle">
+                <img src="https://img.icons8.com/color/48/avito.png" alt="Avito">
+            </div>
+            <div class="social-circle">
+                <img src="https://img.icons8.com/color/48/vk-circled.png" alt="VK">
+            </div>
+            <a href="#" class="btn-consult">
+                Консультация <span>→</span>
+            </a>
+        </div>
+    </header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Собери свой IPC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800;900&display=swap" rel="stylesheet">
+    
+    <style id="header-styles">
+        .site-header {
+            width: 100%;
+            max-width: 1000px; 
+            margin: 20px auto 40px auto; 
+            background: #ffffff;
+            border-radius: 50px;
+            padding: 10px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            box-sizing: border-box;
+        }
+
+        .header-logo img {
+            height: 45px;
+            display: block;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        .header-nav a {
+            text-decoration: none;
+            color: #1a1a1a;
+            font-weight: 900;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .social-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .social-circle img {
+            width: 24px;
+            height: 24px;
+        }
+
+        .btn-consult {
+            background: #0f0f0f;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 13px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.2s ease;
+        }
+
+        .btn-consult:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+
+    <style>
+        :root {
+            --bg-color: #f7f7f7;
+            --card-bg: #0f0f0f;
+            --accent-purple: #a465ff;
+            --text-white: #ffffff;
+            --text-gray: #a0a0a0;
+            --blue-vk: #007eff;
+            --blue-avito: #006aff;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+            min-height: 100vh;
+        }
+
+        .container { 
+            width: 100%;
+            max-width: 1300px; 
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 56px;
+            font-weight: 900;
+            margin: 0 0 40px 0;
+            color: #1a1a1a;
+        }
+
+        h1 span { color: var(--accent-purple); }
+
+        .widgets-wrapper {
+            display: flex;
+            gap: 20px;
+            align-items: stretch; 
+            width: 100%;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 40px;
+            padding: 35px;
+            color: var(--text-white);
+            display: flex;
+            box-sizing: border-box;
+        }
+
+        .main-widget {
+            flex: 2.3;
+            gap: 30px;
+        }
+
+        .pc-image-container {
+            width: 320px;
+            height: 320px;
+            background: #222;
+            border-radius: 25px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .pc-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .config-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 260px;
+            flex-shrink: 0;
+        }
+
+        .config-info h2 {
+            font-size: 34px;
+            font-weight: 900;
+            margin: 0;
+            text-transform: uppercase;
+            line-height: 34px;
+        }
+
+        .config-info h2 span { color: var(--accent-purple); }
+
+        .badge {
+            display: inline-flex;
+            border: 2px solid #2a2a2a;
+            border-radius: 30px;
+            padding: 6px 14px;
+            font-size: 15px;
+            font-weight: 900;
+            margin-top: 15px;
+        }
+
+        .price-text {
+            font-size: 28px;
+            font-weight: 900;
+            margin-bottom: 5px;
+        }
+
+        .sub-text {
+            color: var(--text-gray);
+            font-size: 13px;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .btn-anchor {
+            width: 100%;
+            padding-top: 15px;
+            margin-top: -15px;
+        }
+
+        .btn-purple {
+            background-color: var(--accent-purple);
+            color: white;
+            border: none;
+            padding: 18px;
+            border-radius: 18px;
+            font-weight: 900;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.6s ease;
+            box-shadow: 0 0 15px rgba(164, 101, 255, 0.5), 0 0 30px rgba(164, 101, 255, 0.2);
+            animation: neonBreathe 3s infinite ease-in-out;
+        }
+
+        @keyframes neonBreathe {
+            0%, 100% { box-shadow: 0 0 15px rgba(164, 101, 255, 0.5), 0 0 30px rgba(164, 101, 255, 0.2); }
+            50% { box-shadow: 0 0 25px rgba(164, 101, 255, 0.8), 0 0 45px rgba(164, 101, 255, 0.4); }
+        }
+
+        .btn-anchor:hover .btn-purple {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(164, 101, 255, 0.9);
+        }
+
+        .specs-list {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-width: 250px;
+        }
+
+        .specs-header {
+            color: var(--text-gray);
+            font-size: 18px;
+            font-weight: 900;
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .spec-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            height: 50px;
+        }
+
+        .spec-icon {
+            width: 42px;
+            height: 42px;
+            background: #1e1e1e;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .spec-label { color: var(--text-gray); font-size: 11px; font-weight: 800; }
+
+        /* ИСПРАВЛЕНИЕ: Фиксированная высота для предотвращения прыжков */
+        .spec-value { 
+            font-weight: 900; 
+            font-size: 15px; 
+            white-space: pre; 
+            min-height: 1.2em; /* Резервируем место под строку */
+            display: block;
+        }
+
+        /* Дополнительно: эффект курсора (опционально) */
+        .spec-value::after {
+            content: '|';
+            color: var(--accent-purple);
+            animation: blink 0.7s infinite;
+            margin-left: 2px;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        .side-widget {
+            flex: 1;
+            min-width: 320px;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .side-widget h3 { font-size: 22px; font-weight: 900; text-transform: uppercase; margin: 0; line-height: 1.1; }
+        .side-widget p { color: var(--text-gray); font-size: 14px; font-weight: 800; margin-top: 15px; }
+
+        .social-buttons { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+
+        .btn-social {
+            padding: 16px;
+            border-radius: 18px;
+            color: white;
+            font-weight: 900;
+            text-decoration: none;
+            text-align: center;
+            font-size: 14px;
+            text-transform: uppercase;
+            transition: filter 0.2s ease, transform 0.2s ease;
+        }
+
+        .btn-social:hover { filter: brightness(0.7); transform: scale(0.98); }
+
+        .avito { background-color: var(--blue-avito); }
+        .vk { background-color: var(--blue-vk); }
+    </style>
+    <div class="container">
+        <h1>Собери свой ПК<span> вместе с CORETECH</span></h1>
+
+        <div class="widgets-wrapper">
+            <div class="card main-widget">
+                <div class="pc-image-container">
+                    <img src="images/pc1.jpg" alt="PC Image">
+                </div>
+
+                <div class="config-info">
+                    <div>
+                        <h2>КОНФИГ<br><span>ДЛЯ ТЕБЯ</span></h2>
+                        <div class="badge">✓ ЛЮБЫЕ ЗАДАЧИ</div>
+                    </div>
+                    <div>
+                        <div class="price-text">Любой бюджет</div>
+                        <div class="sub-text">● Индивидуальная сборка</div>
+                        <div class="btn-anchor">
+                            <button class="btn-purple">
+                                Собрать компьютер <span>→</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="specs-list">
+                    <div class="specs-header">⚙ ПРИМЕРЫ СБОРОК</div>
+                    <div class="spec-item">
+                        <div class="spec-icon">🧠</div>
+                        <div>
+                            <div class="spec-label">ПРОЦЕССОР</div>
+                            <div class="spec-value" id="cpu-val"></div>
+                        </div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-icon">📺</div>
+                        <div>
+                            <div class="spec-label">ВИДЕОКАРТА</div>
+                            <div class="spec-value" id="gpu-val"></div>
+                        </div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-icon">📼</div>
+                        <div>
+                            <div class="spec-label">ПАМЯТЬ</div>
+                            <div class="spec-value" id="ram-val"></div>
+                        </div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-icon">❄</div>
+                        <div>
+                            <div class="spec-label">ОХЛАЖДЕНИЕ</div>
+                            <div class="spec-value" id="cool-val"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card side-widget">
+                <div>
+                    <h3>Не разбираешься<br>в&nbsp;комплектующих?</h3>
+                    <p>Мы подберем лучшее решение для ваших целей и задач.</p>
+                </div>
+                <div class="social-buttons">
+                    <a href="#" class="btn-social avito">Написать на Avito</a>
+                    <a href="#" class="btn-social vk">Написать в VK</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const builds = [
+            {
+                cpu: "Ryzen 7 7800X3D",
+                gpu: "NVIDIA RTX 5070 12Гб",
+                ram: "32GB DDR5 6000MHz",
+                cooling: "Воздушное охлаждение"
+            },
+            {
+                cpu: "Core i5-13600K",
+                gpu: "RTX 4060 Ti 16GB",
+                ram: "16GB DDR4 3600MHz",
+                cooling: "СЖО 240mm"
+            },
+            {
+                cpu: "Ryzen 5 7600X",
+                gpu: "Radeon RX 7800 XT",
+                ram: "32GB DDR5 5200MHz",
+                cooling: "DeepCool AK620"
+            },
+            {
+                cpu: "Core i9-14900K",
+                gpu: "RTX 4090 24GB",
+                ram: "64GB DDR5 7200MHz",
+                cooling: "Кастомная СЖО"
+            }
+        ];
+
+        let currentBuildIndex = 0;
+        const typingSpeed = 40;   
+        const erasingSpeed = 20;  
+        const pauseTime = 2500;   
+
+        async function typeText(element, text) {
+            for (let i = 0; i <= text.length; i++) {
+                element.textContent = text.substring(0, i);
+                await new Promise(res => setTimeout(res, typingSpeed));
+            }
+        }
+
+        async function eraseText(element) {
+            let text = element.textContent;
+            for (let i = text.length; i >= 0; i--) {
+                element.textContent = text.substring(0, i);
+                await new Promise(res => setTimeout(res, erasingSpeed));
+            }
+        }
+
+        async function updateBuilds() {
+            const specs = [
+                { id: 'cpu-val', key: 'cpu' },
+                { id: 'gpu-val', key: 'gpu' },
+                { id: 'ram-val', key: 'ram' },
+                { id: 'cool-val', key: 'cooling' }
+            ];
+
+            while (true) {
+                const build = builds[currentBuildIndex];
+
+                // Печатаем
+                const promises = specs.map(spec => {
+                    const el = document.getElementById(spec.id);
+                    return typeText(el, build[spec.key]);
+                });
+                await Promise.all(promises);
+
+                await new Promise(res => setTimeout(res, pauseTime));
+
+                // Стираем
+                const erasePromises = specs.map(spec => {
+                    const el = document.getElementById(spec.id);
+                    return eraseText(el);
+                });
+                await Promise.all(erasePromises);
+
+                currentBuildIndex = (currentBuildIndex + 1) % builds.length;
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', updateBuilds);
+    </script>
+    
+<div class="catalog-section">
+    <style>
+        .catalog-section {
+            width: 100%;
+            max-width: 1300px; 
+            margin: 60px auto;
+            font-family: 'Nunito', sans-serif;
+            box-sizing: border-box;
+        }
+
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 20px;
+        }
+
+        /* ИЗМЕНЕНИЯ ТУТ: Горизонтальный свайп для мобилок */
+        @media (max-width: 900px) {
+            .catalog-grid { 
+                display: flex; /* Карточки в ряд */
+                grid-template-columns: none; 
+                overflow-x: auto; /* Включаем прокрутку */
+                scroll-snap-type: x mandatory; /* Магнитный эффект */
+                padding: 10px 20px 40px 20px; 
+                gap: 15px;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .catalog-grid::-webkit-scrollbar {
+                display: none; /* Прячем полосу прокрутки */
+            }
+
+            .product-card { 
+                min-width: 85vw; /* Ширина карточки почти на весь экран */
+                scroll-snap-align: center; /* Центровка при свайпе */
+                transform: none !important; /* Убираем ховер-эффект, чтобы не дергалось */
+            }
+        }
+
+        .product-card {
+            background: #0f0f0f;
+            border-radius: 40px;
+            padding: 30px;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-sizing: border-box;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover { transform: translateY(-5px); }
+
+        .badge-hit {
+            position: absolute;
+            top: 45px; left: 45px;
+            background: #a465ff; color: #fff;
+            padding: 5px 15px; border-radius: 10px;
+            font-size: 12px; font-weight: 900; z-index: 10;
+            text-transform: uppercase;
+        }
+
+        /* Статусы */
+        .status {
+            font-weight: 700; font-size: 13px; text-transform: uppercase;
+            margin-bottom: 15px; display: flex; align-items: center; gap: 8px;
+        }
+        .status::before {
+            content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background-color: currentColor;
+        }
+        .status.in-stock { color: #28a745; }
+        .status.on-order { color: #ff9800; }
+
+        /* Виджет FPS */
+        .fps-widget {
+            position: relative; width: 100%; height: 75px; border-radius: 15px;
+            margin-bottom: 20px; cursor: pointer; overflow: hidden; background: #2a2a2a; 
+            display: flex; align-items: center; justify-content: center;
+        }
+        .fps-widget::before {
+            content: ''; position: absolute; width: 150%; height: 300%;
+            background: conic-gradient(#a465ff, #00ff88, transparent 30%);
+            animation: rotate-border 3s linear infinite; opacity: 0; transition: opacity 0.3s ease;
+        }
+        .fps-widget:hover::before { opacity: 1; }
+        
+        .fps-inner {
+            position: absolute; top: 2px; left: 2px; right: 2px; bottom: 2px;
+            background: #1a1a1a; border-radius: 13px; z-index: 2;
+            padding: 12px 15px; display: flex; flex-direction: column; justify-content: center; gap: 6px;
+        }
+
+        .fps-help-icon {
+            position: absolute;
+            top: 12px;
+            right: 15px;
+            width: 20px;
+            height: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 900;
+            color: #555;
+            transition: all 0.3s ease;
+            background: rgba(255,255,255,0.03);
+        }
+        .fps-widget:hover .fps-help-icon {
+            color: #a465ff;
+            border-color: #a465ff;
+            background: rgba(164, 101, 255, 0.15);
+            transform: rotate(10deg);
+        }
+
+        @keyframes rotate-border { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        .fps-header { display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 900; color: #a0a0a0; padding-right: 30px; }
+        .fps-number { color: #fff; font-size: 14px; }
+        .fps-bar-bg { width: 100%; height: 5px; background: #333; border-radius: 10px; overflow: hidden; }
+        .fps-bar-fill {
+            height: 100%; background: #00ff88; box-shadow: 0 0 10px rgba(0, 255, 136, 0.6);
+            animation: fill-reverse 2s ease-in-out infinite alternate; transform-origin: left;
+        }
+        @keyframes fill-reverse { 0% { transform: scaleX(0.1); } 100% { transform: scaleX(1); } }
+
+        .product-image { width: 100%; height: 240px; background: #1e1e1e; border-radius: 25px; margin-bottom: 20px; overflow: hidden; }
+        .product-image img { width: 100%; height: 100%; object-fit: cover; }
+        .product-name { font-size: 24px; font-weight: 900; margin-bottom: 5px; text-transform: uppercase; }
+        .product-name span { color: #a465ff; }
+        .product-mini-specs { display: flex; flex-direction: column; gap: 10px; margin: 15px 0 20px 0; flex-grow: 1; }
+        .mini-spec { display: flex; align-items: center; gap: 12px; font-size: 14px; color: #a0a0a0; font-weight: 800; }
+        .spec-icon-img { height: 1.1em; width: auto; }
+        .mini-spec span { color: #fff; }
+        .product-price { font-size: 22px; font-weight: 900; margin-bottom: 20px; }
+
+        .btn-card { 
+            background: #a465ff; color: #fff; text-align: center; 
+            padding: 16px; border-radius: 18px; text-decoration: none; 
+            font-weight: 900; text-transform: uppercase; display: block; 
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: none; cursor: pointer; width: 100%;
+            box-shadow: 0 4px 15px rgba(164, 101, 255, 0.2);
+            margin-bottom: 10px;
+        }
+        .btn-card:hover { 
+            background: #8e47ff; transform: scale(1.03);
+            box-shadow: 0 8px 25px rgba(164, 101, 255, 0.5);
+        }
+
+        /* КНОПКА КУПИТЬ С ГРАДИЕНТОМ И АНИМАЦИЕЙ */
+        .g-btn-buy {
+            background: linear-gradient(45deg, #a465ff, #00ff88, #a465ff);
+            background-size: 200% auto;
+            color: #000; text-align: center; padding: 14px; border-radius: 18px;
+            font-weight: 900; text-transform: uppercase; display: block;
+            border: none; cursor: pointer; width: 100%;
+            transition: 0.3s;
+            animation: g-shimmer 3s linear infinite;
+        }
+        .g-btn-buy:hover { transform: scale(1.03); filter: brightness(1.1); }
+        @keyframes g-shimmer { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+        /* СТИЛИ МОДАЛКИ ОФОРМЛЕНИЯ */
+        .g-modal-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85); z-index: 10001; align-items: center; justify-content: center;
+            backdrop-filter: blur(10px); font-family: 'Nunito', sans-serif;
+        }
+        .g-modal-body {
+            background: #fff; color: #000; padding: 35px; border-radius: 35px;
+            max-width: 500px; width: 92%; position: relative;
+        }
+        .g-modal-body h2 { font-size: 28px; font-weight: 900; margin: 0 0 10px; text-transform: uppercase; }
+        .g-copy-area {
+            background: #f4f4f4; color: #333; padding: 20px; border-radius: 20px;
+            font-family: monospace; font-size: 13px; margin: 20px 0; white-space: pre-line;
+            border: 1px dashed #ccc; line-height: 1.5;
+        }
+        .g-btn-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+        .g-action-btn {
+            background: #000; color: #fff; border-radius: 50px; padding: 12px;
+            font-weight: 800; text-decoration: none; text-align: center; font-size: 12px;
+            display: flex; align-items: center; justify-content: center; gap: 5px;
+        }
+        .g-btn-copy { background: #a465ff; cursor: pointer; border: none; }
+
+        /* МОДАЛЬНЫЕ ОКНА (твои) */
+        .custom-modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); z-index: 9999; align-items: center; justify-content: center;
+            backdrop-filter: blur(8px);
+        }
+        .modal-content {
+            background: #111; padding: 40px; border-radius: 30px; max-width: 500px; width: 90%;
+            position: relative; border: 1px solid #a465ff33; color: #fff;
+        }
+        .close-modal {
+            position: absolute; top: 20px; right: 20px; font-size: 30px; color: #666;
+            cursor: pointer; transition: 0.3s;
+        }
+        .close-modal:hover { color: #fff; }
+        .modal-title { font-size: 26px; font-weight: 900; margin-bottom: 25px; color: #a465ff; text-transform: uppercase; }
+        .info-row {
+            display: flex; justify-content: space-between; padding: 14px 0;
+            border-bottom: 1px solid #222; font-weight: 600; font-size: 14px;
+        }
+        .info-label { color: #a0a0a0; }
+        .info-value { color: #fff; text-align: right; }
+        .info-value.highlight { color: #00ff88; }
+    </style>
+
+    <div class="catalog-grid">
+        <!-- Карточка 1 -->
+        <div class="product-card">
+            <div class="badge-hit">ХИТ</div>
+            <div class="product-image"><img src="images/pc1.jpg"></div>
+            <div class="product-name">CORE <span>START</span></div>
+            <div class="fps-widget" onclick="openFpsModal('CORE START', {'CS 2': '320 FPS', 'Dota 2': '240 FPS', 'Atomic Heart': '90 FPS'})">
+                <div class="fps-inner">
+                    <div class="fps-help-icon">?</div>
+                    <div class="fps-header"><span>FPS В ИГРАХ</span><span class="fps-number">145+ FPS</span></div>
+                    <div class="fps-bar-bg"><div class="fps-bar-fill" style="width: 45%;"></div></div>
+                </div>
+            </div>
+            <div class="product-mini-specs">
+                <div class="mini-spec"><img src="images/cpu.png" class="spec-icon-img"> Процессор: <span>i5-12400F</span></div>
+                <div class="mini-spec"><img src="images/gpu.png" class="spec-icon-img"> Видеокарта: <span>RTX 4060</span></div>
+                <div class="mini-spec"><img src="images/ram.png" class="spec-icon-img"> Оперативная память: <span>16GB DDR4</span></div>
+            </div>
+            <div class="status in-stock">В наличии</div>
+            <div class="product-price">65 900 ₽</div>
+            <button class="btn-card" onclick="openSpecsModal(this, { 
+                'Накопитель': '500GB NVMe', 
+                'Блок питания': '600W 80+',
+                'Материнская плата': 'B650'
+                })">Подробнее</button>
+            <button class="g-btn-buy" onclick="gOpenBuy(this)">Купить</button>
+        </div>
+
+        <!-- Карточка 2 -->
+        <div class="product-card">
+            <div class="badge-hit">ХИТ</div>
+            <div class="product-image"><img src="images/pc1.jpg"></div>
+            <div class="product-name">CORE <span>PRO</span></div>
+            <div class="fps-widget" onclick="openFpsModal('CORE PRO', {'Cyberpunk': '85 FPS', 'Warzone': '140 FPS'})">
+                <div class="fps-inner">
+                    <div class="fps-help-icon">?</div>
+                    <div class="fps-header"><span>FPS В ИГРАХ</span><span class="fps-number">210+ FPS</span></div>
+                    <div class="fps-bar-bg"><div class="fps-bar-fill" style="width: 75%;"></div></div>
+                </div>
+            </div>
+            <div class="product-mini-specs">
+                <div class="mini-spec"><img src="images/cpu.png" class="spec-icon-img"> CPU: <span>Ryzen 5 7600</span></div>
+                <div class="mini-spec"><img src="images/gpu.png" class="spec-icon-img"> GPU: <span>RTX 4070 Ti</span></div>
+                <div class="mini-spec"><img src="images/ram.png" class="spec-icon-img"> RAM: <span>32GB DDR5</span></div>
+            </div>
+            <div class="status on-order">Под заказ</div>
+            <div class="product-price">124 500 ₽</div>
+            <button class="btn-card" onclick="openSpecsModal(this, { 
+                'SSD': '1TB Gen4', 
+                'Охлаждение': 'СЖО 240мм',
+                'Материнская плата': 'B650'
+                })">Подробнее</button>
+            <button class="g-btn-buy" onclick="gOpenBuy(this)">Купить</button>
+        </div>
+        
+        <!-- Карточка 1 -->
+        <div class="product-card">
+            <div class="badge-hit">ХИТ</div>
+            <div class="product-image"><img src="images/pc1.jpg"></div>
+            <div class="product-name">CORE <span>START</span></div>
+            <div class="fps-widget" onclick="openFpsModal('CORE START', {'CS 2': '320 FPS', 'Dota 2': '240 FPS', 'Atomic Heart': '90 FPS'})">
+                <div class="fps-inner">
+                    <div class="fps-help-icon">?</div>
+                    <div class="fps-header"><span>FPS В ИГРАХ</span><span class="fps-number">145+ FPS</span></div>
+                    <div class="fps-bar-bg"><div class="fps-bar-fill" style="width: 45%;"></div></div>
+                </div>
+            </div>
+            <div class="product-mini-specs">
+                <div class="mini-spec"><img src="images/cpu.png" class="spec-icon-img"> Процессор: <span>i5-12400F</span></div>
+                <div class="mini-spec"><img src="images/gpu.png" class="spec-icon-img"> Видеокарта: <span>RTX 4060</span></div>
+                <div class="mini-spec"><img src="images/ram.png" class="spec-icon-img"> Оперативная память: <span>16GB DDR4</span></div>
+            </div>
+            <div class="status in-stock">В наличии</div>
+            <div class="product-price">65 900 ₽</div>
+            <button class="btn-card" onclick="openSpecsModal(this, { 
+                'Накопитель': '500GB NVMe', 
+                'Блок питания': '600W 80+',
+                'Материнская плата': 'B650'
+                })">Подробнее</button>
+            <button class="g-btn-buy" onclick="gOpenBuy(this)">Купить</button>
+        </div>
+
+        <!-- Карточка 2 -->
+        <div class="product-card">
+            <div class="badge-hit">ХИТ</div>
+            <div class="product-image"><img src="images/pc1.jpg"></div>
+            <div class="product-name">CORE <span>PRO</span></div>
+            <div class="fps-widget" onclick="openFpsModal('CORE PRO', {'Cyberpunk': '85 FPS', 'Warzone': '140 FPS'})">
+                <div class="fps-inner">
+                    <div class="fps-help-icon">?</div>
+                    <div class="fps-header"><span>FPS В ИГРАХ</span><span class="fps-number">210+ FPS</span></div>
+                    <div class="fps-bar-bg"><div class="fps-bar-fill" style="width: 75%;"></div></div>
+                </div>
+            </div>
+            <div class="product-mini-specs">
+                <div class="mini-spec"><img src="images/cpu.png" class="spec-icon-img"> CPU: <span>Ryzen 5 7600</span></div>
+                <div class="mini-spec"><img src="images/gpu.png" class="spec-icon-img"> GPU: <span>RTX 4070 Ti</span></div>
+                <div class="mini-spec"><img src="images/ram.png" class="spec-icon-img"> RAM: <span>32GB DDR5</span></div>
+            </div>
+            <div class="status on-order">Под заказ</div>
+            <div class="product-price">124 500 ₽</div>
+            <button class="btn-card" onclick="openSpecsModal(this, { 
+                'SSD': '1TB Gen4', 
+                'Охлаждение': 'СЖО 240мм',
+                'Материнская плата': 'B650'
+                })">Подробнее</button>
+            <button class="g-btn-buy" onclick="gOpenBuy(this)">Купить</button>
+        </div>
+        <!-- Карточка 1 -->
+        <div class="product-card">
+            <div class="badge-hit">ХИТ</div>
+            <div class="product-image"><img src="images/pc1.jpg"></div>
+            <div class="product-name">CORE <span>START</span></div>
+            <div class="fps-widget" onclick="openFpsModal('CORE START', {'CS 2': '320 FPS', 'Dota 2': '240 FPS', 'Atomic Heart': '90 FPS'})">
+                <div class="fps-inner">
+                    <div class="fps-help-icon">?</div>
+                    <div class="fps-header"><span>FPS В ИГРАХ</span><span class="fps-number">145+ FPS</span></div>
+                    <div class="fps-bar-bg"><div class="fps-bar-fill" style="width: 45%;"></div></div>
+                </div>
+            </div>
+            <div class="product-mini-specs">
+                <div class="mini-spec"><img src="images/cpu.png" class="spec-icon-img"> Процессор: <span>i5-12400F</span></div>
+                <div class="mini-spec"><img src="images/gpu.png" class="spec-icon-img"> Видеокарта: <span>RTX 4060</span></div>
+                <div class="mini-spec"><img src="images/ram.png" class="spec-icon-img"> Оперативная память: <span>16GB DDR4</span></div>
+            </div>
+            <div class="status in-stock">В наличии</div>
+            <div class="product-price">65 900 ₽</div>
+            <button class="btn-card" onclick="openSpecsModal(this, { 
+                'Накопитель': '500GB NVMe', 
+                'Блок питания': '600W 80+',
+                'Материнская плата': 'B650'
+                })">Подробнее</button>
+            <button class="g-btn-buy" onclick="gOpenBuy(this)">Купить</button>
+        </div>
+
+        <!-- Карточка 2 -->
+        <div class="product-card">
+            <div class="badge-hit">ХИТ</div>
+            <div class="product-image"><img src="images/pc1.jpg"></div>
+            <div class="product-name">CORE <span>PRO</span></div>
+            <div class="fps-widget" onclick="openFpsModal('CORE PRO', {'Cyberpunk': '85 FPS', 'Warzone': '140 FPS'})">
+                <div class="fps-inner">
+                    <div class="fps-help-icon">?</div>
+                    <div class="fps-header"><span>FPS В ИГРАХ</span><span class="fps-number">210+ FPS</span></div>
+                    <div class="fps-bar-bg"><div class="fps-bar-fill" style="width: 75%;"></div></div>
+                </div>
+            </div>
+            <div class="product-mini-specs">
+                <div class="mini-spec"><img src="images/cpu.png" class="spec-icon-img"> CPU: <span>Ryzen 5 7600</span></div>
+                <div class="mini-spec"><img src="images/gpu.png" class="spec-icon-img"> GPU: <span>RTX 4070 Ti</span></div>
+                <div class="mini-spec"><img src="images/ram.png" class="spec-icon-img"> RAM: <span>32GB DDR5</span></div>
+            </div>
+            <div class="status on-order">Под заказ</div>
+            <div class="product-price">124 500 ₽</div>
+            <button class="btn-card" onclick="openSpecsModal(this, { 
+                'SSD': '1TB Gen4', 
+                'Охлаждение': 'СЖО 240мм',
+                'Материнская плата': 'B650'
+                })">Подробнее</button>
+            <button class="g-btn-buy" onclick="gOpenBuy(this)">Купить</button>
+        </div>
+
+    <!-- Твоя модалка инфо -->
+    <div id="infoModal" class="custom-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div id="modalTitle" class="modal-title">Инфо</div>
+            <div id="modalDataContainer"></div>
+        </div>
+    </div>
+
+    <!-- Модалка оформления заказа -->
+    <div id="gBuyModal" class="g-modal-overlay">
+        <div class="g-modal-body">
+            <div style="position:absolute; top:20px; right:20px; cursor:pointer; font-size:24px; font-weight:bold;" onclick="gCloseBuy()">×</div>
+            <h2>Оформление</h2>
+            <p style="font-size:14px; margin-bottom:15px;">Текст вашей заявки:</p>
+            <div class="g-copy-area" id="gOrderText"></div>
+            <div class="g-btn-row">
+                <button class="g-action-btn g-btn-copy" onclick="gCopyText()">
+                    <span id="gCopyStatus">КОПИРОВАТЬ</span>
+                </button>
+                <a href="#" class="g-action-btn">AVITO</a>
+                <a href="#" class="g-action-btn">VK</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('infoModal');
+        const title = document.getElementById('modalTitle');
+        const container = document.getElementById('modalDataContainer');
+
+        function openFpsModal(pcName, games) {
+            title.innerText = pcName + ' - Производительность';
+            container.innerHTML = '';
+            for (let game in games) {
+                container.innerHTML += `<div class="info-row"><span class="info-label">${game}</span><span class="info-value highlight">${games[game]}</span></div>`;
+            }
+            modal.style.display = 'flex';
+        }
+
+        const pcDataStorage = {};
+
+        function openSpecsModal(btn, extraSpecs) {
+            const card = btn.closest('.product-card');
+            const pcName = card.querySelector('.product-name').innerText;
+            title.innerText = pcName + ' - Конфигурация';
+            container.innerHTML = '';
+            
+            let fullSpecsList = [];
+            const miniSpecs = card.querySelectorAll('.mini-spec');
+            miniSpecs.forEach(spec => {
+                const text = spec.innerText.split(':');
+                const label = text[0].trim();
+                const value = text[1] ? text[1].trim() : '';
+                fullSpecsList.push(`${label}: ${value}`);
+                container.innerHTML += `<div class="info-row"><span class="info-label">${label}</span><span class="info-value">${value}</span></div>`;
+            });
+
+            for (let part in extraSpecs) {
+                fullSpecsList.push(`${part}: ${extraSpecs[part]}`);
+                container.innerHTML += `<div class="info-row"><span class="info-label">${part}</span><span class="info-value">${extraSpecs[part]}</span></div>`;
+            }
+
+            pcDataStorage[pcName] = fullSpecsList;
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() { modal.style.display = 'none'; }
+
+        function gOpenBuy(btn) {
+            const card = btn.closest('.product-card');
+            const pcName = card.querySelector('.product-name').innerText;
+            const pcPrice = card.querySelector('.product-price').innerText;
+            
+            if (!pcDataStorage[pcName]) {
+                const detailBtn = card.querySelector('.btn-card');
+                const originalDisplay = modal.style.display;
+                detailBtn.click(); 
+                modal.style.display = originalDisplay; 
+            }
+
+            const specs = pcDataStorage[pcName] || [];
+            let pcSpecsText = specs.map(s => "• " + s).join("\n");
+            const finalMessage = `— ЗАЯВКА НА ПК —\n\nСборка: ${pcName}\nЦена: ${pcPrice}\n\nПолная конфигурация:\n${pcSpecsText}`;
+            
+            document.getElementById('gOrderText').innerText = finalMessage;
+            document.getElementById('gBuyModal').style.display = 'flex';
+        }
+
+        function gCloseBuy() { document.getElementById('gBuyModal').style.display = 'none'; }
+
+        function gCopyText() {
+            const text = document.getElementById('gOrderText').innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = document.getElementById('gCopyStatus');
+                btn.innerText = 'ГОТОВО!';
+                setTimeout(() => btn.innerText = 'КОПИРОВАТЬ', 2000);
+            });
+        }
+
+        window.onclick = (e) => { 
+            if (e.target == modal) closeModal(); 
+            if (e.target.id == 'gBuyModal') gCloseBuy();
+        }
+    </script>
+</div>
+</body>
+</html>

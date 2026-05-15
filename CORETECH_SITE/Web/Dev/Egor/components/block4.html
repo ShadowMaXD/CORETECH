@@ -1,0 +1,115 @@
+<section class="steps-section">
+    <style>
+        :root {
+            /* НАСТРОЙКИ КАРТИНКИ ПК (pc3.png) */
+            --steps-pc-width: 80%;    /* Ширина картинки */
+            --steps-pc-offset-x: -5%;  /* Смещение по горизонтали (<0 влево, >0 вправо) */
+            --steps-pc-offset-y: 0px;  /* Смещение по вертикали */
+        }
+
+        .steps-section {
+            width: 100%;
+            max-width: 1300px;
+            margin: 80px auto;
+            padding: 20px;
+            box-sizing: border-box;
+            font-family: 'Nunito', sans-serif;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 40px;
+        }
+
+        .steps-visual {
+            flex: 1;
+            position: sticky;
+            top: 100px;
+            display: flex;
+            flex-direction: column;
+            z-index: 2;
+        }
+
+        .steps-visual h2 {
+            font-size: 80px;
+            font-weight: 900;
+            line-height: 0.8;
+            text-transform: uppercase;
+            margin: 0 0 40px 0;
+            color: #1a1a1a;
+        }
+
+        .steps-visual h2 span {
+            color: var(--accent-purple);
+            display: block;
+        }
+
+        .steps-pc-image {
+            /* Применяем настройки из переменных выше */
+            width: var(--steps-pc-width);
+            height: auto;
+            transform: translate(var(--steps-pc-offset-x), var(--steps-pc-offset-y));
+            filter: drop-shadow(0 20px 50px rgba(164, 101, 255, 0.15));
+            display: block;
+        }
+
+        .steps-content {
+            flex: 1.2;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            z-index: 1;
+        }
+
+        .step-item {
+            border-radius: 40px;
+            padding: 35px;
+            color: #ffffff;
+            transition: transform 0.3s ease;
+        }
+
+        .step-item:hover { transform: translateX(-10px); }
+
+        .step-01 { background-color: #0f0f0f; width: 85%; align-self: flex-end; }
+        .step-02 { background-color: #a465ff; width: 95%; align-self: flex-end; }
+        .step-03 { background-color: #ffffff; border: 2px solid #a465ff; color: #1a1a1a; width: 85%; align-self: flex-start; }
+        .step-04 { background-color: #0f0f0f; width: 85%; align-self: flex-end; }
+
+        .step-number { font-weight: 900; font-size: 18px; text-transform: uppercase; margin-bottom: 10px; display: block; }
+        .step-description { font-size: 15px; line-height: 1.5; font-weight: 700; margin: 0; }
+        
+        .step-01 .step-description, .step-04 .step-description { color: #a0a0a0; }
+        .step-03 .step-description { color: #555; }
+
+        @media (max-width: 1000px) {
+            .steps-section { flex-direction: column; align-items: center; }
+            .steps-visual { position: static; align-items: center; text-align: center; }
+            .steps-visual h2 { font-size: 50px; }
+            .step-item { width: 100% !important; align-self: center !important; }
+            .steps-pc-image { width: 70%; transform: none; margin: 20px 0; }
+        }
+    </style>
+
+    <div class="steps-visual">
+        <h2>Этапы<br><span>Работы</span></h2>
+        <img src="images/pc3.png" alt="Процесс сборки" class="steps-pc-image">
+    </div>
+
+    <div class="steps-content">
+        <div class="step-item step-01">
+            <span class="step-number">/ 01 ПОДБОР И КОНЦЕПТ</span>
+            <p class="step-description">Изучаем ваши задачи, подбираем идеальную связку комплектующих. Создаем визуальный концепт будущей сборки.</p>
+        </div>
+        <div class="step-item step-02">
+            <span class="step-number">/ 02 СБОРКА И УКЛАДКА</span>
+            <p class="step-description">Наши инженеры приступают к работе. Безупречный кабель-менеджмент и внимание к каждой детали.</p>
+        </div>
+        <div class="step-item step-03">
+            <span class="step-number">/ 03 НАСТРОЙКА И ТЕСТЫ</span>
+            <p class="step-description">Настраиваем BIOS, тайминги памяти и прогоняем ПК через самые тяжелые стресс-тесты.</p>
+        </div>
+        <div class="step-item step-04">
+            <span class="step-number">/ 04 ФИНАЛЬНЫЙ РЕЗУЛЬТАТ</span>
+            <p class="step-description">Вы получаете мощный и тихий компьютер, готовый к любым играм прямо из коробки.</p>
+        </div>
+    </div>
+</section>
