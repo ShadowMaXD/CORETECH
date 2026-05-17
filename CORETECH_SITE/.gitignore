@@ -1,3 +1,10 @@
 # Visual Studio
 .vs/
-.vscode/
+CORETECH_SITE/Backend/CORETECH_WebApi/Business/bin
+CORETECH_SITE/Backend/CORETECH_WebApi/Business/obj
+CORETECH_SITE/Backend/CORETECH_WebApi/Common/bin
+CORETECH_SITE/Backend/CORETECH_WebApi/Common/obj
+CORETECH_SITE/Backend/CORETECH_WebApi/CORETECH_WebApi/bin
+CORETECH_SITE/Backend/CORETECH_WebApi/CORETECH_WebApi/obj
+CORETECH_SITE/Backend/CORETECH_WebApi/Database/bin
+CORETECH_SITE/Backend/CORETECH_WebApi/Database/obj
