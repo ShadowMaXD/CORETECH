@@ -36,6 +36,43 @@
             "related": ".pdb;.xml"
           }
         }
+      },
+      "Business/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "dependencies": {
+          "Common": "1.0.0",
+          "Database": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Business.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Business.dll": {}
+        }
+      },
+      "Common/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "compile": {
+          "bin/placeholder/Common.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Common.dll": {}
+        }
+      },
+      "Database/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "dependencies": {
+          "Common": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Database.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Database.dll": {}
+        }
       }
     }
   },
@@ -75,10 +112,27 @@
         "microsoft.openapi.2.0.0.nupkg.sha512",
         "microsoft.openapi.nuspec"
       ]
+    },
+    "Business/1.0.0": {
+      "type": "project",
+      "path": "../Business/Business.csproj",
+      "msbuildProject": "../Business/Business.csproj"
+    },
+    "Common/1.0.0": {
+      "type": "project",
+      "path": "../Common/Common.csproj",
+      "msbuildProject": "../Common/Common.csproj"
+    },
+    "Database/1.0.0": {
+      "type": "project",
+      "path": "../Database/Database.csproj",
+      "msbuildProject": "../Database/Database.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net10.0": [
+      "Business >= 1.0.0",
+      "Common >= 1.0.0",
       "Microsoft.AspNetCore.OpenApi >= 10.0.8"
     ]
   },
@@ -114,7 +168,14 @@
         "net10.0": {
           "framework": "net10.0",
           "targetAlias": "net10.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Git_CORETECH\\CORETECH_SITE\\Backend\\CORETECH_WebApi\\Business\\Business.csproj": {
+              "projectPath": "C:\\Git_CORETECH\\CORETECH_SITE\\Backend\\CORETECH_WebApi\\Business\\Business.csproj"
+            },
+            "C:\\Git_CORETECH\\CORETECH_SITE\\Backend\\CORETECH_WebApi\\Common\\Common.csproj": {
+              "projectPath": "C:\\Git_CORETECH\\CORETECH_SITE\\Backend\\CORETECH_WebApi\\Common\\Common.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
