@@ -1,10 +1,11 @@
 # Visual Studio
 .vs/
-CORETECH_SITE/Backend/CORETECH_WebApi/Business/bin
-CORETECH_SITE/Backend/CORETECH_WebApi/Business/obj
-CORETECH_SITE/Backend/CORETECH_WebApi/Common/bin
-CORETECH_SITE/Backend/CORETECH_WebApi/Common/obj
-CORETECH_SITE/Backend/CORETECH_WebApi/CORETECH_WebApi/bin
-CORETECH_SITE/Backend/CORETECH_WebApi/CORETECH_WebApi/obj
-CORETECH_SITE/Backend/CORETECH_WebApi/Database/bin
-CORETECH_SITE/Backend/CORETECH_WebApi/Database/obj
+
+# Visual Studio Code
+.vscode/
+
+# Папки bin и obj (результаты компиляции)
+**/bin/
+**/obj/
+bin/
+obj/
