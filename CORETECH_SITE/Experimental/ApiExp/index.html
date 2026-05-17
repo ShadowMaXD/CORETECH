@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Все виды API запросов (Fetch)</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 30px; background-color: #f5f7fb; color: #333; }
+        h1 { color: #2c3e50; }
+        .container { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        button { background-color: #3498db; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        button:hover { background-color: #2980b9; }
+        .btn-post { background-color: #2ecc71; } .btn-post:hover { background-color: #27ae60; }
+        .btn-put { background-color: #f1c40f; color: #333; } .btn-put:hover { background-color: #d4ac0d; }
+        .btn-delete { background-color: #e74c3c; } .btn-delete:hover { background-color: #c0392b; }
+        pre { background: #2d3748; color: #fff; padding: 15px; border-radius: 6px; overflow-x: auto; font-size: 14px; max-height: 250px; }
+        .input-group { margin-bottom: 10px; }
+        .input-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+        .input-group input, .input-group textarea { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+    </style>
+</head>
+<body>
+
+    <h1>Шпаргалка по HTTP-запросам (Fetch API)</h1>
+    <p>Открой консоль браузера (F12), чтобы видеть сетевые запросы во вкладке Network (Сеть).</p>
+
+    <div class="container">
+
+        <!-- 1. GET ЗАПРОС -->
+        <div class="card">
+            <h2>1. GET (Получение данных)</h2>
+            <p>Запрашивает данные с сервера. Тело (body) отправлять нельзя.</p>
+            <button id="btn-get">Выполнить GET</button>
+            <h3>Результат:</h3>
+            <pre id="output-get">// Здесь будет ответ...</pre>
+        </div>
+
+        <!-- 2. POST ЗАПРОС -->
+        <div class="card">
+            <h2>2. POST (Создание новой записи)</h2>
+            <p>Отправляет данные на сервер для создания нового объекта.</p>
+            <div class="input-group">
+                <label>Заголовок поста:</label>
+                <input type="text" id="post-title" value="Новый крутой пост">
+            </div>
+            <div class="input-group">
+                <label>Текст поста:</label>
+                <textarea id="post-body">Текст нашего нового поста, который уйдет в API.</textarea>
+            </div>
+            <button id="btn-post" class="btn-post">Выполнить POST</button>
+            <h3>Результат:</h3>
+            <pre id="output-post">// Здесь будет ответ...</pre>
+        </div>
+
+        <!-- 3. PUT ЗАПРОС -->
+        <div class="card">
+            <h2>3. PUT (Полное обновление записи)</h2>
+            <p>Обновляет существующий объект на сервере (например, пост с ID: 1) целиком.</p>
+            <button id="btn-put" class="btn-put">Выполнить PUT (для ID: 1)</button>
+            <h3>Результат:</h3>
+            <pre id="output-put">// Здесь будет ответ...</pre>
+        </div>
+
+        <!-- 4. DELETE ЗАПРОС -->
+        <div class="card">
+            <h2>4. DELETE (Удаление записи)</h2>
+            <p>Удаляет объект с сервера (например, пост с ID: 1).</p>
+            <button id="btn-delete" class="btn-delete">Выполнить DELETE (для ID: 1)</button>
+            <h3>Результат:</h3>
+            <pre id="output-delete">// Здесь будет ответ...</pre>
+        </div>
+
+    </div>
+
+    <!-- Подключаем внешний файл со скриптами -->
+    <script src="api-requests.js"></script>
+</body>
+</html>
