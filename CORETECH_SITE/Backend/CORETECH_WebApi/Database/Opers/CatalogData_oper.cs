@@ -2,7 +2,9 @@
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
+using System.Runtime.Intrinsics.Arm;
 using System.Text;
+using static System.Net.Mime.MediaTypeNames;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Database.Opers
@@ -65,12 +67,25 @@ namespace Database.Opers
         /// <param name="Value"></param>
         /// <param name="Name"></param>
         /// <returns></returns>
-        public int Add(decimal Value, string? Name)
+        public int Add(string Name, bool IsHit, string Image, string FpsNumber, string FpsBarWidth, string? FpsModalSerialized, 
+                        string Cpu, string Gpu, string Ram, string StatusClass, string StatusText, string Price, string? SpecsModalSerialized)
         {
 
             CatalogData elem = new()
             {
-                
+                Name = Name,
+                IsHit = IsHit,
+                Image = Image,
+                FpsNumber = FpsNumber,
+                FpsBarWidth = FpsBarWidth,
+                FpsModalSerialized = FpsModalSerialized,
+                Cpu = Cpu,
+                Gpu = Gpu,
+                Ram = Ram,
+                StatusClass = StatusClass,
+                StatusText = StatusText,
+                Price = Price,
+                SpecsModalSerialized = SpecsModalSerialized
             };
 
             _db.CatalogDatas.Add(elem);
@@ -93,9 +108,9 @@ namespace Database.Opers
         /// <param name="Value_New"></param>
         /// <param name="Name_New"></param>
         /// <returns></returns>
-        public int Edit(int ID, decimal Value_New, string? Name_New)
+        public int Edit(int ID, string Name, bool IsHit, string Image, string FpsNumber, string FpsBarWidth, string? FpsModalSerialized,
+                        string Cpu, string Gpu, string Ram, string StatusClass, string StatusText, string Price, string? SpecsModalSerialized)
         {
-            string loginfo = $"ID='{ID}' Value_New='{Value_New}' Name_New='{Name_New}'";
 
             CatalogData? elem = Get(ID: ID);
 
@@ -104,7 +119,19 @@ namespace Database.Opers
                 return -200;
             }
 
-            elem.Name = Name_New;
+            elem.Name = Name;
+            elem.IsHit = IsHit;
+            elem.Image = Image;
+            elem.FpsNumber = FpsNumber;
+            elem.FpsBarWidth = FpsBarWidth;
+            elem.FpsModalSerialized = FpsModalSerialized;
+            elem.Cpu = Cpu;
+            elem.Gpu = Gpu;
+            elem.Ram = Ram;
+            elem.StatusClass = StatusClass;
+            elem.StatusText = StatusText;
+            elem.Price = Price;
+            elem.SpecsModalSerialized = SpecsModalSerialized;
 
             try
             {
@@ -116,6 +143,5 @@ namespace Database.Opers
                 return -203;
             }
         }
-
     }
 }
