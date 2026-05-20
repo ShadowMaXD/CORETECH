@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="ru">
-<body>
-  <meta charset="UTF-8">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Собери свой IPC</title>
+    <title>Игровые компьютеры от CORETECH</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800;900&display=swap" rel="stylesheet">
-    
+</head>
+<body>
+
     <div class="bg-container">
         <div class="main-background"></div>
     </div>
@@ -116,33 +118,61 @@
 
         .header-actions { display: flex; align-items: center; gap: 15px; }
 
-        .social-circle {
+        .social-circle1 {
             width: 30px; height: 30px; border-radius: 50%;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border: 0px solid rgba(255, 255, 255, 0.3);
             display: flex; align-items: center; justify-content: center;
             transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Пружинистый эффект */
         }
 
-        .social-circle:hover {
+        .social-circle1:hover {
             transform: scale(1.15) rotate(5deg); /* Увеличение и легкий наклон */
             background: rgba(255, 255, 255, 0.1); /* Легкая подсветка фона */
             border-color: #ffffff;
             box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2); /* Тень вокруг круга */
         }
 
-        .social-circle img {
+        .social-circle1 img {
             transition: transform 0.4s ease;
         }
 
-        .social-circle:hover img {
+        .social-circle1:hover img {
             transform: scale(1.1); /* Сама иконка внутри тоже чуть растет */
         }
 
-        .site-header.scrolled .social-circle {
+        .site-header.scrolled .social-circle1 {
             border: 1px solid #f0f0f0;
         }
 
-        .social-circle img { width: 24px; height: 24px; }
+        .social-circle1 img { width: 65px; height: 65px; transform: rotate(18deg);}
+
+        .social-circle2 {
+            width: 30px; height: 30px; border-radius: 50%;
+            border: 0px solid rgba(255, 255, 255, 0.3);
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Пружинистый эффект */
+        }
+
+        .social-circle2:hover {
+            transform: scale(1.15) rotate(5deg); /* Увеличение и легкий наклон */
+            background: rgba(255, 255, 255, 0.1); /* Легкая подсветка фона */
+            border-color: #ffffff;
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2); /* Тень вокруг круга */
+        }
+
+        .social-circle2 img {
+            transition: transform 0.4s ease;
+        }
+
+        .social-circle2:hover img {
+            transform: scale(1.1); /* Сама иконка внутри тоже чуть растет */
+        }
+
+        .site-header.scrolled .social-circle2 {
+            border: 1px solid #f0f0f0;
+        }
+
+        .social-circle2 img { width: 55px; height: 55px;}
 
         .btn-consult {
         /* Основные параметры */
@@ -160,13 +190,13 @@
         gap: 10px;
         
         backface-visibility: hidden; /* Скрывает микро-сдвиги задней плоскости */
-    transform: translateZ(0);     /* Принудительно включает аппаратное ускорение */
-    -webkit-font-smoothing: subpixel-antialiased; /* Улучшает отрисовку шрифта */
-    will-change: transform;       /* Подготавливает браузер к анимации */
+        transform: translateZ(0);     /* Принудительно включает аппаратное ускорение */
+        -webkit-font-smoothing: subpixel-antialiased; /* Улучшает отрисовку шрифта */
+        will-change: transform;       /* Подготавливает браузер к анимации */
 
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
-                box-shadow 0.4s ease, 
-                background-position 0.5s ease;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                    box-shadow 0.4s ease, 
+                    background-position 0.5s ease;
         }
 
         /* Эффект при наведении */
@@ -232,8 +262,65 @@
             background: #0f0f0f;
             color: #ffffff;
         }
-    </style>
 
+        /* Контейнер звезд теперь закреплен на весь экран */
+    .star-field {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        pointer-events: none; /* Пропускает клики мыши сквозь себя */
+        overflow: hidden;
+        z-index: 0; /* Опускаем на самый нижний слой, чтобы они летели строго за текстом и карточками */
+    }
+
+    /* Сама падающая звезда */
+    .falling-star {
+        position: absolute;
+        top: -50px;
+        width: 2px;
+        height: 50px;
+        background: linear-gradient(to bottom, rgba(147, 51, 234, 0), rgba(147, 51, 234, 0.7));
+        border-radius: 50%;
+        opacity: 0;
+        pointer-events: none;
+        animation: fall linear infinite;
+    }
+
+    /* Светящаяся точка на конце */
+    .falling-star::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 4px;
+        height: 4px;
+        background: #9333ea;
+        border-radius: 50%;
+        box-shadow: 0 0 12px 2px rgba(147, 51, 234, 1);
+    }
+
+    /* Анимация падения */
+    @keyframes fall {
+        0% {
+            transform: translateY(0) translateX(0) rotate(-25deg);
+            opacity: 0;
+        }
+        10% {
+            opacity: 1;
+        }
+        90% {
+            opacity: 1;
+        }
+        100% {
+            /* Изменили на 100vh, чтобы они гарантированно долетали до конца экрана при скролле */
+            transform: translateY(105vh) translateX(400px) rotate(-25deg);
+            opacity: 0;
+        }
+    }
+    </style>
 
     <script>
         window.addEventListener('scroll', function() {
@@ -263,24 +350,33 @@
             <a href="#">Отзывы</a>
         </nav>
 
-        <div class="header-actions">
-            <div class="social-circle">
-                <img src="https://img.icons8.com/color/48/avito.png" alt="Avito">
-            </div>
-            <div class="social-circle">
-                <img src="https://img.icons8.com/color/48/vk-circled.png" alt="VK">
-            </div>
-            <a href="#" class="btn-consult">
-                Консультация <span>→</span>
+
+        
+    <div class="header-actions">
+        <div class="social-circle1">
+            <a href="https://vk.com/coretech_pc" target="_blank" style="display: flex; width: 100%; height: 100%; align-items: center; justify-content: center; text-decoration: none;">
+                <img src="images/mini_logo_avito.png" alt="Avito">
             </a>
         </div>
+        
+        <div class="social-circle2">
+            <a href="https://vk.com/coretech_pc" target="_blank" style="display: flex; width: 100%; height: 100%; align-items: center; justify-content: center; text-decoration: none;">
+                <img src="images/mini_logo_vk.png" alt="VK">
+            </a>
+        </div>
+        
+        <a href="#" class="btn-consult">
+            Консультация <span>→</span>
+        </a>
+    </div>
+
     </header>
     <style>
         :root {
             --bg-color: transparent;
             --card-bg: #0f0f0f;
             --accent-purple: #a465ff;
-            --accent-mint: #4ef0c3; /* Added for the new Hero section */
+            --accent-mint: #4ce2b8; /* Added for the new Hero section */
             --text-white: #ffffff;
             --text-gray: #a0a0a0;
             --blue-vk: #007eff;
@@ -452,7 +548,7 @@ body {
         .container { 
             width: 100%;
             max-width: 100%; 
-            background: #ffffff; 
+            background: #ffffff00; 
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -461,6 +557,8 @@ body {
             position: relative;
             z-index: 5;
             padding: 80px 20px;
+            padding-bottom: 10px;
+            margin-top: -10px;
         }
         .widgets-wrapper, .catalog-section, .container > h1 {
             width: 100%;
@@ -468,13 +566,20 @@ body {
         }
 
         h1 {
-            font-size: 56px;
+            font-size: 60px;
             font-weight: 900;
-            margin: 0 0 40px 0;
-            color: #1a1a1a;
+            margin: 0 0 10px 0;
+            color: #313131;
+            
+            /* Идеальная внешняя обводка без заезда внутрь букв */
+            text-shadow:
+                -0.5px -0.5px 0 #000000,  
+                0.5px -0.5px 0 #000000,
+                -0.5px  0.5px 0 #000000,
+                6px 6px 10px rgba(0, 0, 0, 0.3);
         }
 
-        h1 span { color: var(--accent-purple); }
+        h1 span { color: var(--accent-mint); }
 
         .widgets-wrapper {
             display: flex;
@@ -529,7 +634,7 @@ body {
             line-height: 34px;
         }
 
-        .config-info h2 span { color: var(--accent-purple); }
+        .config-info h2 span { color: var(--accent-mint); }
 
         .badge {
             display: inline-flex;
@@ -561,34 +666,22 @@ body {
         }
 
         .btn-purple {
-            background-color: var(--accent-purple);
-            color: white;
-            border: none;
-            padding: 18px;
-            border-radius: 18px;
-            font-weight: 900;
-            font-size: 16px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            width: 100%;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.6s ease;
-            box-shadow: 0 0 15px rgba(164, 101, 255, 0.5), 0 0 30px rgba(164, 101, 255, 0.2);
-            animation: neonBreathe 3s infinite ease-in-out;
+            background: linear-gradient(45deg, #a465ff, #00ff88, #a465ff);
+            background-size: 200% auto;
+            color: #000; text-align: center; padding: 14px; border-radius: 18px;
+            font-weight: 900; text-transform: uppercase; display: block;
+            border: none; cursor: pointer; width: 100%;
+            transition: 0.3s;
+            animation: g-shimmer 3s linear infinite;
         }
-
         @keyframes neonBreathe {
             0%, 100% { box-shadow: 0 0 15px rgba(164, 101, 255, 0.5), 0 0 30px rgba(164, 101, 255, 0.2); }
             50% { box-shadow: 0 0 25px rgba(164, 101, 255, 0.8), 0 0 45px rgba(164, 101, 255, 0.4); }
         }
 
         .btn-anchor:hover .btn-purple {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(164, 101, 255, 0.9);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 40px rgba(65, 255, 122, 0.4);
         }
 
         .specs-list {
@@ -705,7 +798,7 @@ body {
             <div class="hero-subtitle">Кабель-менеджмент, подбор, качественная сборка и гарантия</div>
                 <div class="hero-title">Индивидуальная</div>
                 <div class="hero-title2">Сборка компьютеров</div>
-                <div class="hero-description">МЫ — пока еще небольшая команда энтузиастов, которая собирает каждый компьютер как для себя. Внимание к каждой мелочи и желание сделать лучшее для каждого клиента — не дают нам покой.</div>
+                <div class="hero-description">МЫ — пока еще небольшая команда энтузиастов, которая собирает каждый компьютер как для себя. Внимание к каждой мелочи и желание сделать лучшее для каждого клиента — не дают нам покоя.</div>
 
                 <div class="hero-btns">
                     <a href="#" class="btn-hero">
@@ -729,7 +822,7 @@ body {
     </section>
 
     <div class="container">
-        <h1>Собери свой ПК<span> вместе с CORETECH</span></h1>
+        <h1>СБОРКА<span> НА ЗАКАЗ</span></h1>
 
         <div class="widgets-wrapper">
             <div class="card main-widget">
@@ -791,15 +884,17 @@ body {
                     <h3>Не разбираешься<br>в&nbsp;комплектующих?</h3>
                     <p>Мы подберем лучшее решение для ваших целей и задач.</p>
                 </div>
+                
                 <div class="social-buttons">
-                    <a href="#" class="btn-social avito">Написать на Avito</a>
-                    <a href="#" class="btn-social vk">Написать в VK</a>
+                    <a href="https://vk.com/coretech_pc" class="btn-social avito">Написать на Avito</a>
+                    <a href="https://vk.com/coretech_pc" class="btn-social vk">Написать в VK</a>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
+        /*TODO: Сделать наполнение через Api, Добавить фотографии в наполнение и их плавное переключение*/
         const builds = [
             {
                 cpu: "Ryzen 7 7800X3D",
@@ -1008,10 +1103,10 @@ body {
         }
         @keyframes fill-reverse { 0% { transform: scaleX(0.1); } 100% { transform: scaleX(1); } }
 
-        .product-image { width: 100%; height: 240px; background: #1e1e1e; border-radius: 25px; margin-bottom: 20px; overflow: hidden; }
+        .product-image { width: 100%; height: 350px; background: #1e1e1e; border-radius: 25px; margin-bottom: 20px; overflow: hidden; }
         .product-image img { width: 100%; height: 100%; object-fit: cover; }
         .product-name { font-size: 24px; font-weight: 900; margin-bottom: 5px; text-transform: uppercase; }
-        .product-name span { color: #a465ff; }
+        .product-name span { color: var(--accent-mint); }
         .product-mini-specs { display: flex; flex-direction: column; gap: 10px; margin: 15px 0 20px 0; flex-grow: 1; }
         .mini-spec { display: flex; align-items: center; gap: 12px; font-size: 14px; color: #a0a0a0; font-weight: 800; }
         .spec-icon-img { height: 1.1em; width: auto; }
@@ -1095,284 +1190,269 @@ body {
     </style>
 
 <!-- БЛОК КАРТОЧКИ ТОВАРОВ -->
+<h1>ГОТОВЫЕ<span> СБОРКИ</span></h1>
 
-    <div class="catalog-grid">
-        <!-- Карточка 1 -->
-        <div class="product-card">
-            <div class="badge-hit">ХИТ</div>
-            <div class="product-image"><img src="images/pc1.jpg"></div>
-            <div class="product-name">CORE <span>START</span></div>
-            <div class="fps-widget" onclick="openFpsModal('CORE START', {'CS 2': '320 FPS', 'Dota 2': '240 FPS', 'Atomic Heart': '90 FPS'})">
-                <div class="fps-inner">
-                    <div class="fps-help-icon">?</div>
-                    <div class="fps-header"><span>FPS В ИГРАХ</span><span class="fps-number">145+ FPS</span></div>
-                    <div class="fps-bar-bg"><div class="fps-bar-fill" style="width: 45%;"></div></div>
-                </div>
-            </div>
-            <div class="product-mini-specs">
-                <div class="mini-spec"><img src="images/cpu.png" class="spec-icon-img"> Процессор: <span>i5-12400F</span></div>
-                <div class="mini-spec"><img src="images/gpu.png" class="spec-icon-img"> Видеокарта: <span>RTX 4060</span></div>
-                <div class="mini-spec"><img src="images/ram.png" class="spec-icon-img"> Оперативная память: <span>16GB DDR4</span></div>
-            </div>
-            <div class="status in-stock">В наличии</div>
-            <div class="product-price">65 900 ₽</div>
-            <button class="btn-card" onclick="openSpecsModal(this, { 
-                'Накопитель': '500GB NVMe', 
-                'Блок питания': '600W 80+',
-                'Материнская плата': 'B650'
-                })">Подробнее</button>
-            <button class="g-btn-buy" onclick="gOpenBuy(this)">Купить</button>
-        </div>
+<div class="catalog-grid" id="js-catalog-grid"></div>
 
-        <!-- Карточка 2 -->
-        <div class="product-card">
-            <div class="badge-hit">ХИТ</div>
-            <div class="product-image"><img src="images/pc1.jpg"></div>
-            <div class="product-name">CORE <span>PRO</span></div>
-            <div class="fps-widget" onclick="openFpsModal('CORE PRO', {'Cyberpunk': '85 FPS', 'Warzone': '140 FPS'})">
-                <div class="fps-inner">
-                    <div class="fps-help-icon">?</div>
-                    <div class="fps-header"><span>FPS В ИГРАХ</span><span class="fps-number">210+ FPS</span></div>
-                    <div class="fps-bar-bg"><div class="fps-bar-fill" style="width: 75%;"></div></div>
-                </div>
-            </div>
-            <div class="product-mini-specs">
-                <div class="mini-spec"><img src="images/cpu.png" class="spec-icon-img"> CPU: <span>Ryzen 5 7600</span></div>
-                <div class="mini-spec"><img src="images/gpu.png" class="spec-icon-img"> GPU: <span>RTX 4070 Ti</span></div>
-                <div class="mini-spec"><img src="images/ram.png" class="spec-icon-img"> RAM: <span>32GB DDR5</span></div>
-            </div>
-            <div class="status on-order">Под заказ</div>
-            <div class="product-price">124 500 ₽</div>
-            <button class="btn-card" onclick="openSpecsModal(this, { 
-                'SSD': '1TB Gen4', 
-                'Охлаждение': 'СЖО 240мм',
-                'Материнская плата': 'B650'
-                })">Подробнее</button>
-            <button class="g-btn-buy" onclick="gOpenBuy(this)">Купить</button>
-        </div>
-        
-        <!-- Карточка 1 -->
-        <div class="product-card">
-            <div class="badge-hit">ХИТ</div>
-            <div class="product-image"><img src="images/pc1.jpg"></div>
-            <div class="product-name">CORE <span>START</span></div>
-            <div class="fps-widget" onclick="openFpsModal('CORE START', {'CS 2': '320 FPS', 'Dota 2': '240 FPS', 'Atomic Heart': '90 FPS'})">
-                <div class="fps-inner">
-                    <div class="fps-help-icon">?</div>
-                    <div class="fps-header"><span>FPS В ИГРАХ</span><span class="fps-number">145+ FPS</span></div>
-                    <div class="fps-bar-bg"><div class="fps-bar-fill" style="width: 45%;"></div></div>
-                </div>
-            </div>
-            <div class="product-mini-specs">
-                <div class="mini-spec"><img src="images/cpu.png" class="spec-icon-img"> Процессор: <span>i5-12400F</span></div>
-                <div class="mini-spec"><img src="images/gpu.png" class="spec-icon-img"> Видеокарта: <span>RTX 4060</span></div>
-                <div class="mini-spec"><img src="images/ram.png" class="spec-icon-img"> Оперативная память: <span>16GB DDR4</span></div>
-            </div>
-            <div class="status in-stock">В наличии</div>
-            <div class="product-price">65 900 ₽</div>
-            <button class="btn-card" onclick="openSpecsModal(this, { 
-                'Накопитель': '500GB NVMe', 
-                'Блок питания': '600W 80+',
-                'Материнская плата': 'B650'
-                })">Подробнее</button>
-            <button class="g-btn-buy" onclick="gOpenBuy(this)">Купить</button>
-        </div>
-
-        <!-- Карточка 2 -->
-        <div class="product-card">
-            <div class="badge-hit">ХИТ</div>
-            <div class="product-image"><img src="images/pc1.jpg"></div>
-            <div class="product-name">CORE <span>PRO</span></div>
-            <div class="fps-widget" onclick="openFpsModal('CORE PRO', {'Cyberpunk': '85 FPS', 'Warzone': '140 FPS'})">
-                <div class="fps-inner">
-                    <div class="fps-help-icon">?</div>
-                    <div class="fps-header"><span>FPS В ИГРАХ</span><span class="fps-number">210+ FPS</span></div>
-                    <div class="fps-bar-bg"><div class="fps-bar-fill" style="width: 75%;"></div></div>
-                </div>
-            </div>
-            <div class="product-mini-specs">
-                <div class="mini-spec"><img src="images/cpu.png" class="spec-icon-img"> CPU: <span>Ryzen 5 7600</span></div>
-                <div class="mini-spec"><img src="images/gpu.png" class="spec-icon-img"> GPU: <span>RTX 4070 Ti</span></div>
-                <div class="mini-spec"><img src="images/ram.png" class="spec-icon-img"> RAM: <span>32GB DDR5</span></div>
-            </div>
-            <div class="status on-order">Под заказ</div>
-            <div class="product-price">124 500 ₽</div>
-            <button class="btn-card" onclick="openSpecsModal(this, { 
-                'SSD': '1TB Gen4', 
-                'Охлаждение': 'СЖО 240мм',
-                'Материнская плата': 'B650'
-                })">Подробнее</button>
-            <button class="g-btn-buy" onclick="gOpenBuy(this)">Купить</button>
-        </div>
-        <!-- Карточка 1 -->
-        <div class="product-card">
-            <div class="badge-hit">ХИТ</div>
-            <div class="product-image"><img src="images/pc1.jpg"></div>
-            <div class="product-name">CORE <span>START</span></div>
-            <div class="fps-widget" onclick="openFpsModal('CORE START', {'CS 2': '320 FPS', 'Dota 2': '240 FPS', 'Atomic Heart': '90 FPS'})">
-                <div class="fps-inner">
-                    <div class="fps-help-icon">?</div>
-                    <div class="fps-header"><span>FPS В ИГРАХ</span><span class="fps-number">145+ FPS</span></div>
-                    <div class="fps-bar-bg"><div class="fps-bar-fill" style="width: 45%;"></div></div>
-                </div>
-            </div>
-            <div class="product-mini-specs">
-                <div class="mini-spec"><img src="images/cpu.png" class="spec-icon-img"> Процессор: <span>i5-12400F</span></div>
-                <div class="mini-spec"><img src="images/gpu.png" class="spec-icon-img"> Видеокарта: <span>RTX 4060</span></div>
-                <div class="mini-spec"><img src="images/ram.png" class="spec-icon-img"> Оперативная память: <span>16GB DDR4</span></div>
-            </div>
-            <div class="status in-stock">В наличии</div>
-            <div class="product-price">65 900 ₽</div>
-            <button class="btn-card" onclick="openSpecsModal(this, { 
-                'Накопитель': '500GB NVMe', 
-                'Блок питания': '600W 80+',
-                'Материнская плата': 'B650'
-                })">Подробнее</button>
-            <button class="g-btn-buy" onclick="gOpenBuy(this)">Купить</button>
-        </div>
-
-        <!-- Карточка 2 -->
-        <div class="product-card">
-            <div class="badge-hit">ХИТ</div>
-            <div class="product-image"><img src="images/pc1.jpg"></div>
-            <div class="product-name">CORE <span>PRO</span></div>
-            <div class="fps-widget" onclick="openFpsModal('CORE PRO', {'Cyberpunk': '85 FPS', 'Warzone': '140 FPS'})">
-                <div class="fps-inner">
-                    <div class="fps-help-icon">?</div>
-                    <div class="fps-header"><span>FPS В ИГРАХ</span><span class="fps-number">210+ FPS</span></div>
-                    <div class="fps-bar-bg"><div class="fps-bar-fill" style="width: 75%;"></div></div>
-                </div>
-            </div>
-            <div class="product-mini-specs">
-                <div class="mini-spec"><img src="images/cpu.png" class="spec-icon-img"> CPU: <span>Ryzen 5 7600</span></div>
-                <div class="mini-spec"><img src="images/gpu.png" class="spec-icon-img"> GPU: <span>RTX 4070 Ti</span></div>
-                <div class="mini-spec"><img src="images/ram.png" class="spec-icon-img"> RAM: <span>32GB DDR5</span></div>
-            </div>
-            <div class="status on-order">Под заказ</div>
-            <div class="product-price">124 500 ₽</div>
-            <button class="btn-card" onclick="openSpecsModal(this, { 
-                'SSD': '1TB Gen4', 
-                'Охлаждение': 'СЖО 240мм',
-                'Материнская плата': 'B650'
-                })">Подробнее</button>
-            <button class="g-btn-buy" onclick="gOpenBuy(this)">Купить</button>
-        </div>
-
-    <!-- Твоя модалка инфо -->
-    <div id="infoModal" class="custom-modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <div id="modalTitle" class="modal-title">Инфо</div>
-            <div id="modalDataContainer"></div>
-        </div>
+<div id="infoModal" class="custom-modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <div id="modalTitle" class="modal-title">Инфо</div>
+        <div id="modalDataContainer"></div>
     </div>
-
-    <!-- Модалка оформления заказа -->
-    <div id="gBuyModal" class="g-modal-overlay">
-        <div class="g-modal-body">
-            <div style="position:absolute; top:20px; right:20px; cursor:pointer; font-size:24px; font-weight:bold;" onclick="gCloseBuy()">×</div>
-            <h2>Оформление</h2>
-            <p style="font-size:14px; margin-bottom:15px;">Текст вашей заявки:</p>
-            <div class="g-copy-area" id="gOrderText"></div>
-            <div class="g-btn-row">
-                <button class="g-action-btn g-btn-copy" onclick="gCopyText()">
-                    <span id="gCopyStatus">КОПИРОВАТЬ</span>
-                </button>
-                <a href="#" class="g-action-btn">AVITO</a>
-                <a href="#" class="g-action-btn">VK</a>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        const modal = document.getElementById('infoModal');
-        const title = document.getElementById('modalTitle');
-        const container = document.getElementById('modalDataContainer');
-
-        function openFpsModal(pcName, games) {
-            title.innerText = pcName + ' - Производительность';
-            container.innerHTML = '';
-            for (let game in games) {
-                container.innerHTML += `<div class="info-row"><span class="info-label">${game}</span><span class="info-value highlight">${games[game]}</span></div>`;
-            }
-            modal.style.display = 'flex';
-        }
-
-        const pcDataStorage = {};
-
-        function openSpecsModal(btn, extraSpecs) {
-            const card = btn.closest('.product-card');
-            const pcName = card.querySelector('.product-name').innerText;
-            title.innerText = pcName + ' - Конфигурация';
-            container.innerHTML = '';
-            
-            let fullSpecsList = [];
-            const miniSpecs = card.querySelectorAll('.mini-spec');
-            miniSpecs.forEach(spec => {
-                const text = spec.innerText.split(':');
-                const label = text[0].trim();
-                const value = text[1] ? text[1].trim() : '';
-                fullSpecsList.push(`${label}: ${value}`);
-                container.innerHTML += `<div class="info-row"><span class="info-label">${label}</span><span class="info-value">${value}</span></div>`;
-            });
-
-            for (let part in extraSpecs) {
-                fullSpecsList.push(`${part}: ${extraSpecs[part]}`);
-                container.innerHTML += `<div class="info-row"><span class="info-label">${part}</span><span class="info-value">${extraSpecs[part]}</span></div>`;
-            }
-
-            pcDataStorage[pcName] = fullSpecsList;
-            modal.style.display = 'flex';
-        }
-
-        function closeModal() { modal.style.display = 'none'; }
-
-        function gOpenBuy(btn) {
-            const card = btn.closest('.product-card');
-            const pcName = card.querySelector('.product-name').innerText;
-            const pcPrice = card.querySelector('.product-price').innerText;
-            
-            if (!pcDataStorage[pcName]) {
-                const detailBtn = card.querySelector('.btn-card');
-                const originalDisplay = modal.style.display;
-                detailBtn.click(); 
-                modal.style.display = originalDisplay; 
-            }
-
-            const specs = pcDataStorage[pcName] || [];
-            let pcSpecsText = specs.map(s => "• " + s).join("\n");
-            const finalMessage = `— ЗАЯВКА НА ПК —\n\nСборка: ${pcName}\nЦена: ${pcPrice}\n\nПолная конфигурация:\n${pcSpecsText}`;
-            
-            document.getElementById('gOrderText').innerText = finalMessage;
-            document.getElementById('gBuyModal').style.display = 'flex';
-        }
-
-        function gCloseBuy() { document.getElementById('gBuyModal').style.display = 'none'; }
-
-        function gCopyText() {
-            const text = document.getElementById('gOrderText').innerText;
-            navigator.clipboard.writeText(text).then(() => {
-                const btn = document.getElementById('gCopyStatus');
-                btn.innerText = 'ГОТОВО!';
-                setTimeout(() => btn.innerText = 'КОПИРОВАТЬ', 2000);
-            });
-        }
-
-        window.onclick = (e) => { 
-            if (e.target == modal) closeModal(); 
-            if (e.target.id == 'gBuyModal') gCloseBuy();
-        }
-    </script>
 </div>
+
+<div id="gBuyModal" class="g-modal-overlay">
+    <div class="g-modal-body">
+        <div style="position:absolute; top:20px; right:20px; cursor:pointer; font-size:24px; font-weight:bold;" onclick="gCloseBuy()">×</div>
+        <h2>Оформление</h2>
+        <p style="font-size:14px; margin-bottom:15px;">Текст вашей заявки:</p>
+        <div class="g-copy-area" id="gOrderText"></div>
+        <div class="g-btn-row">
+            <button class="g-action-btn g-btn-copy" onclick="gCopyText()">
+                <span id="gCopyStatus">КОПИРОВАТЬ</span>
+            </button>
+            <a href="#" class="g-action-btn">AVITO</a>
+            <a href="#" class="g-action-btn">VK</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 1. СНАЧАЛА ОБЪЯВЛЯЕМ ПЕРЕМЕННЫЕ И ФУНКЦИИ МОДАЛОК
+    const modal = document.getElementById('infoModal');
+    const title = document.getElementById('modalTitle');
+    const container = document.getElementById('modalDataContainer');
+    const pcDataStorage = {};
+
+    function openFpsModal(pcName, games) {
+        title.innerText = pcName + ' - Производительность';
+        container.innerHTML = '';
+        for (let game in games) {
+            container.innerHTML += `<div class="info-row"><span class="info-label">${game}</span><span class="info-value highlight">${games[game]}</span></div>`;
+        }
+        modal.style.display = 'flex';
+    }
+
+    function openSpecsModal(btn, extraSpecs) {
+        const card = btn.closest('.product-card');
+        const pcName = card.querySelector('.product-name').innerText;
+        title.innerText = pcName + ' - Конфигурация';
+        container.innerHTML = '';
+        
+        let fullSpecsList = [];
+        const miniSpecs = card.querySelectorAll('.mini-spec');
+        miniSpecs.forEach(spec => {
+            const text = spec.innerText.split(':');
+            const label = text[0].trim();
+            const value = text[1] ? text[1].trim() : '';
+            fullSpecsList.push(`${label}: ${value}`);
+            container.innerHTML += `<div class="info-row"><span class="info-label">${label}</span><span class="info-value">${value}</span></div>`;
+        });
+
+        for (let part in extraSpecs) {
+            fullSpecsList.push(`${part}: ${extraSpecs[part]}`);
+            container.innerHTML += `<div class="info-row"><span class="info-label">${part}</span><span class="info-value">${extraSpecs[part]}</span></div>`;
+        }
+
+        pcDataStorage[pcName] = fullSpecsList;
+        modal.style.display = 'flex';
+    }
+
+    function closeModal() { modal.style.display = 'none'; }
+
+    function gOpenBuy(btn) {
+        const card = btn.closest('.product-card');
+        const pcName = card.querySelector('.product-name').innerText;
+        const pcPrice = card.querySelector('.product-price').innerText;
+        
+        if (!pcDataStorage[pcName]) {
+            const detailBtn = card.querySelector('.btn-card');
+            const originalDisplay = modal.style.display;
+            detailBtn.click(); 
+            modal.style.display = originalDisplay; 
+        }
+
+        const specs = pcDataStorage[pcName] || [];
+        let pcSpecsText = specs.map(s => "• " + s).join("\n");
+        const finalMessage = `— ЗАЯВКА НА ПК —\n\nСборка: ${pcName}\nЦена: ${pcPrice}\n\nПолная конфигурация:\n${pcSpecsText}`;
+        
+        document.getElementById('gOrderText').innerText = finalMessage;
+        document.getElementById('gBuyModal').style.display = 'flex';
+    }
+
+    function gCloseBuy() { document.getElementById('gBuyModal').style.display = 'none'; }
+
+    function gCopyText() {
+        const text = document.getElementById('gOrderText').innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            const btn = document.getElementById('gCopyStatus');
+            btn.innerText = 'ГОТОВО!';
+            setTimeout(() => btn.innerText = 'КОПИРОВАТЬ', 2000);
+        });
+    }
+
+    window.onclick = (e) => { 
+        if (e.target == modal) closeModal(); 
+        if (e.target.id == 'gBuyModal') gCloseBuy();
+    }
+
+    // 2. ДАННЫЕ ДЛЯ КАТАЛОГА ТОВАРОВ
+    // TODO: Сделать наполнение каталога через Api
+    const myComputers = [
+        {
+            name: "CORE START",
+            isHit: true,
+            image: "images/pc1.jpg",
+            fpsNumber: "145+ FPS",
+            fpsBarWidth: "45%",
+            fpsModal: { 'CS 2': '320 FPS', 'Dota 2': '240 FPS', 'Atomic Heart': '90 FPS' },
+            cpu: "i5-12400F",
+            gpu: "RTX 4060",
+            ram: "16GB DDR4",
+            statusClass: "in-stock",
+            statusText: "В наличии",
+            price: "65 900 ₽",
+            specsModal: { 'Накопитель': '500GB NVMe', 'Блок питания': '600W 80+', 'Материнская плата': 'B650' }
+        },
+        {
+            name: "CORE PRO",
+            isHit: true,
+            image: "images/pc1.jpg",
+            fpsNumber: "210+ FPS",
+            fpsBarWidth: "75%",
+            fpsModal: { 'Cyberpunk': '85 FPS', 'Warzone': '140 FPS' },
+            cpu: "Ryzen 5 7600",
+            gpu: "RTX 4070 Ti",
+            ram: "32GB DDR5",
+            statusClass: "on-order",
+            statusText: "Под заказ",
+            price: "124 500 ₽",
+            specsModal: { 'SSD': '1TB Gen4', 'Охлаждение': 'СЖО 240мм', 'Материнская плата': 'B650' }
+        },
+        {
+            name: "CORE PRO",
+            isHit: true,
+            image: "images/pc1.jpg",
+            fpsNumber: "210+ FPS",
+            fpsBarWidth: "75%",
+            fpsModal: { 'Cyberpunk': '85 FPS', 'Warzone': '140 FPS' },
+            cpu: "Ryzen 5 7600",
+            gpu: "RTX 4070 Ti",
+            ram: "32GB DDR5",
+            statusClass: "on-order",
+            statusText: "Под заказ",
+            price: "124 500 ₽",
+            specsModal: { 'SSD': '1TB Gen4', 'Охлаждение': 'СЖО 240мм', 'Материнская плата': 'B650' }
+        },
+        {
+            name: "CORE PRO",
+            isHit: true,
+            image: "images/pc1.jpg",
+            fpsNumber: "210+ FPS",
+            fpsBarWidth: "75%",
+            fpsModal: { 'Cyberpunk': '85 FPS', 'Warzone': '140 FPS' },
+            cpu: "Ryzen 5 7600",
+            gpu: "RTX 4070 Ti",
+            ram: "32GB DDR5",
+            statusClass: "on-order",
+            statusText: "Под заказ",
+            price: "124 500 ₽",
+            specsModal: { 'SSD': '1TB Gen4', 'Охлаждение': 'СЖО 240мм', 'Материнская плата': 'B650' }
+        },
+        {
+            name: "CORE PRO",
+            isHit: true,
+            image: "images/pc1.jpg",
+            fpsNumber: "210+ FPS",
+            fpsBarWidth: "75%",
+            fpsModal: { 'Cyberpunk': '85 FPS', 'Warzone': '140 FPS' },
+            cpu: "Ryzen 5 7600",
+            gpu: "RTX 4070 Ti",
+            ram: "32GB DDR5",
+            statusClass: "on-order",
+            statusText: "Под заказ",
+            price: "124 500 ₽",
+            specsModal: { 'SSD': '1TB Gen4', 'Охлаждение': 'СЖО 240мм', 'Материнская плата': 'B650' }
+        },
+        {
+            name: "CORE PRO",
+            isHit: true,
+            image: "images/pc1.jpg",
+            fpsNumber: "210+ FPS",
+            fpsBarWidth: "75%",
+            fpsModal: { 'Cyberpunk': '85 FPS', 'Warzone': '140 FPS' },
+            cpu: "Ryzen 5 7600",
+            gpu: "RTX 4070 Ti",
+            ram: "32GB DDR5",
+            statusClass: "on-order",
+            statusText: "Под заказ",
+            price: "124 500 ₽",
+            specsModal: { 'SSD': '1TB Gen4', 'Охлаждение': 'СЖО 240мм', 'Материнская плата': 'B650' }
+        }
+    ];
+
+    // 3. ФУНКЦИЯ СБОРКИ
+    function buildCatalog() {
+        const grid = document.getElementById('js-catalog-grid');
+        if (!grid) return;
+        
+        grid.innerHTML = ''; 
+
+        myComputers.forEach(pc => {
+            const badge = pc.isHit ? `<div class="badge-hit">ХИТ</div>` : '';
+            
+            const fpsDataStr = JSON.stringify(pc.fpsModal).replace(/"/g, '&quot;');
+            const specsDataStr = JSON.stringify(pc.specsModal).replace(/"/g, '&quot;');
+            
+            const nameArray = pc.name.split(' ');
+            const mainName = nameArray[0] || '';
+            const subName = nameArray.slice(1).join(' ') || '';
+            const titleHtml = subName ? `${mainName} <span>${subName}</span>` : mainName;
+
+            const cardStructure = `
+                <div class="product-card">
+                    ${badge}
+                    <div class="product-image"><img src="${pc.image}"></div>
+                    <div class="product-name">${titleHtml}</div>
+                    
+                    <div class="fps-widget" onclick="openFpsModal('${pc.name}', ${fpsDataStr})">
+                        <div class="fps-inner">
+                            <div class="fps-help-icon">?</div>
+                            <div class="fps-header"><span>FPS В ИГРАХ</span><span class="fps-number">${pc.fpsNumber}</span></div>
+                            <div class="fps-bar-bg"><div class="fps-bar-fill" style="width: ${pc.fpsBarWidth};"></div></div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-mini-specs">
+                        <div class="mini-spec"><img src="images/cpu.png" class="spec-icon-img"> Процессор: <span>${pc.cpu}</span></div>
+                        <div class="mini-spec"><img src="images/gpu.png" class="spec-icon-img"> Видеокарта: <span>${pc.gpu}</span></div>
+                        <div class="mini-spec"><img src="images/ram.png" class="spec-icon-img"> Оперативная память: <span>${pc.ram}</span></div>
+                    </div>
+                    
+                    <div class="status ${pc.statusClass}">${pc.statusText}</div>
+                    <div class="product-price">${pc.price}</div>
+                    
+                    <button class="btn-card" onclick="openSpecsModal(this, ${specsDataStr})">Подробнее</button>
+                    <button class="g-btn-buy" onclick="gOpenBuy(this)">Купить</button>
+                </div>
+            `;
+            
+            grid.insertAdjacentHTML('beforeend', cardStructure);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', buildCatalog);
+</script>
 
 <!-- БЛОК ЭТАПЫ РАБОТЫ -->
 <section class="steps-section">
     <style>
         :root {
             /* НАСТРОЙКИ КАРТИНКИ ПК (pc3.png) */
-            --steps-pc-width: 80%;    /* Ширина картинки */
-            --steps-pc-offset-x: -5%;  /* Смещение по горизонтали (<0 влево, >0 вправо) */
-            --steps-pc-offset-y: 0px;  /* Смещение по вертикали */
+            --steps-pc-width: 100%;    /* Ширина картинки */
+            --steps-pc-offset-x: -10%;  /* Смещение по горизонтали (<0 влево, >0 вправо) */
+            --steps-pc-offset-y: -150px;  /* Смещение по вертикали */
         }
 
         .steps-section {
@@ -1386,6 +1466,7 @@ body {
             justify-content: space-between;
             align-items: flex-start;
             gap: 40px;
+            margin-bottom: -200px;
         }
 
         .steps-visual {
@@ -1576,14 +1657,14 @@ body {
             }
 
             /* --- ОСТАЛЬНОЙ КОНТЕНТ (БЕЗ ИЗМЕНЕНИЙ) --- */
-            .vp-header { text-align: center; margin-bottom: 80px; position: relative; z-index: 5; }
+            .vp-header { text-align: center; margin-bottom: 40px; position: relative; z-index: 5; }
             .vp-header h2 { font-size: 48px; font-weight: 900; margin: 0 0 15px 0; text-transform: uppercase; }
-            .vp-header p { color: #00f2ff; font-size: 18px; font-weight: 700; letter-spacing: 2px; }
+            .vp-header p { color: #00f2ff; font-size: 35px; font-weight: 700; letter-spacing: 2px; }
             .vp-grid { width: 100%; max-width: 1100px; display: flex; flex-direction: column; position: relative; z-index: 5; }
             .vp-row { display: flex; align-items: center; justify-content: space-between; padding: 40px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.08); gap: 40px; }
             .vp-row:last-child { border-bottom: none; }
             .vp-row.reverse { flex-direction: row-reverse; text-align: right; }
-            .vp-number { font-size: 32px; font-weight: 900; color: rgba(255,255,255,0.05); min-width: 70px; }
+            .vp-number { font-size: 32px; font-weight: 900; color: rgba(255, 255, 255, 0.562); min-width: 70px; }
             .vp-info h3 { font-size: 24px; font-weight: 900; margin: 0 0 10px 0; text-transform: uppercase; }
             .vp-info p { font-size: 16px; line-height: 1.6; color: #a0a0a0; font-weight: 700; margin: 0; max-width: 600px; }
             .vp-icon { font-size: 28px; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.03); border-radius: 15px; border: 1px solid rgba(255,255,255,0.1); }
@@ -1885,7 +1966,7 @@ body {
                     <h3 class="card-name">ВКонтакте</h3>
                 </div>
                 <div class="card-image-wrapper">
-                    <img src="images/pc2.png" alt="VK" class="floating-icon">
+                    <img src="images/logo_vk.png" alt="VK" class="floating-icon-vk">
                 </div>
             </a>
 
@@ -1895,7 +1976,7 @@ body {
                     <h3 class="card-name">Авито</h3>
                 </div>
                 <div class="card-image-wrapper">
-                    <img src="images/pc2.png" alt="Avito" class="floating-icon">
+                    <img src="images/logo_avito.png" alt="Avito" class="floating-icon-av">
                 </div>
             </a>
 
@@ -1905,7 +1986,7 @@ body {
                     <h3 class="card-name">OZON</h3>
                 </div>
                 <div class="card-image-wrapper">
-                    <img src="images/pc2.png" alt="OZON" class="floating-icon">
+                    <img src="images/logo_ozon.png" alt="OZON" class="floating-icon">
                 </div>
             </a>
 
@@ -1915,7 +1996,7 @@ body {
                     <h3 class="card-name">Wildberries</h3>
                 </div>
                 <div class="card-image-wrapper">
-                    <img src="images/pc2.png" alt="Wildberries" class="floating-icon">
+                    <img src="images/logo_wb.png" alt="Wildberries" class="floating-icon">
                 </div>
             </a>
         </div>
@@ -2004,7 +2085,25 @@ body {
     }
 
     .floating-icon {
-        width: 500px;
+        width: 320px;
+        height: auto;
+        object-fit: contain;
+        /* Тень для самой картинки (эффект объема) */
+        filter: drop-shadow(0 15px 25px rgba(0,0,0,0.1));
+        animation: floatLife 4s ease-in-out infinite;
+    }
+
+    .floating-icon-av {
+        width: 360px;
+        height: auto;
+        object-fit: contain;
+        /* Тень для самой картинки (эффект объема) */
+        filter: drop-shadow(0 15px 25px rgba(0,0,0,0.1));
+        animation: floatLife 4s ease-in-out infinite;
+    }
+
+    .floating-icon-vk {
+        width: 280px;
         height: auto;
         object-fit: contain;
         /* Тень для самой картинки (эффект объема) */
@@ -2029,7 +2128,7 @@ body {
     }
 
     /* Индивидуальные задержки для "живого" эффекта */
-    .social-mega-grid .social-mega-card:nth-child(2) .floating-icon { animation-delay: 0.7s; }
+    .social-mega-grid .social-mega-card:nth-child(2) .floating-icon-av { animation-delay: 0.7s; }
     .social-mega-grid .social-mega-card:nth-child(3) .floating-icon { animation-delay: 1.4s; }
     .social-mega-grid .social-mega-card:nth-child(4) .floating-icon { animation-delay: 2.1s; }
 

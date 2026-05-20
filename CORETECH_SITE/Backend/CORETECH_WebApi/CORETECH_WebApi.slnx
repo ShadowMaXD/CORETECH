@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/Businesses/">
+    <Project Path="Business/Business.csproj" Id="f78ed7a1-060c-4703-958b-bc6c63e7d18e" />
+  </Folder>
+  <Folder Name="/Datas/">
+    <Project Path="Common/Common.csproj" />
+    <Project Path="Database/Database.csproj" Id="4cb12510-cd64-40d4-9cec-78704ae6ccf0" />
+  </Folder>
+  <Folder Name="/Web/">
+    <Project Path="CORETECH_WebApi/CORETECH_WebApi.csproj" />
+  </Folder>
+</Solution>

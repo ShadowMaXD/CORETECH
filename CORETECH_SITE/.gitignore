@@ -1,0 +1,11 @@
+# Visual Studio
+.vs/
+
+# Visual Studio Code
+.vscode/
+
+# Папки bin и obj (результаты компиляции)
+**/bin/
+**/obj/
+bin/
+obj/
