@@ -4,7 +4,14 @@ using System.Text;
 
 namespace Common.Consts
 {
-    internal class Consts_Debug
+    /// <summary>
+    /// Константы для дебага
+    /// </summary>
+    public static class Consts_Debug
     {
+        /// <summary>
+        /// Строка соединения для отладки
+        /// </summary>
+        public const string DB_ConnectionString = "Data Source=.\\sqlexpress;Initial Catalog=OemActivator;TrustServerCertificate=Yes;User ID=sa; Password=123;";
     }
 }
