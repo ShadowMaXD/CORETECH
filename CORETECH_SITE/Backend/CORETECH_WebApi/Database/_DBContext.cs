@@ -1,5 +1,6 @@
 ﻿using Common;
 using Common.Consts;
+using Database.Definitions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
 using System;
@@ -10,6 +11,9 @@ namespace Database
 {
     public partial class _DBContext : DbContext
     {
+
+        public DbSet<CatalogData> CatalogDatas { get; set; } = null!;
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
