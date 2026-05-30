@@ -1,137 +1,121 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
+using System.Text.Json.Serialization;
 
-namespace Database.Definitions
+namespace Business.Definitions
 {
     /// <summary>
-	/// Продукты каталога
-	/// </summary>
-    [Table("CatalogDatas")]
-    [Comment("Продукты каталога")]
-    public class CatalogData
+    /// Продукты каталога
+    /// </summary>
+    public class CCatalogData
     {
 
         /// <summary>
         /// Код
         /// </summary>
-        [Key]
-        [Comment("Код")]
+        [JsonPropertyName("id")]
         public int ID { get; set; }
 
 
         /// <summary>
         /// Имя продукта
         /// </summary>
-        [Comment("Имя продукта")]
+        [JsonPropertyName("name")]
         public string Name { get; set; } = null!;
 
 
         /// <summary>
         /// IsHit
         /// </summary>
-        [Comment("IsHit")]
+        [JsonPropertyName("isHit")]
         public bool IsHit { get; set; }
 
 
         /// <summary>
         /// Картинка base64
         /// </summary>
-        [Comment("Имя продукта")]
+        [JsonPropertyName("image")]
         public string Image { get; set; } = null!;
 
 
         /// <summary>
         /// FPS На главной
         /// </summary>
-        [Comment("FPS На главной")]
+        [JsonPropertyName("fpsNumber")]
         public string FpsNumber { get; set; } = null!;
 
 
         /// <summary>
         /// FPS прогресс
         /// </summary>
-        [Comment("FPS прогресс")]
+        [JsonPropertyName("fpsBarWidth")]
         public string FpsBarWidth { get; set; } = null!;
 
 
         /// <summary>
         /// FPS модальное окно
         /// </summary>
-        [NotMapped]
-        [Comment("FPS модальное окно")]
+        [JsonPropertyName("fpsModal")]
         public Dictionary<string, string>? FpsModal { get; set; }
 
-        /// <summary>
-        /// Поле для хранения сериализованных данных FPS модальное окно
-        /// </summary>
-        [Comment("Сериализованное FPS модальное окно")]
-        public string? FpsModalSerialized { get; set; }
 
         /// <summary>
         /// Процессор
         /// </summary>
-        [Comment("Процессор")]
+        [JsonPropertyName("cpu")]
         public string Cpu { get; set; } = null!;
 
 
         /// <summary>
         /// Графическая карта
         /// </summary>
-        [Comment("Графическая карта")]
+        [JsonPropertyName("gpu")]
         public string Gpu { get; set; } = null!;
 
 
         /// <summary>
         /// Оперативка
         /// </summary>
-        [Comment("Оперативка")]
+        [JsonPropertyName("ram")]
         public string Ram { get; set; } = null!;
 
 
         /// <summary>
         /// Статус
         /// </summary>
-        [Comment("Статус")]
+        [JsonPropertyName("statusClass")]
         public string StatusClass { get; set; } = null!;
 
 
         /// <summary>
         /// Текст статуса
         /// </summary>
-        [Comment("Текст статуса")]
+        [JsonPropertyName("statusText")]
         public string StatusText { get; set; } = null!;
 
 
         /// <summary>
         /// Стоимость
         /// </summary>
-        [Comment("Стоимость")]
+        [JsonPropertyName("price")]
         public string Price { get; set; } = null!;
 
 
         /// <summary>
         /// FPS модальное окно
         /// </summary>
-        [NotMapped]
-        [Comment("модальное окно")]
+        [JsonPropertyName("specsModal")]
         public Dictionary<string, string>? SpecsModal { get; set; }
-
-
-        /// <summary>
-        /// Поле для хранения сериализованных данных FPS модальное окно
-        /// </summary>
-        [Comment("Сериализованное модальное окно")]
-        public string? SpecsModalSerialized { get; set; }
 
 
         /// <summary>
         /// Флаг удаленности
         /// </summary>
-        [Comment("Флаг удалено")]
+        [JsonPropertyName("flag_Del")]
         public bool Flag_Del { get; set; }
     }
+
 }

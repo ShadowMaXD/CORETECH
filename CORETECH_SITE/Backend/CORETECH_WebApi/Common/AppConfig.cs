@@ -1,4 +1,4 @@
-﻿namespace WIS.OemActivator.Common
+﻿namespace Common
 {
     /// <summary>
     /// Класс для хранения конфигурации приложения
