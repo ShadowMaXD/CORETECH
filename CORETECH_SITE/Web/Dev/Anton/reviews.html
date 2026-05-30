@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -17,7 +18,51 @@
         }
 
         .reviews-header { text-align: center; margin-bottom: 50px; position: relative; z-index: 2;}
-        .reviews-header h2 { font-size: 3rem; font-weight: 900; text-transform: uppercase; background: linear-gradient(to right, #fff, #4ef0c3); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .reviews-header h2 { font-size: 3rem; font-weight: 900; text-transform: uppercase; background: linear-gradient(to right, #fff, #4ef0c3); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-top: 10px; }
+        
+        /* --- СТИЛЬ КНОПКИ ВОЗВРАТА НА ГЛАВНУЮ --- */
+        .back-to-main-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 13px;
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 10px 22px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 30px;
+            margin-bottom: 15px; /* Дистанция до градиентного текста */
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        /* Эффект при наведении (подсветка неоном CORETECH) */
+        .back-to-main-btn:hover {
+            color: #4ef0c3;
+            background: rgba(78, 240, 195, 0.08);
+            border-color: #4ef0c3;
+            box-shadow: 0 0 20px rgba(78, 240, 195, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .back-to-main-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Анимация движения стрелочки влево */
+        .back-to-main-btn svg {
+            transition: transform 0.3s ease;
+        }
+
+        .back-to-main-btn:hover svg {
+            transform: translateX(-4px);
+        }
+
         .star { position: absolute; background: #fff; border-radius: 50%; opacity: 0.5; animation: twinkle var(--duration) infinite ease-in-out; }
         @keyframes twinkle { 0%, 100% { opacity: 0.2; transform: scale(1); } 50% { opacity: 0.8; transform: scale(1.2); } }
         .review-rating { display: flex; align-items: center; gap: 8px; margin-bottom: 15px; background: rgba(0,0,0,0.3); padding: 8px 12px; border-radius: 12px; font-weight: 800; }
@@ -159,8 +204,6 @@
         }
 
         /* СТИЛИ ДЛЯ НОВОГО БЛОКА ОЦЕНКИ И ЗВЕЗД */
- 
-
         .rating-value {
             font-size: 14px;
             font-weight: 900;
@@ -363,6 +406,8 @@
             .footer-bottom { flex-direction: column; text-align: center; }
             .footer-bottom-right { text-align: center; }
             .footer-disclaimer { text-align: center; }
+            .reviews-header h2 { font-size: 2.2rem !important; }
+            .back-to-main-btn { font-size: 11px; padding: 8px 18px; margin-bottom: 10px; }
         }
 
         /* ОБЩИЙ БЛОК РЕЙТИНГА СТРАНИЦЫ */
@@ -490,63 +535,74 @@
         <a href="index.html" class="logo">CORE<span>TECH</span></a>
         <nav class="nav-links">
             <a href="index.html">Главная</a>
-            <a href="index.html#js-catalog-grid">Сборки</a>
+            <a href="index.html#block_catalog">Сборки</a>
             <a href="reviews.html" style="color: #4ef0c3;">Отзывы</a>
         </nav>
     </header>
 
     <section class="reviews-page-section">
-        <h1>Что о нас <span>говорят</span></h1>
+        
+        <div class="reviews-header">
+            <a href="index.html" class="back-to-main-btn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                Вернуться на сайт
+            </a>
+            <h2>Отзывы клиентов</h2>
+        </div>
+
         <div class="reviews-subtitle">Честные отзывы от реальных покупателей наших мощных игровых машин</div>
         <div class="total-rating-container">
-    <div class="total-rating-score">
-        <div class="total-score-digit">5.0</div>
-        <div class="total-score-stars">★★★★★</div>
-        <div class="total-score-count">на основе отзывов</div>
-    </div>
-
-    <div class="total-rating-stars-list">
-        <div class="rating-bar-row">
-            <span class="rating-bar-number">5</span>
-            <div class="rating-bar-track">
-                <div class="rating-bar-fill-5"></div>
+            <div class="total-rating-score">
+                <div class="total-score-digit">5.0</div>
+                <div class="total-score-stars">★★★★★</div>
+                <div class="total-score-count">на основе отзывов</div>
             </div>
-            <span class="rating-bar-percent">100%</span>
-        </div>
 
-        <div class="rating-bar-row">
-            <span class="rating-bar-number">4</span>
-            <div class="rating-bar-track">
-                <div class="rating-bar-fill-empty"></div>
-            </div>
-            <span class="rating-bar-percent">0%</span>
-        </div>
+            <div class="total-rating-stars-list">
+                <div class="rating-bar-row">
+                    <span class="rating-bar-number">5</span>
+                    <div class="rating-bar-track">
+                        <div class="rating-bar-fill-5"></div>
+                    </div>
+                    <span class="rating-bar-percent">100%</span>
+                </div>
 
-        <div class="rating-bar-row">
-            <span class="rating-bar-number">3</span>
-            <div class="rating-bar-track">
-                <div class="rating-bar-fill-empty"></div>
-            </div>
-            <span class="rating-bar-percent">0%</span>
-        </div>
+                <div class="rating-bar-row">
+                    <span class="rating-bar-number">4</span>
+                    <div class="rating-bar-track">
+                        <div class="rating-bar-fill-empty"></div>
+                    </div>
+                    <span class="rating-bar-percent">0%</span>
+                </div>
 
-        <div class="rating-bar-row">
-            <span class="rating-bar-number">2</span>
-            <div class="rating-bar-track">
-                <div class="rating-bar-fill-empty"></div>
-            </div>
-            <span class="rating-bar-percent">0%</span>
-        </div>
+                <div class="rating-bar-row">
+                    <span class="rating-bar-number">3</span>
+                    <div class="rating-bar-track">
+                        <div class="rating-bar-fill-empty"></div>
+                    </div>
+                    <span class="rating-bar-percent">0%</span>
+                </div>
 
-        <div class="rating-bar-row">
-            <span class="rating-bar-number">1</span>
-            <div class="rating-bar-track">
-                <div class="rating-bar-fill-empty"></div>
+                <div class="rating-bar-row">
+                    <span class="rating-bar-number">2</span>
+                    <div class="rating-bar-track">
+                        <div class="rating-bar-fill-empty"></div>
+                    </div>
+                    <span class="rating-bar-percent">0%</span>
+                </div>
+
+                <div class="rating-bar-row">
+                    <span class="rating-bar-number">1</span>
+                    <div class="rating-bar-track">
+                        <div class="rating-bar-fill-empty"></div>
+                    </div>
+                    <span class="rating-bar-percent">0%</span>
+                </div>
             </div>
-            <span class="rating-bar-percent">0%</span>
         </div>
-    </div>
-</div>
         <div class="reviews-grid" id="js-reviews-page-grid"></div>
     </section>
 
@@ -586,25 +642,24 @@
     <script>
         // Твоя база данных отзывов
         const reviewsData = [
-        { author: "Александр П.", platform: "Telegram", avatar: "images/reviews/r1.png", link: "https://t.me/your_link1" },
-        { author: "Александр П.", platform: "Telegram", avatar: "images/reviews/r1.png", link: "https://t.me/your_link1" },
-        { author: "Александр П.", platform: "Telegram", avatar: "images/reviews/r1.png", link: "https://t.me/your_link1" },
-        { author: "Александр П.", platform: "Telegram", avatar: "images/reviews/r1.png", link: "https://t.me/your_link1" },
-        { author: "Александр П.", platform: "Telegram", avatar: "images/reviews/r1.png", link: "https://t.me/your_link1" },
-        { author: "Александр П.", platform: "Telegram", avatar: "images/reviews/r1.png", link: "https://t.me/your_link1" },
-        { author: "Александр П.", platform: "Telegram", avatar: "images/reviews/r1.png", link: "https://t.me/your_link1" },
-        { author: "Александр П.", platform: "Telegram", avatar: "images/reviews/r1.png", link: "https://t.me/your_link1" },
-        { author: "Александр П.", platform: "Telegram", avatar: "images/reviews/r1.png", link: "https://t.me/your_link1" },
-        { author: "Александр П.", platform: "Telegram", avatar: "images/reviews/r1.png", link: "https://t.me/your_link1" },
-        { author: "Александр П.", platform: "Telegram", avatar: "images/reviews/r1.png", link: "https://t.me/your_link1" },
-        { author: "Александр П.", platform: "Telegram", avatar: "images/reviews/r1.png", link: "https://t.me/your_link1" },
-        { author: "Александр П.", platform: "Telegram", avatar: "images/reviews/r1.png", link: "https://t.me/your_link1" },
-        { author: "Александр П.", platform: "Telegram", avatar: "images/reviews/r1.png", link: "https://t.me/your_link1" },
-        { author: "Александр П.", platform: "Telegram", avatar: "images/reviews/r1.png", link: "https://t.me/your_link1" },
-        { author: "Александр П.", platform: "Telegram", avatar: "images/reviews/r1.png", link: "https://t.me/your_link1" },
-        { author: "Александр П.", platform: "Telegram", avatar: "images/reviews/r1.png", link: "https://t.me/your_link1" },        
-
-    ];
+            { author: "Александр П.", platform: "Telegram", avatar: "images/reviews/r1.png", link: "https://t.me/your_link1" },
+            { author: "Александр П.", platform: "Telegram", avatar: "images/reviews/r1.png", link: "https://t.me/your_link1" },
+            { author: "Александр П.", platform: "Telegram", avatar: "images/reviews/r1.png", link: "https://t.me/your_link1" },
+            { author: "Александр П.", platform: "Telegram", avatar: "images/reviews/r1.png", link: "https://t.me/your_link1" },
+            { author: "Александр П.", platform: "Telegram", avatar: "images/reviews/r1.png", link: "https://t.me/your_link1" },
+            { author: "Александр П.", platform: "Telegram", avatar: "images/reviews/r1.png", link: "https://t.me/your_link1" },
+            { author: "Александр П.", platform: "Telegram", avatar: "images/reviews/r1.png", link: "https://t.me/your_link1" },
+            { author: "Александр П.", platform: "Telegram", avatar: "images/reviews/r1.png", link: "https://t.me/your_link1" },
+            { author: "Александр П.", platform: "Telegram", avatar: "images/reviews/r1.png", link: "https://t.me/your_link1" },
+            { author: "Александр П.", platform: "Telegram", avatar: "images/reviews/r1.png", link: "https://t.me/your_link1" },
+            { author: "Александр П.", platform: "Telegram", avatar: "images/reviews/r1.png", link: "https://t.me/your_link1" },
+            { author: "Александр П.", platform: "Telegram", avatar: "images/reviews/r1.png", link: "https://t.me/your_link1" },
+            { author: "Александр П.", platform: "Telegram", avatar: "images/reviews/r1.png", link: "https://t.me/your_link1" },
+            { author: "Александр П.", platform: "Telegram", avatar: "images/reviews/r1.png", link: "https://t.me/your_link1" },
+            { author: "Александр П.", platform: "Telegram", avatar: "images/reviews/r1.png", link: "https://t.me/your_link1" },
+            { author: "Александр П.", platform: "Telegram", avatar: "images/reviews/r1.png", link: "https://t.me/your_link1" },
+            { author: "Александр П.", platform: "Telegram", avatar: "images/reviews/r1.png", link: "https://t.me/your_link1" }
+        ];
 
         // Интегрированная функция создания карточки со звездами и плашкой Покупатель
         function createCard(item) {

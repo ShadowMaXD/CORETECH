@@ -8,11 +8,171 @@
 </head>
 <body>
 
+    <div class="white-stars-background" id="js-stars-space">
+        </div>
+
+    <style>
+        html {
+        scroll-behavior: smooth; /* Включает плавную анимацию скролла по якорям */
+        }
+
+        /* Добавляем отступ сверху для всех секций или конкретных заголовков при скролле */
+        section, [id] {
+            scroll-margin-top: 95px; /* Регулируй это число (80px, 120px, сколько нужно) */
+        }
+
+        /* Главный контейнер белого фона */
+        .white-stars-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #ffffff;
+            z-index: -2; /* Прячем за контент страницы */
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        /* Защита первой секции от просвечивания звезд */
+        .bg-container {
+            background-color: #000000;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Стили динамической переливающейся звезды */
+        .dynamic-star {
+            position: absolute;
+            width: 3px;
+            height: 60px;
+            /* Неоновый градиент: Мятный -> Фиолетовый -> Прозрачный */
+            background: linear-gradient(to bottom, 
+                rgba(78, 240, 195, 0) 0%, 
+                rgba(78, 240, 195, 0.8) 40%, 
+                rgba(164, 101, 255, 0.9) 80%, 
+                rgba(164, 101, 255, 0) 100%
+            );
+            border-radius: 4px;
+            opacity: 0;
+            transform: rotate(-45deg);
+            will-change: transform, opacity; /* Оптимизация производительности (FPS) */
+            transition: margin 0.2s cubic-bezier(0.25, 1, 0.5, 1); /* Плавный параллакс за мышью */
+        }
+
+        /* Светящаяся неоновая точка на конце шлейфа */
+        .dynamic-star::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 5px;
+            height: 5px;
+            background: #4ef0c3;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #4ef0c3, 0 0 20px #a465ff;
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const space = document.getElementById('js-stars-space');
+            if (!space) return;
+
+            const maxStars = 30; // Немного увеличили количество для идеальной плотности
+            const starsArray = [];
+
+            function createStar() {
+                const star = document.createElement('div');
+                star.classList.add('dynamic-star');
+                
+                const speed = Math.random() * 3 + 2.5; // Скорость падения
+                const delay = Math.random() * 6; // Задержка старта
+                
+                // РЕШЕНИЕ: Сдвигаем точку старта далеко влево (до -50%), 
+                // чтобы летящие под 45° вправо звезды успевали заполнить левый угол страницы
+                const startLeft = Math.random() * 160 - 50; 
+                
+                const scaleX = Math.random() * 0.6 + 0.7; // Толщина шлейфа
+                const scaleY = Math.random() * 0.5 + 0.8; // Длина шлейфа
+                const depth = Math.random() * 15 + 5; // Коэффициент параллакса
+
+                star.style.left = `${startLeft}%`;
+                star.style.top = `-100px`;
+                
+                const animName = `fall-${Math.floor(Math.random() * 1000000)}`;
+                const keyframes = `
+                    @keyframes ${animName} {
+                        0% { transform: translateY(0) translateX(0) rotate(-45deg) scale(${scaleX}, ${scaleY}); opacity: 0; }
+                        10% { opacity: 1; }
+                        85% { opacity: 1; }
+                        100% { transform: translateY(120vh) translateX(120vh) rotate(-45deg) scale(${scaleX}, ${scaleY}); opacity: 0; }
+                    }
+                `;
+                
+                const styleSheet = document.createElement('style');
+                styleSheet.innerText = keyframes;
+                document.head.appendChild(styleSheet);
+
+                star.style.animation = `${animName} ${speed}s linear ${delay}s infinite`;
+
+                space.appendChild(star);
+
+                starsArray.push({
+                    element: star,
+                    depth: depth,
+                    baseLeft: startLeft
+                });
+            }
+
+            for (let i = 0; i < maxStars; i++) {
+                createStar();
+            }
+
+            // ПАРАЛЛАКС МЫШИ
+            let mouseX = 0;
+            let mouseY = 0;
+
+            window.addEventListener('mousemove', (e) => {
+                mouseX = (e.clientX / window.innerWidth) - 0.5;
+                mouseY = (e.clientY / window.innerHeight) - 0.5;
+
+                starsArray.forEach(star => {
+                    const moveX = mouseX * star.depth;
+                    const moveY = mouseY * star.depth;
+                    star.element.style.marginLeft = `${moveX}px`;
+                    star.element.style.marginTop = `${moveY}px`;
+                });
+            });
+
+            // ГИРОСКОП НА МОБИЛКАХ
+            if (window.DeviceOrientationEvent) {
+                window.addEventListener('deviceorientation', (e) => {
+                    const tiltX = Math.min(Math.max(e.gamma, -30), 30) / 30;
+                    const tiltY = Math.min(Math.max(e.beta, -30), 30) / 30;
+
+                    starsArray.forEach(star => {
+                        const moveX = tiltX * (star.depth * 0.7);
+                        const moveY = tiltY * (star.depth * 0.7);
+                        star.element.style.marginLeft = `${moveX}px`;
+                        star.element.style.marginTop = `${moveY}px`;
+                    });
+                });
+            }
+        });
+    </script>
     <div class="bg-container">
         <div class="main-background"></div>
     </div>
 
     <style id="header-styles">
+        html, body {
+            max-width: 100% !important;
+            overflow-x: hidden !important;
+            margin: 0;
+            padding: 0;
+        }
         .site-header {
             width: calc(100% - 40px);
             max-width: 1000px; 
@@ -86,7 +246,7 @@
             text-decoration: none;
             color: #ffffff;
             font-weight: 900;
-            font-size: 13px;
+            font-size: 12px;
             text-transform: uppercase;
             /* Плавность для цвета, рамки и фона */
             transition: all 0.3s ease; 
@@ -301,6 +461,10 @@
         border-radius: 50%;
         box-shadow: 0 0 12px 2px rgba(147, 51, 234, 1);
     }
+               /* Скрываем мобильный заголовок на компьютерах */
+            .m-config-title {
+                display: none !important;
+            }
 
     /* Анимация падения */
     @keyframes fall {
@@ -320,6 +484,284 @@
             opacity: 0;
         }
     }
+
+        /* МЕДИА-ЗАПРОС ДЛЯ МОБИЛЬНОЙ НАВИГАЦИИ (МЕНЮ-ГАМБУРГЕР) */
+        @media (max-width: 768px) {
+            /* Скрываем десктопное меню */
+            .site-header .header-nav {
+                display: none; 
+            }
+
+            .site-header {
+            width: calc(100% - 40px);
+            max-width: 1000px; 
+            margin: 20px auto; 
+            background: rgba(255, 255, 255, 0); /* Прозрачная в начале */
+            border-radius: 50px;
+            padding: 10px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 20px rgba(0,0,0,0);
+            box-sizing: border-box;
+            position: fixed;
+            top: 0;
+            left: 50%;
+            /* Добавляем scale(1.05) для увеличения вверху */
+            transform: translateX(-50%) scale(1.05); 
+            z-index: 9999;
+            /* Плавная анимация */
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            backdrop-filter: blur(15px);
+        }
+
+        /* Когда скроллим — возвращаем масштаб 1 */
+        .site-header.scrolled {
+            background: rgba(255, 255, 255, 0.9); /* Делаем белый фон чуть прозрачным (0.9 вместо 1) */
+            margin: 10px auto;
+            transform: translateX(-50%) scale(0.95); 
+            
+            /* ПЛАВНЫЙ ПЕРЕХОД КРАЕВ: */
+            /* 1. Блюр фона (уже есть, но закрепим) */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            
+            /* 2. Тень с большим размытием, которая создает эффект "дымки" вокруг */
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.08); 
+            
+            /* 3. Тонкая, почти прозрачная граница, чтобы край не был резким */
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+            /* Скрываем кнопки соцсетей на мобилках, чтобы не перегружать шапку 
+            .site-header .social-circle1,
+            .site-header .social-circle2 {
+                display: none;
+            } */
+
+            /* Уменьшаем кнопку консультации и логотип, чтобы всё поместилось в один ряд */
+            .site-header .btn-consult {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+            .site-header .header-logo {
+                width: 40px;
+                height: 40px;
+            }
+
+            /* КНОПКА ГАМБУРГЕРА */
+            .mobile-menu-toggle {
+                display: flex !important;
+                flex-direction: column;
+                justify-content: space-between;
+                width: 24px;
+                height: 18px;
+                background: none;
+                border: none;
+                cursor: pointer;
+                padding: 0;
+                z-index: 100001; /* Поверх всего */
+            }
+
+            .mobile-menu-toggle span {
+                display: block;
+                width: 100%;
+                height: 2px;
+                background-color: #ffffff; /* Белые полоски в обычном состоянии */
+                border-radius: 2px;
+                transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+
+            /* Цвет полосок меняется на темный, если шапка проскроллена или меню открыто */
+            .site-header.scrolled .mobile-menu-toggle span,
+            .mobile-menu-toggle.active span {
+                background-color: #1a1a1a;
+            }
+
+            /* Анимация превращения гамбургера в крестик 'X' */
+            .mobile-menu-toggle.active span:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            .mobile-menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .mobile-menu-toggle.active span:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+        /* ВЫЕЗЖАЮЩАЯ ПАНЕЛЬ МЕНЮ */
+            .mobile-nav-overlay {
+                position: fixed;
+                top: 0;
+                right: -100%; /* Изначально спрятано за экраном справа */
+                width: 75%;
+                max-width: 300px;
+                height: 100vh;
+                background: rgba(255, 255, 255, 0.98);
+                box-shadow: -10px 0 40px rgba(0, 0, 0, 0.15);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                
+                display: flex !important; /* <--- ДОБАВЬ ИМЕННО СЮДА, ЧТОБЫ МЕНЮ ОТОБРАЖАЛОСЬ */
+                
+                flex-direction: column;
+                padding: 100px 30px 40px 30px;
+                box-sizing: border-box;
+                gap: 20px;
+                z-index: 100000;
+                transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+
+            /* Когда меню активно — выдвигаем его */
+            .mobile-nav-overlay.active {
+                right: 0;
+            }
+
+            /* Ссылки внутри мобильного меню */
+            .mobile-nav-overlay a {
+                text-decoration: none;
+                color: #1a1a1a;
+                font-weight: 900;
+                font-size: 16px;
+                text-transform: uppercase;
+                padding: 10px 0;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+                transition: color 0.3s;
+            }
+
+            .mobile-nav-overlay a:hover, 
+            .mobile-nav-overlay a.active {
+                color: #4ef0c3;
+            }
+        }
+
+        /* Для десктопа кнопку гамбургера и мобильную панель скрываем */
+        .mobile-menu-toggle { display: none; }
+        .mobile-nav-overlay { display: none; }
+
+    @media (max-width: 768px) {
+
+    /* Родоначальник всей секции (выстраивает 3 главных черных прямоугольника друг под другом) */
+    .widgets-wrapper {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 20px !important;
+    }
+
+    /* ==========================================
+       ЭТАП 1: ФОТО КОМПЬЮТЕРА (ПЕРВЫЙ ЧЕРНЫЙ БЛОК)
+       ========================================== */
+    .pc-image-container {
+        order: 1 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        
+        /* Фирменный черный прямоугольник */
+        background: #0d0f14 !important;
+        border-radius: 20px !important;
+        padding: 20px !important;
+        
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    .pc-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            border-radius: 20px !important;
+    }
+
+    /* =======================================================
+       ЭТАП 2: КОНФИГ ДЛЯ ТЕБЯ + ХАРАКТЕРИСТИКИ (ВТОРOЙ ЧЕРНЫЙ БЛОК)
+       ======================================================= */
+    
+    /* Делаем главный виджет единой черной карточкой для Шага 2 */
+    .card.main-widget {
+        order: 2 !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        
+        /* Фирменный черный прямоугольник */
+        background: #0d0f14 !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        border-radius: 20px !important;
+        padding: 24px !important;
+
+        /* Включаем Гриды, чтобы перемешать соседа (.specs-list) внутрь контента */
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+
+    /* Размыкаем внутренний блок config-info, чтобы его содержимое тоже подчинялось общей сетке */
+    .config-info {
+        display: contents !important; 
+    }
+
+    /* Заголовок "КОНФИГ ДЛЯ ТЕБЯ" и бэдж (Идут первыми в черном прямоугольнике) */
+    .config-info > div:nth-child(1) {
+        order: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+
+    /* ХАРАКТЕРИСТИКИ (Встают строго на второе место — ПОД заголовок, но ВЫШЕ цены) */
+    .specs-list {
+        order: 2 !important;
+        width: 100% !important;
+        border-left: none !important; /* Убираем десктопную полосу слева */
+        padding-left: 0 !important;
+        margin: 0 !important;
+    }
+
+    /* Блок с ценой "Любой бюджет", подтекстом и кнопкой (Падает в самый низ Шага 2) */
+    .config-info > div:nth-child(2) {
+        order: 3 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+    }
+
+    /* ==========================================
+       ЭТАП 3: БЛОК "НЕ РАЗБИРАЕШЬСЯ..." (ТРЕТИЙ ЧЕРНЫЙ БЛОК)
+       ========================================== */
+    .card.side-widget {
+        order: 3 !important; /* Становится третьим в самом низу */
+        width: 100% !important;
+        box-sizing: border-box !important;
+        
+        /* Фирменный черный прямоугольник */
+        background: #0d0f14 !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        border-radius: 20px !important;
+        padding: 24px !important;
+        
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 20px !important;
+    }
+
+    /* Мобильные кнопки соцсетей во всю ширину */
+    .social-buttons {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+        width: 100% !important;
+    }
+
+    .btn-social {
+        width: 100% !important;
+        text-align: center !important;
+        box-sizing: border-box !important;
+        padding: 14px !important;
+    }
+}
+
     </style>
 
     <script>
@@ -335,42 +777,63 @@
     
 </head>
 
-<body>
-    <header class="site-header">
+    <body>
+        <header class="site-header">
         <div class="header-logo">
             <img src="images/logo_ct.png" alt="CT">
         </div>
 
         <nav class="header-nav">
-            <a href="#">Каталог ПК</a>
-            <a href="#">Этапы работы</a>
-            <a href="#">Фото</a>
-            <a href="#">Команда</a>
-            <a href="#">Новости</a>
-            <a href="#">Отзывы</a>
+            <a href="index.html#block_catalog">Каталог ПК</a>
+            <a href="index.html#block_stages">Этапы работы</a>
+            <a href="index.html#block_service">Сервис</a>
+            <a href="index.html#block_team">Команда</a>
+            <a href="index.html#block_social">Контакты</a>
+            <a href="index.html#block_reviews">Отзывы</a>
         </nav>
 
+        <div class="header-actions">
+            <div class="social-circle1">
+                <a href="https://vk.com/coretech_pc" target="_blank" style="display: flex; width: 100%; height: 100%; align-items: center; justify-content: center; text-decoration: none;">
+                    <img src="images/mini_logo_avito.png" alt="Avito">
+                </a>
+            </div>
+            
+            <div class="social-circle2">
+                <a href="https://vk.com/coretech_pc" target="_blank" style="display: flex; width: 100%; height: 100%; align-items: center; justify-content: center; text-decoration: none;">
+                    <img src="images/mini_logo_vk.png" alt="VK">
+                </a>
+            </div>
+            
+            <a href="#consult" class="btn-consult">
+                Консультация <span>→</span>
+            </a>
 
-        
-    <div class="header-actions">
-        <div class="social-circle1">
-            <a href="https://vk.com/coretech_pc" target="_blank" style="display: flex; width: 100%; height: 100%; align-items: center; justify-content: center; text-decoration: none;">
-                <img src="images/mini_logo_avito.png" alt="Avito">
-            </a>
+            <button class="mobile-menu-toggle" id="js-mobile-toggle" aria-label="Открыть меню">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
-        
-        <div class="social-circle2">
-            <a href="https://vk.com/coretech_pc" target="_blank" style="display: flex; width: 100%; height: 100%; align-items: center; justify-content: center; text-decoration: none;">
-                <img src="images/mini_logo_vk.png" alt="VK">
-            </a>
+    </header>
+
+   <div class="mobile-menu-overlay" id="js-mobile-menu">
+        <div class="mobile-menu-container">
+            <nav class="mobile-menu-nav">
+                <a href="#block_catalog" class="mobile-menu-link">Каталог ПК</a>
+                <a href="#block_stages" class="mobile-menu-link">Этапы работы</a>
+                <a href="#block_service" class="mobile-menu-link">Сервис</a>
+                <a href="#block_team" class="mobile-menu-link">Команда</a>
+                <a href="#block_contacts" class="mobile-menu-link">Контакты</a>
+                <a href="reviews.html" class="mobile-menu-link">Отзывы</a>
+                
+                <div class="mobile-menu-action-wrapper">
+                    <a href="#block_consultation" class="mobile-menu-action-btn">Подобрать компьютер</a>
+                </div>
+            </nav>
         </div>
-        
-        <a href="#" class="btn-consult">
-            Консультация <span>→</span>
-        </a>
     </div>
 
-    </header>
     <style>
         :root {
             --bg-color: transparent;
@@ -404,6 +867,7 @@
             background-size: cover;
             background-position: center top;
             background-repeat: no-repeat;
+            z-index: 1;
             
             /* Плавное, многоступенчатое размытие */
             -webkit-mask-image: linear-gradient(to bottom, 
@@ -773,7 +1237,7 @@ body {
     
         /* ПАРАМЕТРЫ УПРАВЛЕНИЯ КАРТИНКОЙ ПК */
         :root {
-            --pc-image-offset: 170px;   /* Смещение: >0 вправо, <0 влево */
+            --pc-image-offset: 210px;   /* Смещение: >0 вправо, <0 влево */
             --pc-image-width: 162%;    /* Размер картинки (например 100%, 80%, 500px) */
         }
 
@@ -791,6 +1255,120 @@ body {
             50% { transform: translateY(-20px) translateX(var(--pc-image-offset)) rotate(1deg); }
         }
 
+        /* --- НОВОЕ МОБИЛЬНОЕ ВЫПАДАЮЩЕЕ МЕНЮ (СПРАВА) --- */
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Изначально спрятано за экраном справа */
+    width: 100%;
+    height: 100vh;
+    background: rgba(5, 7, 10, 0.98); /* Глубокий темный фон в цвет сайта с легким размытием */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 999;
+    transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1); /* Плавное выезжание */
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Когда меню активно — выезжает на экран */
+.mobile-menu-overlay.active {
+    right: 0;
+}
+
+.mobile-menu-container {
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Центрируем пункты по вертикали как у iden-pc */
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+.mobile-menu-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+}
+
+/* Ссылки меню */
+.mobile-menu-link {
+    font-family: 'Nunito', sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 12px 0;
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Легкие разделители */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.mobile-menu-link:last-of-type {
+    border-bottom: none;
+}
+
+/* Центральная кнопка действия */
+.mobile-menu-action-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.mobile-menu-action-btn {
+    font-family: 'Nunito', sans-serif;
+    display: inline-block;
+    background: linear-gradient(135deg, #4ce2b8 0%, #32b391 100%);
+    color: #05070a;
+    font-size: 18px;
+    font-weight: 900;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 16px 35px;
+    border-radius: 30px;
+    box-shadow: 0 10px 25px rgba(76, 226, 184, 0.3);
+    text-align: center;
+    width: 80%;
+    max-width: 300px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mobile-menu-action-btn:active {
+    transform: scale(0.95);
+}
+
+/* --- АНИМАЦИЯ ПОЯВЛЕНИЯ ПУНКТОВ ДРУГ ЗА ДРУГОМ (Stagger эффект) --- */
+.mobile-menu-overlay.active .mobile-menu-link,
+.mobile-menu-overlay.active .mobile-menu-action-wrapper {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Задержки для каждого пункта, чтобы они вылетали по очереди */
+.mobile-menu-overlay.active .mobile-menu-link:nth-child(1) { transition-delay: 0.1s; transform: translateY(0); opacity: 1; }
+.mobile-menu-overlay.active .mobile-menu-link:nth-child(2) { transition-delay: 0.15s; transform: translateY(0); opacity: 1; }
+.mobile-menu-overlay.active .mobile-menu-link:nth-child(3) { transition-delay: 0.2s; transform: translateY(0); opacity: 1; }
+.mobile-menu-overlay.active .mobile-menu-link:nth-child(4) { transition-delay: 0.25s; transform: translateY(0); opacity: 1; }
+.mobile-menu-overlay.active .mobile-menu-link:nth-child(5) { transition-delay: 0.3s; transform: translateY(0); opacity: 1; }
+.mobile-menu-overlay.active .mobile-menu-link:nth-child(6) { transition-delay: 0.4s; transform: translateY(0); opacity: 1; }
+
+/* Убедимся, что кнопка гамбургера всегда выше меню */
+#js-mobile-toggle {
+    z-index: 1000 !important;
+}
     </style>
      
     <section class="hero-section">
@@ -807,7 +1385,7 @@ body {
                             <img src="https://cdn-icons-png.flaticon.com/512/545/545682.png" alt="->">
                         </div>
                     </a>
-                    <a href="#" class="btn-hero">
+                    <a href="index.html#block_catalog" class="btn-hero">
                         Готовые сборки
                         <div class="arrow-icon">
                             <img src="https://cdn-icons-png.flaticon.com/512/545/545682.png" alt="->">
@@ -825,10 +1403,10 @@ body {
         .promo-container {
             position: absolute;
             bottom: 350px; /* Отступ от самого низа экрана */
-            left: 47.5%;
+            left: 50%;
             transform: translateX(-50%);
             width: calc(100% - 40px);
-            max-width: 1200px;
+            max-width: 1300px;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Nunito', sans-serif;
@@ -1021,8 +1599,391 @@ body {
 </div>
     </section>
     
+<section class="m-hero-section-standalone">
+    <style>
+        /* Скрываем мобильную секцию на компьютерах */
+        .m-hero-section-standalone {
+            display: none !important;
+        }
+
+        /* Включаем и стилизуем строго на mobile (до 991px) */
+        @media (max-width: 991px) {
+            /* Скрываем десктопную секцию, чтобы не двоилось */
+            .hero-section {
+                display: none !important;
+            }
+
+            .m-hero-section-standalone {
+                display: flex !important;
+                flex-direction: column;
+                width: 100%;
+                padding: 110px 16px 40px 16px; /* Жесткий отступ сверху под шапку сайта */
+                box-sizing: border-box;
+                font-family: 'Nunito', sans-serif;
+                position: relative;
+                z-index: 2;
+            }
+
+            .m-hero-inner-container {
+                width: 100%;
+                max-width: 500px;
+                margin: 0 auto;
+                display: flex;
+                flex-direction: column;
+                gap: 25px;
+            }
+
+            /* 1. КОНТЕЙНЕР ДЛЯ ПК (ЖЕСТКАЯ ВЫСОТА — ТЕКСТ БОЛЬШЕ НЕ ПРЫГАЕТ) */
+            .m-hero-img-centered {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                position: relative;
+                
+                /* НАСТРОЙКА ЖЕСТКИХ ОТСТУПОВ: */
+                min-height: 280px;       /* Высота блока всегда стабильна, меняй картинку — текст не сдвинется */
+                margin-bottom: -10px;     /* Жесткий зазор до текста снизу */
+                
+                overflow: hidden;        /* Круги не растянут экран */
+                
+                /* НАСТРОЙКА РАЗМЕРОВ КРУГОВ (МЕНЯЙ ТУТ, НА ОТСТУПЫ НЕ ВЛИЯЕТ): */
+                --circle-vnutr: 200px;   /* Размер внутреннего мятного круга */
+                --circle-vnesh: 270px;   /* Размер внешнего фиолетового круга */
+            }
+
+            /* Внутренний мятный круг (Привязан строго к центру контейнера ПК) */
+            .m-hero-img-centered::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: var(--circle-vnutr);
+                height: var(--circle-vnutr);
+                border: 3px dashed rgba(76, 226, 184, 0.35);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 1;
+                animation: m-rotate-clockwise 18s linear infinite;
+            }
+
+            /* Внешний фиолетовый круг (Привязан строго к центру контейнера ПК) */
+            .m-hero-img-centered::after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: var(--circle-vnesh);
+                height: var(--circle-vnesh);
+                border: 4px dashed rgba(164, 101, 255, 0.25);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 1;
+                animation: m-rotate-counter 24s linear infinite;
+            }
+
+            /* КАРТИНКА ПК: Накладывается поверх кругов, центрируется идеально */
+            .m-hero-img-centered img {
+                width: 100%;
+                
+                /* НАСТРОЙКА РАЗМЕРА КОМПЬЮТЕРА: */
+                max-width: 500px;        /* Меняй этот размер как хочешь, круги подстроятся, текст не уплывет */
+                
+                height: auto;
+                object-fit: contain;
+                position: relative;
+                z-index: 2;              /* Поверх кругов */
+                filter: drop-shadow(0 15px 35px rgba(76, 226, 184, 0.25));
+            }
+
+            /* Идеальные анимации вращения относительно центра (-50%, -50%) */
+            @keyframes m-rotate-clockwise {
+                from { transform: translate(-50%, -50%) rotate(0deg); }
+                to { transform: translate(-50%, -50%) rotate(360deg); }
+            }
+
+            @keyframes m-rotate-counter {
+                from { transform: translate(-50%, -50%) rotate(360deg); }
+                to { transform: translate(-50%, -50%) rotate(0deg); }
+            }
+
+            /* 2. Текстовый блок */
+            .m-hero-text-block {
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .m-hero-lbl {
+                font-size: 13px;
+                font-weight: 900;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                color: #a0a0a0;
+                margin-bottom: 12px;
+                display: block;
+            }
+
+            .m-hero-t1 {
+                font-size: 38px;
+                font-weight: 900;
+                line-height: 1.1;
+                text-transform: uppercase;
+                margin: 0;
+                color: #4ce2b8;
+            }
+
+            .m-hero-t2 {
+                font-size: 32px;
+                font-weight: 900;
+                line-height: 1.1;
+                text-transform: uppercase;
+                margin: 5px 0 0 0;
+                color: #ffffff;
+            }
+
+            .m-hero-tx-desc {
+                font-size: 14px;
+                line-height: 1.4;
+                color: #a0a0a0;
+                margin: 15px 0 0 0;
+                font-weight: 800;
+                max-width: 100%;
+            }
+
+            /* 3. Блок кнопок (hero-btns) на мобилке */
+            .m-hero-btns-box {
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                width: 100%;
+            }
+
+            /* Белая кнопка со стрелкой */
+            .m-btn-hero-click {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                background: #ffffff;
+                color: #000000;
+                padding: 6px 6px 6px 24px;
+                border-radius: 50px;
+                text-decoration: none;
+                font-weight: 900;
+                font-size: 18px;
+                text-transform: uppercase;
+                box-sizing: border-box;
+                width: 100%;
+                box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+            }
+
+            .m-btn-hero-click .m-arrow-circle {
+                width: 38px;
+                height: 38px;
+                background: #4ce2b8;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .m-btn-hero-click .m-arrow-circle img {
+                width: 14px;
+                height: 14px;
+                display: block;
+            }
+
+            /* Вторая прозрачная кнопка */
+            .m-btn-hero-sec {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: transparent;
+                color: #ffffff;
+                padding: 14px 24px;
+                border: 2px solid #ffffff;
+                border-radius: 50px;
+                text-decoration: none;
+                font-weight: 900;
+                font-size: 18px;
+                text-transform: uppercase;
+                box-sizing: border-box;
+                width: 100%;
+            }
+
+            /* 4. Баннеры акций (1 широкий, под ним 2 маленьких) */
+            .m-hero-promo-grid {
+                display: flex;
+                flex-direction: column;
+                gap: 14px;
+                width: 100%;
+            }
+
+            /* Широкий баннер */
+            .m-promo-card-wide {
+                background: #0f0f0f;
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                border-radius: 24px;
+                padding: 20px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                gap: 15px;
+                box-sizing: border-box;
+            }
+
+            .m-promo-badge {
+                color: #4ce2b8;
+                font-weight: 900;
+                text-transform: uppercase;
+                font-size: 11px;
+                display: block;
+                margin-bottom: 6px;
+            }
+
+            .m-promo-title {
+                margin: 0;
+                font-size: 18px;
+                font-weight: 900;
+                color: #ffffff;
+            }
+
+            .m-promo-desc {
+                color: #a0a0a0;
+                font-size: 13px;
+                font-weight: 800;
+                margin: 6px 0 0 0;
+                line-height: 1.3;
+            }
+
+            .m-promo-link {
+                color: #fff;
+                text-decoration: none;
+                font-weight: 900;
+                text-transform: uppercase;
+                font-size: 12px;
+                display: flex;
+                align-items: center;
+                gap: 5px;
+            }
+
+            /* Ряд из 2-х маленьких баннеров */
+            .m-promo-subrow {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+                width: 100%;
+            }
+
+            .m-promo-card-small {
+                background: #0f0f0f;
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                border-radius: 20px;
+                padding: 16px;
+                display: flex;
+                flex-direction: column;
+                box-sizing: border-box;
+            }
+
+            .m-small-promo-title {
+                margin: 0;
+                font-size: 14px;
+                font-weight: 900;
+                color: #ffffff;
+                line-height: 1.2;
+            }
+
+            .m-small-promo-desc {
+                color: #a0a0a0;
+                font-size: 11px;
+                font-weight: 800;
+                margin: 8px 0 0 0;
+                line-height: 1.3;
+            }
+
+            /* Фиолетовая рамка для правого маленького баннера */
+            .m-purple-border {
+                border-color: rgba(164, 101, 255, 0.3);
+            }
+            .m-purple-border .m-small-promo-title {
+                color: #a465ff;
+            }
+        }
+        
+       /* ---- ЭТО ВНУТРИ @media (max-width: 768px) ---- */
+        @media (max-width: 768px) {
+            
+            /* Скрываем десктопный заголовок на мобилках */
+            .d-config-title {
+                display: none !important;
+            }
+
+            /* Показываем и настраиваем мобильный заголовок */
+            .m-config-title {
+                display: block !important;
+                font-size: 32px !important; /* Твой размер для мобилки */
+                line-height: 1.1 !important;
+                text-align: center !important;
+                margin: 0 auto 20px auto !important;
+            }
+        }
+
+    </style>
+
+    <div class="m-hero-inner-container">
+        
+        <div class="m-hero-img-centered">
+            <img src="images/pc2.png" alt="Игровой ПК">
+        </div>
+
+        <div class="m-hero-text-block">
+            <span class="m-hero-lbl">Игровые компьютеры от CORETECH</span>
+            <h1 class="m-hero-t1">Мощные решения</h1>
+            <h2 class="m-hero-t2">для любых задач</h2>
+            <p class="m-hero-tx-desc">Мы создаем индивидуальные конфигурации ПК, которые выжимают максимум FPS в любых современных играх и обеспечивают стабильность в тяжелом софте.</p>
+        </div>
+
+        <div class="m-hero-btns-box">
+            <a href="#catalog" class="m-btn-hero-click">
+                Открыть каталог
+                <div class="m-arrow-circle">
+                    <img src="images/arrow_icon.png" alt="→">
+                </div>
+            </a>
+            <a href="#configurator" class="m-btn-hero-sec">
+                Конфигуратор
+            </a>
+        </div>
+
+        <div class="m-hero-promo-grid">
+            <div class="m-promo-card-wide">
+                <div>
+                    <span class="m-promo-badge">Конфиг для тебя</span>
+                    <h3 class="m-promo-title">Индивидуальный подбор</h3>
+                    <p class="m-promo-desc">Соберем компьютер под твои задачи и бюджет за 3 дня</p>
+                </div>
+                <a href="#consult" class="m-promo-link">Рассчитать ПК <span>→</span></a>
+            </div>
+            
+            <div class="m-promo-subrow">
+                <div class="m-promo-card-small">
+                    <h3 class="m-small-promo-title">АКЦИЯ МЕСЯЦА</h3>
+                    <p class="m-small-promo-desc">Настройка и Windows 11 Pro в подарок!</p>
+                </div>
+                <div class="m-promo-card-small m-purple-border">
+                    <h3 class="m-small-promo-title">ДОСТАВКА</h3>
+                    <p class="m-small-promo-desc">Бережная доставка по всей РФ бесплатно</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
     <div class="container">
-        <h1>СБОРКА<span> НА ЗАКАЗ</span></h1>
+        <h1 class="d-config-title">СБОРКА<span> НА ЗАКАЗ</span></h1>
+        <h1 class="m-config-title">СБОРКА<span> НА ЗАКАЗ</span></h1>
 
         <div class="widgets-wrapper">
             <div class="card main-widget">
@@ -1208,9 +2169,10 @@ body {
             }
 
             .product-card { 
-                min-width: 85vw; /* Ширина карточки почти на весь экран */
+                min-width: 77vw; /* Ширина карточки почти на весь экран */
                 scroll-snap-align: center; /* Центровка при свайпе */
                 transform: none !important; /* Убираем ховер-эффект, чтобы не дергалось */
+                .product-image { width: 100%; height: 290px; background: #1e1e1e; border-radius: 25px; margin-bottom: 20px; overflow: hidden; }
             }
         }
 
@@ -1302,7 +2264,7 @@ body {
         }
         @keyframes fill-reverse { 0% { transform: scaleX(0.1); } 100% { transform: scaleX(1); } }
 
-        .product-image { width: 100%; height: 350px; background: #1e1e1e; border-radius: 25px; margin-bottom: 20px; overflow: hidden; }
+        .product-image { width: 100%; height: 340px; background: #1e1e1e; border-radius: 25px; margin-bottom: 20px; overflow: hidden; }
         .product-image img { width: 100%; height: 100%; object-fit: cover; }
         .product-name { font-size: 24px; font-weight: 900; margin-bottom: 5px; text-transform: uppercase; }
         .product-name span { color: var(--accent-mint); }
@@ -1389,7 +2351,9 @@ body {
     </style>
 
 <!-- БЛОК КАРТОЧКИ ТОВАРОВ -->
-<h1>ГОТОВЫЕ<span> СБОРКИ</span></h1>
+<section id="block_catalog">
+<h1 class="d-config-title">ГОТОВЫЕ<span> СБОРКИ</span></h1>
+<h1 class="m-config-title">ГОТОВЫЕ<span> СБОРКИ</span></h1>
 
 <div class="catalog-grid" id="js-catalog-grid"></div>
 
@@ -1501,7 +2465,7 @@ body {
         {
             name: "CORE START",
             isHit: true,
-            image: "images/pc1.jpg",
+            image: "images/comp1.jpg",
             fpsNumber: "145+ FPS",
             fpsBarWidth: "45%",
             fpsModal: { 'CS 2': '320 FPS', 'Dota 2': '240 FPS', 'Atomic Heart': '90 FPS' },
@@ -1516,7 +2480,7 @@ body {
         {
             name: "CORE PRO",
             isHit: true,
-            image: "images/pc1.jpg",
+            image: "images/comp2.jpg",
             fpsNumber: "210+ FPS",
             fpsBarWidth: "75%",
             fpsModal: { 'Cyberpunk': '85 FPS', 'Warzone': '140 FPS' },
@@ -1642,9 +2606,10 @@ body {
 
     document.addEventListener('DOMContentLoaded', buildCatalog);
 </script>
+</section>
 
 <!-- БЛОК ЭТАПЫ РАБОТЫ -->
-<section class="steps-section">
+<section class="steps-section steps-desktop-only" id="block_stages">
     <style>
         :root {
             /* НАСТРОЙКИ КАРТИНКИ ПК (pc3.png) */
@@ -1691,7 +2656,6 @@ body {
         }
 
         .steps-pc-image {
-            /* Применяем настройки из переменных выше */
             width: var(--steps-pc-width);
             height: auto;
             transform: translate(var(--steps-pc-offset-x), var(--steps-pc-offset-y));
@@ -1727,12 +2691,19 @@ body {
         .step-01 .step-description, .step-04 .step-description { color: #a0a0a0; }
         .step-03 .step-description { color: #555; }
 
-        @media (max-width: 1000px) {
-            .steps-section { flex-direction: column; align-items: center; }
-            .steps-visual { position: static; align-items: center; text-align: center; }
-            .steps-visual h2 { font-size: 50px; }
-            .step-item { width: 100% !important; align-self: center !important; }
-            .steps-pc-image { width: 70%; transform: none; margin: 20px 0; }
+        /* Скрываем мобильную версию на десктопе */
+        .steps-mobile-only {
+            display: none !important;
+        }
+
+        /* ПЕРЕКЛЮЧАТЕЛЬ МЕЖДУ СЕКЦИЯМИ */
+        @media (max-width: 768px) {
+            .steps-desktop-only {
+                display: none !important;
+            }
+            .steps-mobile-only {
+                display: block !important;
+            }
         }
     </style>
 
@@ -1743,32 +2714,239 @@ body {
 
     <div class="steps-content">
         <div class="step-item step-01">
-            <span class="step-number">/ 01 ПОДБОР И КОНЦЕПТ</span>
-            <p class="step-description">Изучаем ваши задачи, подбираем идеальную связку комплектующих. Создаем визуальный концепт будущей сборки.</p>
+            <span class="step-number">[ 01 / ВАША ИДЕЯ И НАШЕ ПРОЕКТИРОВАНИЕ ]</span>
+            <p class="step-description">Анализируем ваши потребности и формируем оптимальный сетап железа. Разрабатываем уникальный дизайн-макет и визуальный стиль вашего будущего ПК.</p>
         </div>
         <div class="step-item step-02">
-            <span class="step-number">/ 02 СБОРКА И УКЛАДКА</span>
-            <p class="step-description">Наши инженеры приступают к работе. Безупречный кабель-менеджмент и внимание к каждой детали.</p>
+            <span class="step-number">[ 02 / НЖЕНЕРИЯ И СБОРКА ]</span>
+            <p class="step-description">Кастом переходит в руки профи. Собираем систему с филигранной точностью, обеспечивая идеальный кабель-менеджмент и правильный воздушный поток.</p>
         </div>
         <div class="step-item step-03">
-            <span class="step-number">/ 03 НАСТРОЙКА И ТЕСТЫ</span>
-            <p class="step-description">Настраиваем BIOS, тайминги памяти и прогоняем ПК через самые тяжелые стресс-тесты.</p>
+            <span class="step-number">[ 03 / ОПТИМИЗАЦИЯ И СТРЕСС-ТЕСТЫ ]</span>
+            <p class="step-description">Выжимаем максимум производительности: калибруем BIOS, настраиваем тайминги ОЗУ и тестируем систему под экстремальными нагрузками на стабильность.</p>
         </div>
         <div class="step-item step-04">
-            <span class="step-number">/ 04 ФИНАЛЬНЫЙ РЕЗУЛЬТАТ</span>
-            <p class="step-description">Вы получаете мощный и тихий компьютер, готовый к любым играм прямо из коробки.</p>
+            <span class="step-number">[ 04 / ГОТОВ К СРАЖЕНИЯМ ]</span>
+            <p class="step-description">На выходе — бескомпромиссно мощная, тихая и полностью настроенная машина. Никаких лишних действий: распаковывай, включай и доминируй в играх.</p>
+        </div>
+    </div>
+</section>
+
+
+<section class="steps-mobile-only">
+    <style>
+        .m-steps-section {
+            width: 100%;
+            padding: 40px 16px;
+            box-sizing: border-box;
+            font-family: 'Nunito', sans-serif;
+            background-color: transparent;
+        }
+
+        .m-steps-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch; /* Разрешаем дочерним блокам двигаться влево/вправо */
+            gap: 16px;
+        }
+
+        /* Заголовок этапов на мобилке */
+        .m-steps-title {
+            font-size: 38px;
+            font-weight: 900;
+            line-height: 1;
+            text-transform: uppercase;
+            text-align: center;
+            margin: 0 0 10px 0;
+            color: #1a1a1a;
+            align-self: center;
+        }
+
+        .m-steps-title span {
+            color: #a465ff;
+        }
+
+        /* Контейнер для фотки (в самом начале, по центру, управляемый по высоте) */
+        .m-steps-img-top {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin: -110px 0 -80px 0;
+            align-self: center;
+            
+            /* РЫЧАГ ВЫСОТЫ КАРТИНКИ НА МОБИЛКЕ */
+            height: 540px; 
+        }
+
+        .m-steps-img-top img {
+            width: auto;
+            height: 100%;
+            max-width: 95%;
+            object-fit: contain;
+            filter: drop-shadow(0 20px 50px rgba(164, 101, 255, 0.15));
+        }
+
+        /* БАЗОВАЯ СТРУКТУРА КАРТОЧЕК ДЛЯ МОБИЛКИ (НЕВЫЛЕЗАЮЩАЯ ШИРИНА) */
+        .m-step-box {
+            width: 100%;
+            max-width: 370px; /* Идеальный размер для создания эффекта ступенек */
+            border-radius: 40px; /* Оригинальное скругление десктопа */
+            padding: 30px 25px;
+            box-sizing: border-box; /* Прячет внутренние отступы внутрь карточки */
+            transition: transform 0.3s ease;
+        }
+
+        /* ОРИГИНАЛЬНЫЙ ДИЗАЙН И ЦВЕТА КАРТОЧЕК 1 в 1 КАК НА ПК */
+        .m-step-01 { background-color: #0f0f0f; color: #ffffff; }
+        .m-step-02 { background-color: #a465ff; color: #ffffff; }
+        .m-step-03 { background-color: #ffffff; border: 2px solid #a465ff; color: #1a1a1a; }
+        .m-step-04 { background-color: #0f0f0f; color: #ffffff; }
+
+        /* РАССТАНОВКА СТУПЕНЬКАМИ (ЛЕВЕЕ / ПРАВЕЕ) */
+        .m-left {
+            align-self: flex-start; /* Прижимает блок к левому краю */
+        }
+
+        .m-right {
+            align-self: flex-end; /* Прижимает блок к правому краю */
+        }
+
+        /* Стили текста внутри мобильных карточек */
+        .m-step-box-num {
+            font-weight: 900;
+            font-size: 16px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .m-step-box-desc {
+            font-size: 14px;
+            line-height: 1.4;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        /* Цвета описания в зависимости от фона (как на десктопе) */
+        .m-step-01 .m-step-box-desc, .m-step-04 .m-step-box-desc { color: #a0a0a0; }
+        .m-step-03 .m-step-box-desc { color: #555; }
+    </style>
+
+    <div class="m-steps-section">
+        <div class="m-steps-container">
+            
+            <h2 class="m-steps-title">Этапы <span>Работы</span></h2>
+            
+            <div class="m-steps-img-top">
+                <img src="images/pc3.png" alt="Процесс сборки">
+            </div>
+            
+            <div class="m-step-box m-step-01 m-left">
+                <span class="m-step-box-num">/ 01 ПОДБОР И КОНЦЕПТ</span>
+                <p class="m-step-box-desc">Изучаем ваши задачи, подбираем идеальную связку комплектующих. Создаем визуальный концепт будущей сборки.</p>
+            </div>
+            
+            <div class="m-step-box m-step-02 m-right">
+                <span class="m-step-box-num">/ 02 СБОРКА И УКЛАДКА</span>
+                <p class="m-step-box-desc">Наши инженеры приступают к работе. Безупречный кабель-менеджмент и внимание к каждой детали.</p>
+            </div>
+            
+            <div class="m-step-box m-step-03 m-left">
+                <span class="m-step-box-num">/ 03 НАСТРОЙКА И ТЕСТЫ</span>
+                <p class="m-step-box-desc">Настраиваем BIOS, тайминги памяти и прогоняем ПК через самые тяжелые стресс-тесты.</p>
+            </div>
+            
+            <div class="m-step-box m-step-04 m-right">
+                <span class="m-step-box-num">/ 04 ФИНАЛЬНЫЙ РЕЗУЛЬТАТ</span>
+                <p class="m-step-box-desc">Вы получаете мощный и тихий компьютер, готовый к любым играм прямо из коробки.</p>
+            </div>
+
         </div>
     </div>
 </section>
 
 <!-- БЛОК ЗВЕЗДНОЕ НЕБО -->
-<section class="value-proposition-container">
+<section class="value-proposition-container" id="block_service">
     <div class="value-proposition">
         <div class="stars-layer s1"></div>
         <div class="stars-layer s2"></div>
         <div class="stars-layer s3"></div>
 
         <style>
+
+        /* --- НОВАЯ СВЕРХПЛАВНАЯ АНИМАЦИЯ --- */
+        .vp-info p {
+            position: relative;
+            margin: 0;
+            /* Управляем плавностью затухания маски (0.6s — оптимально, чтобы не отставать от текста) */
+            transition: -webkit-mask-image 0.6s ease, mask-image 0.6s ease;
+            
+            /* Изначальное сильное затухание (видно около 1.5 строк) */
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 15%, rgba(0,0,0,0) 90%);
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 15%, rgba(0,0,0,0) 90%);
+        }
+
+        /* Контейнер-обертка, который будет плавно сжиматься и расширяться */
+        .vp-text-wrapper {
+            display: grid;
+            grid-template-rows: 0fr; /* Изначально схлопнут */
+            transition: grid-template-rows 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+
+        /* Внутренний блок, задающий минимальную видимую высоту в закрытом состоянии */
+        .vp-text-content {
+            min-height: 2.5em; /* Высота превью (около 1.5 строк) */
+            transition: min-height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* СОСТОЯНИЕ РАСКРЫТО: мгновенный старт анимации в обе стороны */
+        .vp-text-wrapper.is-expanded {
+            grid-template-rows: 1fr; /* Раскрывается ровно до высоты контента */
+        }
+
+        .vp-text-wrapper.is-expanded .vp-text-content {
+            min-height: 100%; /* Убираем ограничение высоты */
+        }
+
+        .vp-text-wrapper.is-expanded p {
+            /* Полностью проявляем текст */
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 100%, rgba(0,0,0,1) 100%);
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 100%, rgba(0,0,0,1) 100%);
+        }
+
+        /* --- СТИЛИ КНОПКИ (БЕЗ ИЗМЕНЕНИЙ) --- */
+        .vp-toggle-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #4ce2b8;
+            cursor: pointer;
+            font-size: 18px;
+            line-height: 1;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin-top: 15px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+        .vp-toggle-btn:hover {
+            background: rgba(76, 226, 184, 0.2);
+            border-color: #4ce2b8;
+            transform: scale(1.05);
+        }
+        @media (max-width: 768px) {
+            .vp-info { display: flex; flex-direction: column; align-items: center; }
+            .vp-row.reverse { flex-direction: column; }
+        }
+
+
+
+
             .value-proposition-container {
                 padding: 60px 20px;
                 background-color: transparent;
@@ -1857,16 +3035,20 @@ body {
             /* --- ОСТАЛЬНОЙ КОНТЕНТ (БЕЗ ИЗМЕНЕНИЙ) --- */
             .vp-header { text-align: center; margin-bottom: 40px; position: relative; z-index: 5; }
             .vp-header h2 { font-size: 48px; font-weight: 900; margin: 0 0 15px 0; text-transform: uppercase; }
-            .vp-header p { color: #00f2ff; font-size: 35px; font-weight: 700; letter-spacing: 2px; }
+            .vp-header p { color: #4ce2b8; font-size: 35px; font-weight: 700; letter-spacing: 2px; margin-bottom: -10px; }
             .vp-grid { width: 100%; max-width: 1100px; display: flex; flex-direction: column; position: relative; z-index: 5; }
-            .vp-row { display: flex; align-items: center; justify-content: space-between; padding: 40px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.08); gap: 40px; }
+            .vp-row { display: flex; align-items: center; justify-content: space-between; padding: 30px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.08); gap: 40px; }
             .vp-row:last-child { border-bottom: none; }
             .vp-row.reverse { flex-direction: row-reverse; text-align: right; }
             .vp-number { font-size: 32px; font-weight: 900; color: rgba(255, 255, 255, 0.562); min-width: 70px; }
             .vp-info h3 { font-size: 24px; font-weight: 900; margin: 0 0 10px 0; text-transform: uppercase; }
-            .vp-info p { font-size: 16px; line-height: 1.6; color: #a0a0a0; font-weight: 700; margin: 0; max-width: 600px; }
+            .vp-info p { font-size: 16px; line-height: 1.4; color: #a0a0a0; font-weight: 700; margin: 0; max-width: 800px; }
             .vp-icon { font-size: 28px; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.03); border-radius: 15px; border: 1px solid rgba(255,255,255,0.1); }
-            @media (max-width: 768px) { .vp-row, .vp-row.reverse { flex-direction: column; text-align: center; } .vp-header h2 { font-size: 32px; } }
+            @media (max-width: 768px) { 
+                .vp-row, .vp-row.reverse { flex-direction: column; text-align: center; } 
+                .vp-header h2 { font-size: 32px; } 
+                .vp-header { text-align: center; margin-bottom: 40px; position: relative; z-index: 5; }
+            }
         </style>
 
         <div class="vp-header">
@@ -1878,41 +3060,87 @@ body {
             <div class="vp-row">
                 <div class="vp-number">01</div>
                 <div class="vp-info">
-                    <h3>Подбор под задачи</h3>
-                    <p>Анализируем ваши цели: стриминг, 3D-графика или киберспорт. Собираем оптимальный конфиг без переплат.</p>
+                    <h3>Честная гарантия 12 месяцев</h3>
+                    <p>Мы берем на себя полную ответственность за каждый собранный компьютер и предоставляем официальную годовую гарантию на всю систему в сборе. Вам не придется самостоятельно разбираться с сервисными центрами отдельных производителей комплектующих в случае проблем. Мы оперативно берем решение любого гарантийного случая на себя, обеспечивая быструю диагностику и замену деталей.</p>
                 </div>
                 <div class="vp-icon">⚙️</div>
             </div>
             <div class="vp-row reverse">
                 <div class="vp-number">02</div>
                 <div class="vp-info">
-                    <h3>Тонкая настройка</h3>
-                    <p>Настройка таймингов оперативной памяти и оптимизация вольтажа процессора для максимальной тишины и мощи.</p>
+                    <h3>Техническая поддержка и ведение клиента</h3>
+                    <p>Наш сервис не заканчивается в момент передачи коробки с компьютером. На протяжении всего гарантийного срока вы получаете приоритетную выделенную линию связи с нашими инженерами для решения любых вопросов. Поможем обновить драйверы, настроить софт для стриминга, подключить периферию или провести удаленную диагностику, если что-то пошло не так.</p>
                 </div>
                 <div class="vp-icon">🛠️</div>
             </div>
             <div class="vp-row">
                 <div class="vp-number">03</div>
                 <div class="vp-info">
-                    <h3>Стресс-тестирование</h3>
-                    <p>Минимум 12 часов под нагрузкой. Проверяем каждый узел, чтобы вы были уверены в стабильности на 100%.</p>
+                    <h3>«Бронированная» упаковка Safe-Transit</h3>
+                    <p>Мы знаем, как работают службы доставки, поэтому разработали собственную многоуровневую систему защиты ПК при транспортировке. Внутрь корпуса устанавливается специальный надувной пакет-паропласт, который намертво фиксирует тяжелую видеокарту и кулер, защищая материнскую плату от изломов. Снаружи компьютер заматывается в несколько толстых слоев премиальной воздушно-пузырьковой пленки и помещается в жесткий противоударный короб, полностью исключающий любые повреждения.</p>
                 </div>
                 <div class="vp-icon">🛡️</div>
             </div>
             <div class="vp-row reverse">
                 <div class="vp-number">04</div>
                 <div class="vp-info">
-                    <h3>Кабель-менеджмент</h3>
-                    <p>Эстетика внутри и снаружи. Идеальная укладка проводов обеспечивает правильный воздушный поток.</p>
+                    <h3>Компьютер готов к работе сразу после распаковки</h3>
+                    <p>Мы передаем вам систему, полностью готовую к работе: с чистой операционной системой, актуальными драйверами и базовым набором необходимого софта. Никакого мусора и рекламных программ — только чистая производительность прямо из коробки. Каждый компьютер сопровождается отчетом о стабильной работе. Как говорится, просто включил и кайфуешь!</p>
                 </div>
                 <div class="vp-icon">🔌</div>
             </div>
         </div>
     </div>
+   <script>
+document.addEventListener("DOMContentLoaded", function() {
+    const infoParagraphs = document.querySelectorAll('.vp-info p');
+
+    infoParagraphs.forEach(p => {
+        // Проверяем, что это именно описание, а не заголовок, и текст достаточно длинный
+        if (p.scrollHeight > 40 && !p.closest('.vp-header')) { 
+            
+            // 1. Создаем структуру оберток для идеальной Grid-анимации
+            const wrapper = document.createElement('div');
+            wrapper.className = 'vp-text-wrapper';
+            
+            const content = document.createElement('div');
+            content.className = 'vp-text-content';
+
+            // 2. Встраиваем обертки в DOM вокруг текущего тега <p>
+            p.parentNode.insertBefore(wrapper, p);
+            wrapper.appendChild(content);
+            content.appendChild(p);
+
+            // 3. Создаем кнопку
+            const btn = document.createElement('button');
+            btn.className = 'vp-toggle-btn';
+            btn.innerHTML = '•••';
+            btn.setAttribute('aria-label', 'Читать далее');
+            wrapper.parentNode.insertBefore(btn, wrapper.nextSibling);
+
+            // 4. Логика клика (теперь без задержек)
+            btn.addEventListener('click', function() {
+                const isExpanded = wrapper.classList.toggle('is-expanded');
+                
+                if (isExpanded) {
+                    btn.innerHTML = '✕'; 
+                    btn.style.color = '#ff6b6b'; 
+                } else {
+                    btn.innerHTML = '•••';
+                    btn.style.color = '#4ce2b8';
+                    
+                    // Скролл начинается одновременно с закрытием блока, плавно ведя за собой экран
+                    wrapper.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            });
+        }
+    });
+});
+</script>
 </section>
 
 <!-- БЛОК НАША КОМАНДА -->
-<section class="team-section">
+<section class="team-section" id="block_team">
     <style>
         .team-section {
             width: 100%;
@@ -1930,7 +3158,7 @@ body {
             overflow: hidden;
             align-items: stretch;
             min-height: 550px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.03);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.24);
         }
 
         .team-info {
@@ -1942,9 +3170,9 @@ body {
         }
 
         .team-label {
-            font-size: 14px;
+            font-size: 20px;
             font-weight: 900;
-            color: var(--accent-purple, #7B61FF); /* Использует вашу переменную из index.html */
+            color: var(--accent-mint, #7B61FF); /* Использует вашу переменную из index.html */
             text-transform: uppercase;
             letter-spacing: 2px;
             margin-bottom: 20px;
@@ -2023,7 +3251,7 @@ body {
         }
 
         .nav-btn:hover {
-            background: var(--accent-purple, #7B61FF);
+            background: var(--accent-mint, #7B61FF);
             color: white;
             transform: translateY(-3px);
         }
@@ -2072,15 +3300,15 @@ body {
             <div class="team-stats">
                 <div style="display: flex; gap: 40px;">
                     <div>
-                        <div style="font-size: 36px; font-weight: 900; color: #1a1a1a;">500<span style="color: var(--accent-purple, #7B61FF);">+</span></div>
+                        <div style="font-size: 36px; font-weight: 900; color: #1a1a1a;">500<span style="color: var(--accent-mint, #7B61FF);">+</span></div>
                         <div style="font-size: 13px; font-weight: 800; color: #888; text-transform: uppercase;">Сборок</div>
                     </div>
                     <div>
-                        <div style="font-size: 36px; font-weight: 900; color: #1a1a1a;">10<span style="color: var(--accent-purple, #7B61FF);">+</span></div>
+                        <div style="font-size: 36px; font-weight: 900; color: #1a1a1a;">10<span style="color: var(--accent-mint, #7B61FF);">+</span></div>
                         <div style="font-size: 13px; font-weight: 800; color: #888; text-transform: uppercase;">Мастеров</div>
                     </div>
                     <div>
-                        <div style="font-size: 36px; font-weight: 900; color: #1a1a1a;">10<span style="color: var(--accent-purple, #7B61FF);">+</span></div>
+                        <div style="font-size: 36px; font-weight: 900; color: #1a1a1a;">10<span style="color: var(--accent-mint, #7B61FF);">+</span></div>
                         <div style="font-size: 13px; font-weight: 800; color: #888; text-transform: uppercase;">Мастеров</div>
                     </div>
                 </div>
@@ -2153,7 +3381,7 @@ body {
 
 <!-- БЛОК НАШИ СОЦСЕТИ -->
 
-<section class="social-mega-section">
+<section class="social-mega-section sm-desktop-only" id="block_social">
     <div class="social-mega-container">
         <h2 class="social-mega-title">СЛЕДИТЕ ЗА НАМИ <span class="accent">В СОЦ. СЕТЯХ</span></h2>
         
@@ -2201,11 +3429,61 @@ body {
     </div>
 </section>
 
+<section class="social-mega-section-mobile sm-mobile-only">
+    <div class="m-social-container">
+        <h2 class="m-social-title">СЛЕДИТЕ ЗА НАМИ <span class="accent">В СОЦ. СЕТЯХ</span></h2>
+        
+        <div class="m-social-grid">
+            <a href="#" class="m-social-card">
+                <div class="m-card-content">
+                    <span class="m-card-label">Перейти в группу</span>
+                    <h3 class="m-card-name">ВКонтакте</h3>
+                </div>
+                <div class="m-card-image-wrapper">
+                    <img src="images/logo_vk.png" alt="VK" class="m-floating-icon-vk">
+                </div>
+            </a>
+
+            <a href="#" class="m-social-card">
+                <div class="m-card-content">
+                    <span class="m-card-label">Наш профиль</span>
+                    <h3 class="m-card-name">Авито</h3>
+                </div>
+                <div class="m-card-image-wrapper">
+                    <img src="images/logo_avito.png" alt="Avito" class="m-floating-icon-av">
+                </div>
+            </a>
+
+            <a href="#" class="m-social-card">
+                <div class="m-card-content">
+                    <span class="m-card-label">Магазин</span>
+                    <h3 class="m-card-name">OZON</h3>
+                </div>
+                <div class="m-card-image-wrapper">
+                    <img src="images/logo_ozon.png" alt="OZON" class="m-floating-icon">
+                </div>
+            </a>
+
+            <a href="#" class="m-social-card">
+                <div class="m-card-content">
+                    <span class="m-card-label">Витрина</span>
+                    <h3 class="m-card-name">Wildberries</h3>
+                </div>
+                <div class="m-card-image-wrapper">
+                    <img src="images/logo_wb.png" alt="Wildberries" class="m-floating-icon">
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
 <style>
-    /* Основные настройки секции (Белый фон) */
+    /* ==========================================
+       СТИЛИ ДЛЯ ДЕСКТОПНОЙ ВЕРСИИ (ТВОИ ОРИГИНАЛЬНЫЕ)
+       ========================================== */
     .social-mega-section {
         padding: 80px 20px;
-        background-color: #ffffff; /* Белый фон как на сайте */
+        background-color: #ffffff;
         font-family: 'Nunito', sans-serif;
         overflow: hidden;
     }
@@ -2216,7 +3494,7 @@ body {
     }
 
     .social-mega-title {
-        color: #1a1a1a; /* Темный текст для белого фона */
+        color: #1a1a1a;
         font-size: 36px;
         font-weight: 900;
         text-transform: uppercase;
@@ -2225,21 +3503,19 @@ body {
     }
 
     .social-mega-title .accent {
-        color: #ff4e00; /* Оранжевый акцент остается */
+        color: #ff4e00;
     }
 
-    /* Сетка */
     .social-mega-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 25px;
     }
 
-    /* Карточки для светлого фона */
     .social-mega-card {
         position: relative;
         height: 380px;
-        background: #f8f9fa; /* Очень светлый серый для объема */
+        background: #f8f9fa;
         border-radius: 24px;
         padding: 30px;
         text-decoration: none;
@@ -2249,7 +3525,7 @@ body {
         border: 1px solid #eeeeee;
         transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         overflow: hidden;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); /* Легкая тень */
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     }
 
     .social-mega-card:hover {
@@ -2260,7 +3536,7 @@ body {
     }
 
     .card-label {
-        color: #999; /* Светло-серый текст */
+        color: #999;
         font-size: 14px;
         font-weight: 800;
         text-transform: uppercase;
@@ -2269,7 +3545,7 @@ body {
     }
 
     .card-name {
-        color: #1a1a1a; /* Темный текст заголовка */
+        color: #1a1a1a;
         font-size: 28px;
         font-weight: 900;
         margin: 0;
@@ -2286,7 +3562,6 @@ body {
         width: 320px;
         height: auto;
         object-fit: contain;
-        /* Тень для самой картинки (эффект объема) */
         filter: drop-shadow(0 15px 25px rgba(0,0,0,0.1));
         animation: floatLife 4s ease-in-out infinite;
     }
@@ -2295,7 +3570,6 @@ body {
         width: 360px;
         height: auto;
         object-fit: contain;
-        /* Тень для самой картинки (эффект объема) */
         filter: drop-shadow(0 15px 25px rgba(0,0,0,0.1));
         animation: floatLife 4s ease-in-out infinite;
     }
@@ -2304,7 +3578,6 @@ body {
         width: 280px;
         height: auto;
         object-fit: contain;
-        /* Тень для самой картинки (эффект объема) */
         filter: drop-shadow(0 15px 25px rgba(0,0,0,0.1));
         animation: floatLife 4s ease-in-out infinite;
     }
@@ -2325,25 +3598,162 @@ body {
         }
     }
 
-    /* Индивидуальные задержки для "живого" эффекта */
+    /* Индивидуальные задержки для десктопа */
     .social-mega-grid .social-mega-card:nth-child(2) .floating-icon-av { animation-delay: 0.7s; }
     .social-mega-grid .social-mega-card:nth-child(3) .floating-icon { animation-delay: 1.4s; }
     .social-mega-grid .social-mega-card:nth-child(4) .floating-icon { animation-delay: 2.1s; }
 
-    /* Мобильная адаптация */
-    @media (max-width: 1100px) {
-        .social-mega-grid { grid-template-columns: repeat(2, 1fr); }
+
+    /* ==========================================
+       СТИЛИ ДЛЯ МОБИЛЬНОЙ ВЕРСИИ (2х2, ЖИВОЙ ЭФФЕКТ)
+       ========================================== */
+    .social-mega-section-mobile {
+        padding: 40px 16px;
+        background-color: #ffffff;
+        font-family: 'Nunito', sans-serif;
+        overflow: hidden;
     }
 
-    @media (max-width: 600px) {
-        .social-mega-grid { grid-template-columns: 1fr; }
-        .social-mega-card { height: 320px; }
-        .social-mega-title { font-size: 28px; text-align: center; }
+    .m-social-container {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .m-social-title {
+        color: #1a1a1a;
+        font-size: 26px; /* Адаптивный размер шрифта под мобилки */
+        font-weight: 900;
+        text-transform: uppercase;
+        margin-bottom: 30px;
+        letter-spacing: 1px;
+        text-align: center;
+    }
+
+    .m-social-title .accent {
+        color: #ff4e00;
+    }
+
+    /* Мобильная сетка: строго 2 колонки (2 ряда по 2 карточки) */
+    .m-social-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px; /* Компактный зазор на телефонах */
+    }
+
+    .m-social-card {
+        position: relative;
+        height: 260px; /* Оптимальная высота, чтобы поместиться в ширину экрана 2х2 */
+        background: #f8f9fa;
+        border-radius: 20px;
+        padding: 20px;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border: 1px solid #eeeeee;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        overflow: hidden;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+    }
+
+    .m-social-card:hover {
+        transform: translateY(-6px);
+        border-color: #ff4e00;
+        background: #ffffff;
+        box-shadow: 0 15px 30px rgba(255, 78, 0, 0.1);
+    }
+
+    .m-card-label {
+        color: #999;
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        display: block;
+        margin-bottom: 4px;
+    }
+
+    .m-card-name {
+        color: #1a1a1a;
+        font-size: 20px;
+        font-weight: 900;
+        margin: 0;
+    }
+
+    .m-card-image-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1;
+        position: relative;
+    }
+
+    /* Адаптированные размеры иконок, чтобы они круто левитировали и не вылезали за края */
+    .m-floating-icon {
+        width: 130px;
+        height: auto;
+        object-fit: contain;
+        filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
+        animation: floatLifeMobile 4s ease-in-out infinite;
+    }
+
+    .m-floating-icon-av {
+        width: 145px;
+        height: auto;
+        object-fit: contain;
+        filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
+        animation: floatLifeMobile 4s ease-in-out infinite;
+    }
+
+    .m-floating-icon-vk {
+        width: 115px;
+        height: auto;
+        object-fit: contain;
+        filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
+        animation: floatLifeMobile 4s ease-in-out infinite;
+    }
+
+    /* Мобильная анимация левитации (с сохранением твоих таймингов) */
+    @keyframes floatLifeMobile {
+        0% {
+            transform: translateY(0px) rotate(0deg);
+            filter: drop-shadow(0 10px 10px rgba(0,0,0,0.1));
+        }
+        50% {
+            transform: translateY(-12px) rotate(2deg);
+            filter: drop-shadow(0 20px 20px rgba(255, 78, 0, 0.12));
+        }
+        100% {
+            transform: translateY(0px) rotate(0deg);
+            filter: drop-shadow(0 10px 10px rgba(0,0,0,0.1));
+        }
+    }
+
+    /* Сохраняем твои индивидуальные задержки для создания "живого" хаотичного эффекта */
+    .m-social-grid .m-social-card:nth-child(2) .m-floating-icon-av { animation-delay: 0.7s; }
+    .m-social-grid .m-social-card:nth-child(3) .m-floating-icon { animation-delay: 1.4s; }
+    .m-social-grid .m-social-card:nth-child(4) .m-floating-icon { animation-delay: 2.1s; }
+
+
+    /* ==========================================
+       УПРАВЛЕНИЕ ВИДИМОСТЬЮ (ПЕРЕКЛЮЧАТЕЛЬ ЭКРАНОВ)
+       ========================================== */
+    .sm-mobile-only {
+        display: none !important; /* По умолчанию мобильная скрыта */
+    }
+
+    @media (max-width: 900px) {
+        .sm-desktop-only {
+            display: none !important; /* Выключаем десктоп на планшетах/мобилках */
+        }
+        .sm-mobile-only {
+            display: block !important; /* Включаем красивую адаптивную мобильную секцию 2х2 */
+        }
     }
 </style>
 
 <!-- СЕКЦИЯ ОТЗЫВОВ -->
-<section class="reviews-section">
+<section class="reviews-section" id="block_reviews">
     <div class="stars-container" id="stars"></div>
     <div class="blue-glow"></div>
     
@@ -2353,7 +3763,7 @@ body {
     </div>
 
     <div class="reviews-footer">
-        <a href="ссылка_на_страницу_отзывов.html" class="view-all-btn">
+        <a href="reviews.html" class="view-all-btn">
             Посмотреть все отзывы
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -2906,12 +4316,38 @@ document.addEventListener('DOMContentLoaded', () => {
             transform: translateY(-5px);
         }
 
-        @media (max-width: 992px) {
+        @media (max-width: 768px) {
             .footer-top, .footer-bottom { flex-direction: column; align-items: center; text-align: center; }
             .footer-requisites-container { align-items: center; }
             .footer-requisites, .footer-disclaimer { text-align: center; }
             .footer-bottom-right { flex-direction: column; gap: 15px; }
+            .footer-docs { align-items: center; }
+            
+            .footer-island {
+                background: #0a0a0a !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                margin: 40px 0 0 0 !important; 
+                border-radius: 0px !important;
+                padding: 30px 20px calc(30px + env(safe-area-inset-bottom)) !important; 
+                color: #ffffff;
+                box-sizing: border-box;
+                position: relative;
+                
+                /* Рамка только сверху */
+                border-top: 1px solid rgba(78, 240, 195, 0.15) !important;
+                border-left: none !important;
+                border-right: none !important;
+                border-bottom: none !important;
+
+                /* ХИТРЫЙ ТРЮК: Огромная черная тень внутрь блока и вниз */
+                /* Она намертво закрасит в цвет подвала любые косяки и белые полосы снизу */
+                box-shadow: 
+                    0 25px 50px rgba(0, 0, 0, 0.2), 
+                    0 500px 0 500px #0a0a0a !important;
+            }
         }
+
     </style>
 
     <div class="footer-island">
@@ -3091,8 +4527,48 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('cookieConsent', 'true');
     }
 
-    // Слушаем загрузку страницы и запускаем проверку куки
-    document.addEventListener('DOMContentLoaded', checkCookieConsent);
+   // ОБНОВЛЕННОЕ МОБИЛЬНОЕ МЕНЮ (СПРАВА С ЗАКРЫТИЕМ ЯКОРЕЙ)
+document.addEventListener('DOMContentLoaded', () => {
+    const mobileToggle = document.getElementById('js-mobile-toggle');
+    const mobileMenu = document.getElementById('js-mobile-menu');
+
+    if (mobileToggle && mobileMenu) {
+        mobileToggle.addEventListener('click', toggleMobileMenu);
+
+        // Вешаем событие клика на все ссылки и кнопку ВНУТРИ мобильного меню
+        const menuLinks = mobileMenu.querySelectorAll('.mobile-menu-link, .mobile-menu-action-btn');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                const href = link.getAttribute('href');
+                
+                // Если кликнули по ссылке-якорю (начинается с #)
+                if (href && href.startsWith('#')) {
+                    if (mobileMenu.classList.contains('active')) {
+                        toggleMobileMenu();
+                    }
+                }
+                // Если это обычная ссылка (например, reviews.html), меню закроется, и начнется переход
+                else {
+                    if (mobileMenu.classList.contains('active')) {
+                        toggleMobileMenu();
+                    }
+                }
+            });
+        });
+    }
+
+    function toggleMobileMenu() {
+        mobileToggle.classList.toggle('active');
+        mobileMenu.classList.contains('active') ? mobileMenu.classList.remove('active') : mobileMenu.classList.add('active');
+        
+        // Блокируем скролл основной страницы при открытом меню
+        if (mobileMenu.classList.contains('active')) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+    }
+});
 </script>
 
 </body>
