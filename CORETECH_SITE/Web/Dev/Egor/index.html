@@ -785,7 +785,7 @@
 
         <nav class="header-nav">
             <a href="index.html#block_catalog">Каталог ПК</a>
-            <a href="index.html#block_steps">Этапы работы</a>
+            <a href="index.html#block_stages">Этапы работы</a>
             <a href="index.html#block_service">Сервис</a>
             <a href="index.html#block_team">Команда</a>
             <a href="index.html#block_social">Контакты</a>
@@ -817,13 +817,21 @@
         </div>
     </header>
 
-    <div class="mobile-nav-overlay" id="js-mobile-menu">
-        <a href="index.html#block_catalog" onclick="toggleMobileMenu()">Каталог ПК</a>
-        <a href="index.html#block_steps" onclick="toggleMobileMenu()">Этапы работы</a>
-        <a href="#photos" onclick="toggleMobileMenu()">Фото</a>
-        <a href="#team" onclick="toggleMobileMenu()">Команда</a>
-        <a href="#news" onclick="toggleMobileMenu()">Новости</a>
-        <a href="reviews.html" onclick="toggleMobileMenu()">Отзывы</a>
+   <div class="mobile-menu-overlay" id="js-mobile-menu">
+        <div class="mobile-menu-container">
+            <nav class="mobile-menu-nav">
+                <a href="index.html#block_catalog" class="mobile-menu-link">Каталог ПК</a>
+                <a href="index.html#block_stages_m" class="mobile-menu-link">Этапы работы</a>
+                <a href="#block_service" class="mobile-menu-link">Сервис</a>
+                <a href="#block_team" class="mobile-menu-link">Команда</a>
+                <a href="#block_contacts_m" class="mobile-menu-link">Контакты</a>
+                <a href="reviews.html" class="mobile-menu-link">Отзывы</a>
+                
+                <div class="mobile-menu-action-wrapper">
+                    <a href="#block_consultation" class="mobile-menu-action-btn">Подобрать компьютер</a>
+                </div>
+            </nav>
+        </div>
     </div>
 
     <style>
@@ -1247,6 +1255,120 @@ body {
             50% { transform: translateY(-20px) translateX(var(--pc-image-offset)) rotate(1deg); }
         }
 
+        /* --- НОВОЕ МОБИЛЬНОЕ ВЫПАДАЮЩЕЕ МЕНЮ (СПРАВА) --- */
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Изначально спрятано за экраном справа */
+    width: 100%;
+    height: 100vh;
+    background: rgba(5, 7, 10, 0.98); /* Глубокий темный фон в цвет сайта с легким размытием */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 999;
+    transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1); /* Плавное выезжание */
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Когда меню активно — выезжает на экран */
+.mobile-menu-overlay.active {
+    right: 0;
+}
+
+.mobile-menu-container {
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Центрируем пункты по вертикали как у iden-pc */
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+.mobile-menu-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+}
+
+/* Ссылки меню */
+.mobile-menu-link {
+    font-family: 'Nunito', sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 12px 0;
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Легкие разделители */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.mobile-menu-link:last-of-type {
+    border-bottom: none;
+}
+
+/* Центральная кнопка действия */
+.mobile-menu-action-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.mobile-menu-action-btn {
+    font-family: 'Nunito', sans-serif;
+    display: inline-block;
+    background: linear-gradient(135deg, #4ce2b8 0%, #32b391 100%);
+    color: #05070a;
+    font-size: 18px;
+    font-weight: 900;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 16px 35px;
+    border-radius: 30px;
+    box-shadow: 0 10px 25px rgba(76, 226, 184, 0.3);
+    text-align: center;
+    width: 80%;
+    max-width: 300px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mobile-menu-action-btn:active {
+    transform: scale(0.95);
+}
+
+/* --- АНИМАЦИЯ ПОЯВЛЕНИЯ ПУНКТОВ ДРУГ ЗА ДРУГОМ (Stagger эффект) --- */
+.mobile-menu-overlay.active .mobile-menu-link,
+.mobile-menu-overlay.active .mobile-menu-action-wrapper {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Задержки для каждого пункта, чтобы они вылетали по очереди */
+.mobile-menu-overlay.active .mobile-menu-link:nth-child(1) { transition-delay: 0.1s; transform: translateY(0); opacity: 1; }
+.mobile-menu-overlay.active .mobile-menu-link:nth-child(2) { transition-delay: 0.15s; transform: translateY(0); opacity: 1; }
+.mobile-menu-overlay.active .mobile-menu-link:nth-child(3) { transition-delay: 0.2s; transform: translateY(0); opacity: 1; }
+.mobile-menu-overlay.active .mobile-menu-link:nth-child(4) { transition-delay: 0.25s; transform: translateY(0); opacity: 1; }
+.mobile-menu-overlay.active .mobile-menu-link:nth-child(5) { transition-delay: 0.3s; transform: translateY(0); opacity: 1; }
+.mobile-menu-overlay.active .mobile-menu-link:nth-child(6) { transition-delay: 0.4s; transform: translateY(0); opacity: 1; }
+
+/* Убедимся, что кнопка гамбургера всегда выше меню */
+#js-mobile-toggle {
+    z-index: 1000 !important;
+}
     </style>
      
     <section class="hero-section">
@@ -1257,7 +1379,7 @@ body {
                 <div class="hero-description">МЫ — пока еще небольшая команда энтузиастов, которая собирает каждый компьютер как для себя. Внимание к каждой мелочи и желание сделать лучшее для каждого клиента — не дают нам покоя.</div>
 
                 <div class="hero-btns">
-                    <a href="#" class="btn-hero">
+                    <a href="#config-title" class="btn-hero">
                         Собрать ПК
                         <div class="arrow-icon">
                             <img src="https://cdn-icons-png.flaticon.com/512/545/545682.png" alt="->">
@@ -1859,7 +1981,7 @@ body {
     </div>
 </section>
 
-    <div class="container">
+    <div class="container" id="config-title">
         <h1 class="d-config-title">СБОРКА<span> НА ЗАКАЗ</span></h1>
         <h1 class="m-config-title">СБОРКА<span> НА ЗАКАЗ</span></h1>
 
@@ -2076,6 +2198,30 @@ body {
             font-size: 12px; font-weight: 900; z-index: 10;
             text-transform: uppercase;
         }
+        .badge-fullhd {
+            position: absolute;
+            top: 45px; left: 45px;
+            background: #a465ff; color: #fff;
+            padding: 5px 15px; border-radius: 10px;
+            font-size: 12px; font-weight: 900; z-index: 10;
+            text-transform: uppercase;
+        }
+        .badge-2k {
+            position: absolute;
+            top: 45px; left: 45px;
+            background: #a465ff; color: #fff;
+            padding: 5px 15px; border-radius: 10px;
+            font-size: 12px; font-weight: 900; z-index: 10;
+            text-transform: uppercase;
+        }
+        .badge-4k {
+            position: absolute;
+            top: 45px; left: 45px;
+            background: #a465ff; color: #fff;
+            padding: 5px 15px; border-radius: 10px;
+            font-size: 12px; font-weight: 900; z-index: 10;
+            text-transform: uppercase;
+        }
 
         /* Статусы */
         .status {
@@ -2147,10 +2293,17 @@ body {
         .product-name { font-size: 24px; font-weight: 900; margin-bottom: 5px; text-transform: uppercase; }
         .product-name span { color: var(--accent-mint); }
         .product-mini-specs { display: flex; flex-direction: column; gap: 10px; margin: 15px 0 20px 0; flex-grow: 1; }
-        .mini-spec { display: flex; align-items: center; gap: 12px; font-size: 14px; color: #a0a0a0; font-weight: 800; }
+        .mini-spec { display: flex; align-items: center; gap: 12px; font-size: 15px; color: #a0a0a0; font-weight: 800; }
         .spec-icon-img { height: 1.1em; width: auto; }
         .mini-spec span { color: #fff; }
-        .product-price { font-size: 22px; font-weight: 900; margin-bottom: 20px; }
+        .product-price { font-size: 25px; font-weight: 900; margin-bottom: 20px; }
+
+        @media (max-width: 768px) {
+            .mini-spec {
+            font-size: 13px; /* Меньший размер для мобилок */
+            gap: 8px; /* Можно также уменьшить отступы */
+            }
+        }
 
         .btn-card { 
             background: #a465ff; color: #fff; text-align: center; 
@@ -2341,94 +2494,177 @@ body {
     // 2. ДАННЫЕ ДЛЯ КАТАЛОГА ТОВАРОВ
     const myComputers = [
         {
-            name: "CORE START",
-            isHit: true,
-            image: "images/comp1.jpg",
+            name: "CORE ALL-INCLUSIVE",
+            isHit: false,
+            is4K: true,
+            image: "images/catalog/comp8.jpg",
             fpsNumber: "145+ FPS",
             fpsBarWidth: "45%",
             fpsModal: { 'CS 2': '320 FPS', 'Dota 2': '240 FPS', 'Atomic Heart': '90 FPS' },
-            cpu: "i5-12400F",
-            gpu: "RTX 4060",
-            ram: "16GB DDR4",
+            cpu: "Ryzen 7 9800X3D",
+            gpu: "RTX 5080 16Гб",
+            ram: "32Гб DDR5 6000 (16Гб х 2)",
+            cooling: "GF Eskimo Pro 420",
+            statusClass: "on-order",
+            statusText: "Под заказ",
+            price: "от 279 990 ₽",
+            specsModal: { 'Накопитель': 'M.2 SSD 1Тб на PCI 4.0', 
+            'Блок питания': '1STPlayer NGDP 1000W 80+ GOLD', 
+            'Материнская плата': 'X870 [ATX формфактор]', 
+            'Корпус': 'Geometric Future Model 5'}
+        },
+        {
+            name: "CORE PINK LOVE",
+            isHit: false,
+            image: "images/catalog/comp1.jpg",
+            fpsNumber: "210+ FPS",
+            fpsBarWidth: "75%",
+            fpsModal: { 'Cyberpunk': '85 FPS', 'Warzone': '140 FPS' },
+            cpu: "i5-13600KF",
+            gpu: "RTX 5070 12Гб",
+            ram: "32Гб DDR4 3200 (16Гб х 2)",
+            cooling: "DEEPCOOL LE720",
+            statusClass: "on-order",
+            statusText: "Под заказ",
+            price: "от 144 990 ₽",
+            specsModal: { 'Накопитель': 'M.2 SSD 1Тб на PCI 4.0', 
+            'Блок питания': '1STPlayer ACK Silver 750W 80+ SILVER', 
+            'Материнская плата': 'B760M D4 [Micro-ATX формфактор]', 
+            'Корпус': 'Zalman Pink'}
+        },
+        {
+            name: "CORE MINI MAXIMUS",
+            isHit: true,
+            image: "images/catalog/comp7.jpg",
+            fpsNumber: "210+ FPS",
+            fpsBarWidth: "75%",
+            fpsModal: { 'Cyberpunk': '85 FPS', 'Warzone': '140 FPS' },
+            cpu: "Ryzen 7 7800X3D",
+            gpu: "RTX 5070 Ti 16Гб",
+            ram: "32GB DDR5 6000 (16Гб х 2)",
+            cooling: "Ocypus Sigma L24 Pro",
+            statusClass: "on-order",
+            statusText: "Под заказ",
+            price: "от 229 990 ₽",
+            specsModal: { 'Накопитель': 'M.2 SSD 1Тб на PCI 4.0', 
+            'Блок питания': 'Lian Li SP850V2, 850W, 80+ GOLD', 
+            'Материнская плата': 'B850 [Micro-ATX формфактор]', 
+            'Корпус': 'JONSBO Jonsplus Z20'}
+        },
+        {
+            name: "CORE GOLDEN MEAN",
+            isHit: false,
+            image: "images/catalog/comp9.jpg",
+            fpsNumber: "210+ FPS",
+            fpsBarWidth: "75%",
+            fpsModal: { 'Cyberpunk': '85 FPS', 'Warzone': '140 FPS' },
+            cpu: "i7-14700KF",
+            gpu: "RTX 5070Ti 16Гб",
+            ram: "32GB DDR5 6000 (16Гб х 2)",
+            cooling: "TR Peerless Vision 360",
+            statusClass: "on-order",
+            statusText: "Под заказ",
+            price: "от 239 990 ₽",
+            specsModal: { 'Накопитель': 'M.2 SSD 1Тб на PCI 4.0', 
+            'Блок питания': '1STPlayer NGDP 850W 80+ GOLD', 
+            'Материнская плата': 'B760 DDR5 [Mirco-ATX формфактор]', 
+            'Корпус': 'Lian Li O11 Dynamic MINI V2 Flow'}
+        },
+        {
+            name: "CORE WH OR BL",
+            isHit: false,
+            image: "images/catalog/comp5.jpg",
+            fpsNumber: "210+ FPS",
+            fpsBarWidth: "75%",
+            fpsModal: { 'Cyberpunk': '85 FPS', 'Warzone': '140 FPS' },
+            cpu: "Ryzen 7 7700",
+            gpu: "RTX 5070 12Гб",
+            ram: "32Гб DDR5 5600 (16Гб х 2)",
+            cooling: "TR Peerless Vision 360",
+            statusClass: "on-order",
+            statusText: "Под заказ",
+            price: "от 183 990 ₽",
+            specsModal: { 'Накопитель': 'M.2 SSD 1Тб на PCI 4.0', 
+            'Блок питания': '1STPlayer NGDP 850W, 80+ GOLD', 
+            'Материнская плата': 'B650 [Micro-ATX формфактор]', 
+            'Корпус': 'Zalman P30 BW'}
+        },
+        {
+            name: "CORE MINI BALANCE",
+            isHit: true,
+            image: "images/catalog/comp6.jpg",
+            fpsNumber: "210+ FPS",
+            fpsBarWidth: "75%",
+            fpsModal: { 'Cyberpunk': '85 FPS', 'Warzone': '140 FPS' },
+            cpu: "i5-14600KF",
+            gpu: "RTX 5070",
+            ram: "32Гб DDR4 3200 (16Гб х 2)",
+            cooling: "TR Peerless Vision 240",
+            statusClass: "in-stock",
+            statusText: "Готов к сборке",
+            price: "от 149 990 ₽",
+            specsModal: { 'Накопитель': 'M.2 SSD 1Тб на PCI 4.0', 
+            'Блок питания': '1STPlayer ACK SILVER 750W, 80+ SILVER', 
+            'Материнская плата': 'B760 [Micro-ATX формфактор]', 
+            'Корпус': '1STplayer Miku Mi2-A ARGB'}
+        },
+        {
+            name: "CORE HYPER",
+            isHit: true,
+            image: "images/catalog/comp2.jpg",
+            fpsNumber: "210+ FPS",
+            fpsBarWidth: "75%",
+            fpsModal: { 'Cyberpunk': '85 FPS', 'Warzone': '140 FPS' },
+            cpu: "i5-14400F",
+            gpu: "RTX 5060 8Гб",
+            ram: "32Гб DDR4 3200 (16Гб х 2)",
+            cooling: "ID-Cooling SE-214-XT",
             statusClass: "in-stock",
             statusText: "В наличии",
-            price: "65 900 ₽",
-            specsModal: { 'Накопитель': '500GB NVMe', 'Блок питания': '600W 80+', 'Материнская плата': 'B650' }
+            price: "от 99 990 ₽",
+            specsModal: { 'Накопитель': 'M.2 SSD 1Тб', 
+            'Блок питания': '1STPlayer DK Premium 600W, 80+ BRONZE', 
+            'Материнская плата': 'MSI PRO H610M-G D4', 
+            'Корпус': '1STPlayer MV5-TP с 8ARGB FAN'}
         },
         {
-            name: "CORE PRO",
-            isHit: true,
-            image: "images/comp2.jpg",
+            name: "CORE MINI HYPER",
+            isHit: false,
+            image: "images/catalog/comp3.jpg",
             fpsNumber: "210+ FPS",
             fpsBarWidth: "75%",
             fpsModal: { 'Cyberpunk': '85 FPS', 'Warzone': '140 FPS' },
-            cpu: "Ryzen 5 7600",
-            gpu: "RTX 4070 Ti",
-            ram: "32GB DDR5",
+            cpu: "Ryzen 5 7500F",
+            gpu: "RTX 5060Ti 8Гб",
+            ram: "16GB DDR5 5600 (8Гб х 2)",
+            cooling: "ID-Coling SE-214-XT",
             statusClass: "on-order",
             statusText: "Под заказ",
-            price: "124 500 ₽",
-            specsModal: { 'SSD': '1TB Gen4', 'Охлаждение': 'СЖО 240мм', 'Материнская плата': 'B650' }
+            price: "от 106 990 ₽",
+            specsModal: { 'Накопитель': 'M.2 SSD 1Тб на PCI 4.0', 
+            'Блок питания': '1STPlayer ACK 650W, 80+ [белый]', 
+            'Материнская плата': 'B650 [Micro-ATX формфактор]', 
+            'Корпус': '1STPlayer Miku Mi2-A ARGB'}
         },
         {
-            name: "CORE PRO",
-            isHit: true,
-            image: "images/pc1.jpg",
+            name: "CORE STANDART",
+            isHit: false,
+            is2K: true,
+            image: "images/catalog/comp4.jpg",
             fpsNumber: "210+ FPS",
             fpsBarWidth: "75%",
             fpsModal: { 'Cyberpunk': '85 FPS', 'Warzone': '140 FPS' },
-            cpu: "Ryzen 5 7600",
-            gpu: "RTX 4070 Ti",
-            ram: "32GB DDR5",
+            cpu: "Ryzen 5 5500",
+            gpu: "RTX 5050",
+            ram: "16GB DDR4 3200 (8Гб х 2)",
+            cooling: "SE-214-XT",
             statusClass: "on-order",
             statusText: "Под заказ",
-            price: "124 500 ₽",
-            specsModal: { 'SSD': '1TB Gen4', 'Охлаждение': 'СЖО 240мм', 'Материнская плата': 'B650' }
-        },
-        {
-            name: "CORE PRO",
-            isHit: true,
-            image: "images/pc1.jpg",
-            fpsNumber: "210+ FPS",
-            fpsBarWidth: "75%",
-            fpsModal: { 'Cyberpunk': '85 FPS', 'Warzone': '140 FPS' },
-            cpu: "Ryzen 5 7600",
-            gpu: "RTX 4070 Ti",
-            ram: "32GB DDR5",
-            statusClass: "on-order",
-            statusText: "Под заказ",
-            price: "124 500 ₽",
-            specsModal: { 'SSD': '1TB Gen4', 'Охлаждение': 'СЖО 240мм', 'Материнская плата': 'B650' }
-        },
-        {
-            name: "CORE PRO",
-            isHit: true,
-            image: "images/pc1.jpg",
-            fpsNumber: "210+ FPS",
-            fpsBarWidth: "75%",
-            fpsModal: { 'Cyberpunk': '85 FPS', 'Warzone': '140 FPS' },
-            cpu: "Ryzen 5 7600",
-            gpu: "RTX 4070 Ti",
-            ram: "32GB DDR5",
-            statusClass: "on-order",
-            statusText: "Под заказ",
-            price: "124 500 ₽",
-            specsModal: { 'SSD': '1TB Gen4', 'Охлаждение': 'СЖО 240мм', 'Материнская плата': 'B650' }
-        },
-        {
-            name: "CORE PRO",
-            isHit: true,
-            image: "images/pc1.jpg",
-            fpsNumber: "210+ FPS",
-            fpsBarWidth: "75%",
-            fpsModal: { 'Cyberpunk': '85 FPS', 'Warzone': '140 FPS' },
-            cpu: "Ryzen 5 7600",
-            gpu: "RTX 4070 Ti",
-            ram: "32GB DDR5",
-            statusClass: "on-order",
-            statusText: "Под заказ",
-            price: "124 500 ₽",
-            specsModal: { 'SSD': '1TB Gen4', 'Охлаждение': 'СЖО 240мм', 'Материнская плата': 'B650' }
+            price: "от 69 990 ₽",
+            specsModal: { 'Накопитель': 'M.2 SSD 512Гб', 
+            'Блок питания': '1STPlayer DK Premium 600W, 80+ BRONZE', 
+            'Материнская плата': 'A520 [Micro-ATX формфактор]', 
+            'Корпус': 'HSPD'}
         }
     ];
 
@@ -2441,6 +2677,7 @@ body {
 
         myComputers.forEach(pc => {
             const badge = pc.isHit ? `<div class="badge-hit">ХИТ</div>` : '';
+    
             
             const fpsDataStr = JSON.stringify(pc.fpsModal).replace(/"/g, '&quot;');
             const specsDataStr = JSON.stringify(pc.specsModal).replace(/"/g, '&quot;');
@@ -2467,7 +2704,8 @@ body {
                     <div class="product-mini-specs">
                         <div class="mini-spec"><img src="images/cpu.png" class="spec-icon-img"> Процессор: <span>${pc.cpu}</span></div>
                         <div class="mini-spec"><img src="images/gpu.png" class="spec-icon-img"> Видеокарта: <span>${pc.gpu}</span></div>
-                        <div class="mini-spec"><img src="images/ram.png" class="spec-icon-img"> Оперативная память: <span>${pc.ram}</span></div>
+                        <div class="mini-spec"><img src="images/ram.png" class="spec-icon-img"> ОЗУ: <span>${pc.ram}</span></div>
+                        <div class="mini-spec"><img src="images/cooling.png" class="spec-icon-img"> Охлаждение: <span>${pc.cooling}</span></div>
                     </div>
                     
                     <div class="status ${pc.statusClass}">${pc.statusText}</div>
@@ -2487,13 +2725,13 @@ body {
 </section>
 
 <!-- БЛОК ЭТАПЫ РАБОТЫ -->
-<section class="steps-section steps-desktop-only" id="block_steps">
+<section class="steps-section steps-desktop-only" id="block_stages">
     <style>
         :root {
             /* НАСТРОЙКИ КАРТИНКИ ПК (pc3.png) */
             --steps-pc-width: 100%;    /* Ширина картинки */
             --steps-pc-offset-x: -10%;  /* Смещение по горизонтали (<0 влево, >0 вправо) */
-            --steps-pc-offset-y: -150px;  /* Смещение по вертикали */
+            --steps-pc-offset-y: 0px;  /* Смещение по вертикали */
         }
 
         .steps-section {
@@ -2507,7 +2745,7 @@ body {
             justify-content: space-between;
             align-items: flex-start;
             gap: 40px;
-            margin-bottom: -200px;
+            margin-bottom: 0px;
         }
 
         .steps-visual {
@@ -2587,7 +2825,7 @@ body {
 
     <div class="steps-visual">
         <h2>Этапы<br><span>Работы</span></h2>
-        <img src="images/pc3.png" alt="Процесс сборки" class="steps-pc-image">
+        <img src="images/comp gl.png" alt="Процесс сборки" class="steps-pc-image">
     </div>
 
     <div class="steps-content">
@@ -2596,7 +2834,7 @@ body {
             <p class="step-description">Анализируем ваши потребности и формируем оптимальный сетап железа. Разрабатываем уникальный дизайн-макет и визуальный стиль вашего будущего ПК.</p>
         </div>
         <div class="step-item step-02">
-            <span class="step-number">[ 02 / НЖЕНЕРИЯ И СБОРКА ]</span>
+            <span class="step-number">[ 02 / ИНЖЕНЕРИЯ И СБОРКА ]</span>
             <p class="step-description">Кастом переходит в руки профи. Собираем систему с филигранной точностью, обеспечивая идеальный кабель-менеджмент и правильный воздушный поток.</p>
         </div>
         <div class="step-item step-03">
@@ -2611,7 +2849,7 @@ body {
 </section>
 
 
-<section class="steps-mobile-only">
+<section class="steps-mobile-only" id="block_stages_m">
     <style>
         .m-steps-section {
             width: 100%;
@@ -2722,23 +2960,23 @@ body {
             </div>
             
             <div class="m-step-box m-step-01 m-left">
-                <span class="m-step-box-num">/ 01 ПОДБОР И КОНЦЕПТ</span>
-                <p class="m-step-box-desc">Изучаем ваши задачи, подбираем идеальную связку комплектующих. Создаем визуальный концепт будущей сборки.</p>
+                <span class="m-step-box-num">[ 01 / ВАША ИДЕЯ И НАШЕ ПРОЕКТИРОВАНИЕ ]</span>
+                <p class="m-step-box-desc">Анализируем ваши потребности и формируем оптимальный сетап железа. Разрабатываем уникальный дизайн-макет и визуальный стиль вашего будущего ПК.</p>
             </div>
             
             <div class="m-step-box m-step-02 m-right">
-                <span class="m-step-box-num">/ 02 СБОРКА И УКЛАДКА</span>
-                <p class="m-step-box-desc">Наши инженеры приступают к работе. Безупречный кабель-менеджмент и внимание к каждой детали.</p>
+                <span class="m-step-box-num">[ 02 / ИНЖЕНЕРИЯ И СБОРКА ]</span>
+                <p class="m-step-box-desc">Кастом переходит в руки профи. Собираем систему с филигранной точностью, обеспечивая идеальный кабель-менеджмент и правильный воздушный поток.</p>
             </div>
             
             <div class="m-step-box m-step-03 m-left">
-                <span class="m-step-box-num">/ 03 НАСТРОЙКА И ТЕСТЫ</span>
-                <p class="m-step-box-desc">Настраиваем BIOS, тайминги памяти и прогоняем ПК через самые тяжелые стресс-тесты.</p>
+                <span class="m-step-box-num">[ 03 / ОПТИМИЗАЦИЯ И СТРЕСС-ТЕСТЫ ]</span>
+                <p class="m-step-box-desc">Выжимаем максимум производительности: калибруем BIOS, настраиваем тайминги ОЗУ и тестируем систему под экстремальными нагрузками на стабильность.</p>
             </div>
             
             <div class="m-step-box m-step-04 m-right">
-                <span class="m-step-box-num">/ 04 ФИНАЛЬНЫЙ РЕЗУЛЬТАТ</span>
-                <p class="m-step-box-desc">Вы получаете мощный и тихий компьютер, готовый к любым играм прямо из коробки.</p>
+                <span class="m-step-box-num">[ 04 / ГОТОВ К СРАЖЕНИЯМ ]</span>
+                <p class="m-step-box-desc">На выходе — бескомпромиссно мощная, тихая и полностью настроенная машина. Никаких лишних действий: распаковывай, включай и доминируй в играх.</p>
             </div>
 
         </div>
@@ -2753,6 +2991,78 @@ body {
         <div class="stars-layer s3"></div>
 
         <style>
+
+        /* --- НОВАЯ СВЕРХПЛАВНАЯ АНИМАЦИЯ --- */
+        .vp-info p {
+            position: relative;
+            margin: 0;
+            /* Управляем плавностью затухания маски (0.6s — оптимально, чтобы не отставать от текста) */
+            transition: -webkit-mask-image 0.6s ease, mask-image 0.6s ease;
+            
+            /* Изначальное сильное затухание (видно около 1.5 строк) */
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 15%, rgba(0,0,0,0) 90%);
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 15%, rgba(0,0,0,0) 90%);
+        }
+
+        /* Контейнер-обертка, который будет плавно сжиматься и расширяться */
+        .vp-text-wrapper {
+            display: grid;
+            grid-template-rows: 0fr; /* Изначально схлопнут */
+            transition: grid-template-rows 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+
+        /* Внутренний блок, задающий минимальную видимую высоту в закрытом состоянии */
+        .vp-text-content {
+            min-height: 2.5em; /* Высота превью (около 1.5 строк) */
+            transition: min-height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* СОСТОЯНИЕ РАСКРЫТО: мгновенный старт анимации в обе стороны */
+        .vp-text-wrapper.is-expanded {
+            grid-template-rows: 1fr; /* Раскрывается ровно до высоты контента */
+        }
+
+        .vp-text-wrapper.is-expanded .vp-text-content {
+            min-height: 100%; /* Убираем ограничение высоты */
+        }
+
+        .vp-text-wrapper.is-expanded p {
+            /* Полностью проявляем текст */
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 100%, rgba(0,0,0,1) 100%);
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 100%, rgba(0,0,0,1) 100%);
+        }
+
+        /* --- СТИЛИ КНОПКИ (БЕЗ ИЗМЕНЕНИЙ) --- */
+        .vp-toggle-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #4ce2b8;
+            cursor: pointer;
+            font-size: 18px;
+            line-height: 1;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin-top: 15px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+        .vp-toggle-btn:hover {
+            background: rgba(76, 226, 184, 0.2);
+            border-color: #4ce2b8;
+            transform: scale(1.05);
+        }
+        @media (max-width: 768px) {
+            .vp-info { display: flex; flex-direction: column; align-items: center; }
+            .vp-row.reverse { flex-direction: column; }
+        }
+
+
+
+
             .value-proposition-container {
                 padding: 60px 20px;
                 background-color: transparent;
@@ -2897,6 +3207,52 @@ body {
             </div>
         </div>
     </div>
+   <script>
+document.addEventListener("DOMContentLoaded", function() {
+    const infoParagraphs = document.querySelectorAll('.vp-info p');
+
+    infoParagraphs.forEach(p => {
+        // Проверяем, что это именно описание, а не заголовок, и текст достаточно длинный
+        if (p.scrollHeight > 40 && !p.closest('.vp-header')) { 
+            
+            // 1. Создаем структуру оберток для идеальной Grid-анимации
+            const wrapper = document.createElement('div');
+            wrapper.className = 'vp-text-wrapper';
+            
+            const content = document.createElement('div');
+            content.className = 'vp-text-content';
+
+            // 2. Встраиваем обертки в DOM вокруг текущего тега <p>
+            p.parentNode.insertBefore(wrapper, p);
+            wrapper.appendChild(content);
+            content.appendChild(p);
+
+            // 3. Создаем кнопку
+            const btn = document.createElement('button');
+            btn.className = 'vp-toggle-btn';
+            btn.innerHTML = '•••';
+            btn.setAttribute('aria-label', 'Читать далее');
+            wrapper.parentNode.insertBefore(btn, wrapper.nextSibling);
+
+            // 4. Логика клика (теперь без задержек)
+            btn.addEventListener('click', function() {
+                const isExpanded = wrapper.classList.toggle('is-expanded');
+                
+                if (isExpanded) {
+                    btn.innerHTML = '✕'; 
+                    btn.style.color = '#ff6b6b'; 
+                } else {
+                    btn.innerHTML = '•••';
+                    btn.style.color = '#4ce2b8';
+                    
+                    // Скролл начинается одновременно с закрытием блока, плавно ведя за собой экран
+                    wrapper.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            });
+        }
+    });
+});
+</script>
 </section>
 
 <!-- БЛОК НАША КОМАНДА -->
@@ -3045,31 +3401,33 @@ body {
             .team-container { flex-direction: column; }
             .team-info { padding: 40px 30px; order: 2; }
             .team-slider { height: 400px; order: 1; }
-            .team-title { font-size: 32px; }
+            .team-title { font-size: 25px; }
+            .team-label {font-size: 16px; }
         }
     </style>
 
     <div class="team-container">
         <div class="team-info">
-            <span class="team-label">Наша команда</span>
-            <h2 class="team-title">Эксперты в области<br>технологий</h2>
+            <span class="team-label">Собрано профи. Подтверждено делом.</span>
+            <h2 class="team-title">Архитекторы вашей<br>производительности</h2>
             <p class="team-description">
-                За каждой сборкой стоит профессионал. Мы не просто собираем ПК, мы создаем инструмент для ваших побед и работы.
+                За каждым винтиком и ваттом питания стоит человек, который фанатеет от результата.
+                Мы создаём фундамент для ваших побед: в киберспорте, творчестве или бизнесе.
             </p>
             
             <div class="team-stats">
                 <div style="display: flex; gap: 40px;">
                     <div>
                         <div style="font-size: 36px; font-weight: 900; color: #1a1a1a;">500<span style="color: var(--accent-mint, #7B61FF);">+</span></div>
-                        <div style="font-size: 13px; font-weight: 800; color: #888; text-transform: uppercase;">Сборок</div>
+                        <div style="font-size: 13px; font-weight: 800; color: #888; text-transform: uppercase;">собранных нами ПК</div>
                     </div>
                     <div>
-                        <div style="font-size: 36px; font-weight: 900; color: #1a1a1a;">10<span style="color: var(--accent-mint, #7B61FF);">+</span></div>
-                        <div style="font-size: 13px; font-weight: 800; color: #888; text-transform: uppercase;">Мастеров</div>
+                        <div style="font-size: 36px; font-weight: 900; color: var(--accent-mint);"> > <span style="color: hsl(0, 0%, 10%);">5</span></div>
+                        <div style="font-size: 13px; font-weight: 800; color: #888; text-transform: uppercase;">лет опыта работы</div>
                     </div>
                     <div>
-                        <div style="font-size: 36px; font-weight: 900; color: #1a1a1a;">10<span style="color: var(--accent-mint, #7B61FF);">+</span></div>
-                        <div style="font-size: 13px; font-weight: 800; color: #888; text-transform: uppercase;">Мастеров</div>
+                        <div style="font-size: 36px; font-weight: 900; color: #1a1a1a;">100<span style="color: var(--accent-mint, #7B61FF);">+</span></div>
+                        <div style="font-size: 13px; font-weight: 800; color: #888; text-transform: uppercase;">отзывов</div>
                     </div>
                 </div>
             </div>
@@ -3146,7 +3504,7 @@ body {
         <h2 class="social-mega-title">СЛЕДИТЕ ЗА НАМИ <span class="accent">В СОЦ. СЕТЯХ</span></h2>
         
         <div class="social-mega-grid">
-            <a href="#" class="social-mega-card">
+            <a href="https://vk.com/coretech_pc" class="social-mega-card">
                 <div class="card-content">
                     <span class="card-label">Перейти в группу</span>
                     <h3 class="card-name">ВКонтакте</h3>
@@ -3156,9 +3514,9 @@ body {
                 </div>
             </a>
 
-            <a href="#" class="social-mega-card">
+            <a href="https://www.avito.ru/brands/i177752551" class="social-mega-card">
                 <div class="card-content">
-                    <span class="card-label">Наш профиль</span>
+                    <span class="card-label">Перейти в профиль</span>
                     <h3 class="card-name">Авито</h3>
                 </div>
                 <div class="card-image-wrapper">
@@ -3166,9 +3524,9 @@ body {
                 </div>
             </a>
 
-            <a href="#" class="social-mega-card">
+            <a href="https://ozon.ru/s/coretech" class="social-mega-card">
                 <div class="card-content">
-                    <span class="card-label">Магазин</span>
+                    <span class="card-label">Перейти в наш магазин</span>
                     <h3 class="card-name">OZON</h3>
                 </div>
                 <div class="card-image-wrapper">
@@ -3176,25 +3534,25 @@ body {
                 </div>
             </a>
 
-            <a href="#" class="social-mega-card">
+            <a href="https://www.youtube.com/@coretech-store" class="social-mega-card">
                 <div class="card-content">
-                    <span class="card-label">Витрина</span>
-                    <h3 class="card-name">Wildberries</h3>
+                    <span class="card-label">Смотри наши видео</span>
+                    <h3 class="card-name">YouTube</h3>
                 </div>
                 <div class="card-image-wrapper">
-                    <img src="images/logo_wb.png" alt="Wildberries" class="floating-icon">
+                    <img src="images/logo_youtube.png" alt="Wildberries" class="floating-icon">
                 </div>
             </a>
         </div>
     </div>
 </section>
 
-<section class="social-mega-section-mobile sm-mobile-only">
+<section class="social-mega-section-mobile sm-mobile-only" id="block_contacts_m">
     <div class="m-social-container">
         <h2 class="m-social-title">СЛЕДИТЕ ЗА НАМИ <span class="accent">В СОЦ. СЕТЯХ</span></h2>
         
         <div class="m-social-grid">
-            <a href="#" class="m-social-card">
+            <a href="https://vk.com/coretech_pc" class="m-social-card">
                 <div class="m-card-content">
                     <span class="m-card-label">Перейти в группу</span>
                     <h3 class="m-card-name">ВКонтакте</h3>
@@ -3204,9 +3562,9 @@ body {
                 </div>
             </a>
 
-            <a href="#" class="m-social-card">
+            <a href="https://www.avito.ru/brands/i177752551" class="m-social-card">
                 <div class="m-card-content">
-                    <span class="m-card-label">Наш профиль</span>
+                    <span class="m-card-label">Перейти в профиль</span>
                     <h3 class="m-card-name">Авито</h3>
                 </div>
                 <div class="m-card-image-wrapper">
@@ -3214,9 +3572,9 @@ body {
                 </div>
             </a>
 
-            <a href="#" class="m-social-card">
+            <a href="https://ozon.ru/s/coretech" class="m-social-card">
                 <div class="m-card-content">
-                    <span class="m-card-label">Магазин</span>
+                    <span class="m-card-label">Перейти в наш магазин</span>
                     <h3 class="m-card-name">OZON</h3>
                 </div>
                 <div class="m-card-image-wrapper">
@@ -3224,13 +3582,13 @@ body {
                 </div>
             </a>
 
-            <a href="#" class="m-social-card">
+            <a href="https://www.youtube.com/@coretech-store" class="m-social-card">
                 <div class="m-card-content">
-                    <span class="m-card-label">Витрина</span>
-                    <h3 class="m-card-name">Wildberries</h3>
+                    <span class="m-card-label">Смотри наши видео</span>
+                    <h3 class="m-card-name">YouTube</h3>
                 </div>
                 <div class="m-card-image-wrapper">
-                    <img src="images/logo_wb.png" alt="Wildberries" class="m-floating-icon">
+                    <img src="images/logo_youtube.png" alt="Wildberries" class="m-floating-icon">
                 </div>
             </a>
         </div>
@@ -3382,7 +3740,7 @@ body {
 
     .m-social-title {
         color: #1a1a1a;
-        font-size: 26px; /* Адаптивный размер шрифта под мобилки */
+        font-size: 36px; /* Адаптивный размер шрифта под мобилки */
         font-weight: 900;
         text-transform: uppercase;
         margin-bottom: 30px;
@@ -3403,7 +3761,7 @@ body {
 
     .m-social-card {
         position: relative;
-        height: 260px; /* Оптимальная высота, чтобы поместиться в ширину экрана 2х2 */
+        height: 180px; /* Оптимальная высота, чтобы поместиться в ширину экрана 2х2 */
         background: #f8f9fa;
         border-radius: 20px;
         padding: 20px;
@@ -3800,37 +4158,51 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 1. ДАННЫЕ ОТЗЫВОВ (Добавляй новые тут)
     const reviewsData = [
-        { name: "Александр П.", source: "Telegram", img: "images/reviews/r1.png", link: "https://t.me/your_link1" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
+    { name: "Пользователь",  source:"Avito",img:  "images/reviews/2081715930.png", link: "https://www.avito.ru/brands/i177752551/all?sellerId=4bb001b8fc2a08075dae6b7a921c87d4" },
+    { name: "Елена Н.",  source:"OZON",img:  "images/reviews/2081715932.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019d8233-33c6-76ad-9a73-d0ab3364a07b&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Надежда Д.",  source:"OZON",img:  "images/reviews/2081715933.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019d10c5-ca77-779f-adde-da4f91dde3e3&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Naum",  source:"Avito",img:  "images/reviews/2081716004.png", link: "https://www.avito.ru/brands/i177752551/all?sellerId=4bb001b8fc2a08075dae6b7a921c87d4" },
+    { name: "Андрей Е.",  source:"OZON",img:  "images/reviews/2081715934.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=0196b601-9736-7b43-85a6-597ead466e99&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Игорь Д.",  source:"OZON",img:  "images/reviews/2081715935.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019d9083-a54b-7b91-b8d5-016f48e58dbb&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Леонид",  source:"Avito",img:  "images/reviews/2081716003.png", link: "https://www.avito.ru/brands/i177752551/all?sellerId=4bb001b8fc2a08075dae6b7a921c87d4" },
+    { name: "Ольга Ш.",  source:"OZON",img:  "images/reviews/2081715936.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019d7370-4f25-7c15-b799-871891428b22&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Вадим Т.",  source:"ВКонтакте",img:  "images/reviews/2081715978.png", link: "https://vk.com/reviews-226911143" },
+    { name: "Вячеслав П..",  source:"OZON",img:  "images/reviews/2081715937.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-i3-intel-core-i3-12100f-ram-16-gb-ssd-512-gb-2031690485/reviews/?ruuid=01964876-b315-7bcd-8e0a-76cf6029fe3e&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Максим Е.",  source:"OZON",img:  "images/reviews/2081715938.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-i3-intel-core-i3-12100f-ram-16-gb-ssd-512-gb-2031690485/reviews/?ruuid=01964523-8900-7043-be69-0bcb334a3bdc&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Мухаммад",  source:"Avito",img:  "images/reviews/2081716001.png", link: "https://www.avito.ru/brands/i177752551/all?sellerId=4bb001b8fc2a08075dae6b7a921c87d4" },
+    { name: "Игорь А.",  source:"OZON",img:  "images/reviews/2081715939.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i3-12100f-ram-16-gb-ssd-512-gb-nvidia-2078221567/reviews/?ruuid=01969ef0-1f73-737f-a003-479c00663c30&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Шевченко К.",  source:"Avito",img:  "images/reviews/2081716000.png", link: "https://www.avito.ru/brands/i177752551/all?sellerId=4bb001b8fc2a08075dae6b7a921c87d4" },
+    { name: "Владислав",  source:"Avito",img:  "images/reviews/2081715999.png", link: "https://www.avito.ru/brands/i177752551/all?sellerId=4bb001b8fc2a08075dae6b7a921c87d4" },
+    { name: "Сергей К.",  source:"OZON",img:  "images/reviews/2081715940.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-16-gb-ssd-1024-gb-1974227228/reviews/?ruuid=0197249d-07a9-7e2d-b6fb-6dc239c19f11&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Эльдар Ш.",  source:"OZON",img:  "images/reviews/2081715945.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019a5dba-db2e-705c-b2eb-d1319b8aa269&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Всеволод Г.",  source:"OZON",img:  "images/reviews/2081715946.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019b1d84-2e95-7ec1-8d7e-2dc4c3a6ba9b&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Николай",  source:"OZON",img:  "images/reviews/2081715947.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019cfc9e-3b7a-7cf4-9ca3-a1bce1e2fb95&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Юлия Я.",  source:"OZON",img:  "images/reviews/2081715948.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019d38df-e120-7ba3-92f1-9e03d33660d0&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Руслан С.",  source:"OZON",img:  "images/reviews/2081715949.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019b503c-4d1f-7b96-aa3d-75642c2c073d&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Максим Ч.",  source:"OZON",img:  "images/reviews/2081715950.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-white-amd-ryzen-5-7500f-ram-16-gb-ssd-1024-gb-nvidia-2078221558/reviews/?ruuid=0196c94e-31e0-70ed-9e09-6b19d799631c&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Денис П.",  source:"OZON",img:  "images/reviews/2081715951.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019b1057-305b-78ac-b059-b07934d4def2&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Павел К.",  source:"OZON",img:  "images/reviews/2081715952.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019c4650-9bc8-76cc-993c-fb2de564a534&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "No More-Cash. ",  source:"ВКонтакте",img:  "images/reviews/2081715974.png", link: "https://vk.com/reviews-226911143" },
+    { name: "Натали К.",  source:"OZON",img:  "images/reviews/2081715954.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019ab65d-576e-76d7-8e60-e0037ce5c982&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Максим С.",  source:"OZON",img:  "images/reviews/2081715955.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019c22b6-2cf8-7143-9a5a-2a6ef9e49cd0&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Наталья Г.",  source:"OZON",img:  "images/reviews/2081715956.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019ae9f9-e786-7cee-8598-08c29e7e8b14&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Юлия Г.",  source:"OZON",img:  "images/reviews/2081715957.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019a7d21-449d-792a-a43f-f1bc4723adf7&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Vyacheslav M.",  source:"OZON",img:  "images/reviews/2081715958.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019e1b9f-4aa0-7c95-9b02-5f799d41d580&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Максим Т.",  source:"OZON",img:  "images/reviews/2081715959.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019e497d-f81a-7453-997a-21d9c852232b&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Вадим С.",  source:"OZON",img:  "images/reviews/2081715960.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019ba08a-7dfe-704c-b102-b63a0458f4c4&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Андрей П.",  source:"OZON",img:  "images/reviews/2081715961.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019d01cc-5a40-7d4d-83d6-f615c9406542&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Виталий С.",  source:"OZON",img:  "images/reviews/2081715962.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-magic-one-intel-core-i5-13400f-ram-32-gb-ssd-960-gb-2595941619/reviews/?ruuid=0198e99f-e730-7832-82d7-dc89d079dcaa&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Александр К.",  source:"OZON",img:  "images/reviews/2081715963.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=01969ad9-847f-7626-8871-e393e0f7c35d&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Вечер Добрый",  source:"ВКонтакте",img:  "images/reviews/2081715967.png", link: "https://vk.com/reviews-226911143" },
+    { name: "Вячеслав П.",  source:"Вконтакте",img:  "images/reviews/2081715968.png", link: "https://vk.com/reviews-226911143" },
+    { name: "Ilya M..",  source:"ВКонтакте",img:  "images/reviews/2081715969.png", link: "https://vk.com/reviews-226911143" },
+    { name: "Алекс С.",  source:"ВКонтакте",img:  "images/reviews/2081715970.png", link: "https://vk.com/reviews-226911143" },
+    { name: "Владислав Г.",  source:"ВКонтакте",img:  "images/reviews/2081715971.png", link: "https://vk.com/reviews-226911143" },
+    { name: "Макс А.",  source:"ВКонтакте",img:  "images/reviews/2081715972.png", link: "https://vk.com/reviews-226911143" },
+    { name: "Евгений П.",  source:"OZON",img:  "images/reviews/2081715973.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019dfc28-9e33-71b5-9bed-34f059cf7484&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Виталий Ю.",  source:"ВКонтакте",img:  "images/reviews/2081715975.png", link: "https://vk.com/reviews-226911143" },
+    { name: "Александр",  source:"Avito",img:  "images/reviews/2081715982.png", link: "https://www.avito.ru/brands/i177752551/all?sellerId=4bb001b8fc2a08075dae6b7a921c87d4" },
+    { name: "Надежда",  source:"Avito",img:  "images/reviews/2081715984.png", link: "https://www.avito.ru/brands/i177752551/all?sellerId=4bb001b8fc2a08075dae6b7a921c87d4" },
     ];
 
     // 2. ФУНКЦИЯ ШАБЛОНА
@@ -4287,27 +4659,48 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('cookieConsent', 'true');
     }
 
-    // Ждем полной загрузки HTML структуры, чтобы скрипт точно увидел элементы шапки
-        document.addEventListener('DOMContentLoaded', () => {
-            const mobileToggle = document.getElementById('js-mobile-toggle');
-            const mobileMenu = document.getElementById('js-mobile-menu');
+   // ОБНОВЛЕННОЕ МОБИЛЬНОЕ МЕНЮ (СПРАВА С ЗАКРЫТИЕМ ЯКОРЕЙ)
+document.addEventListener('DOMContentLoaded', () => {
+    const mobileToggle = document.getElementById('js-mobile-toggle');
+    const mobileMenu = document.getElementById('js-mobile-menu');
 
-            if (mobileToggle && mobileMenu) {
-                mobileToggle.addEventListener('click', toggleMobileMenu);
-            }
+    if (mobileToggle && mobileMenu) {
+        mobileToggle.addEventListener('click', toggleMobileMenu);
 
-            function toggleMobileMenu() {
-                mobileToggle.classList.toggle('active');
-                mobileMenu.classList.toggle('active');
+        // Вешаем событие клика на все ссылки и кнопку ВНУТРИ мобильного меню
+        const menuLinks = mobileMenu.querySelectorAll('.mobile-menu-link, .mobile-menu-action-btn');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                const href = link.getAttribute('href');
                 
-                // Блокируем или разрешаем скролл страницы при открытом меню
-                if (mobileMenu.classList.contains('active')) {
-                    document.body.style.overflow = 'hidden';
-                } else {
-                    document.body.style.overflow = '';
+                // Если кликнули по ссылке-якорю (начинается с #)
+                if (href && href.startsWith('#')) {
+                    if (mobileMenu.classList.contains('active')) {
+                        toggleMobileMenu();
+                    }
                 }
-            }
+                // Если это обычная ссылка (например, reviews.html), меню закроется, и начнется переход
+                else {
+                    if (mobileMenu.classList.contains('active')) {
+                        toggleMobileMenu();
+                    }
+                }
+            });
         });
+    }
+
+    function toggleMobileMenu() {
+        mobileToggle.classList.toggle('active');
+        mobileMenu.classList.contains('active') ? mobileMenu.classList.remove('active') : mobileMenu.classList.add('active');
+        
+        // Блокируем скролл основной страницы при открытом меню
+        if (mobileMenu.classList.contains('active')) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+    }
+});
 </script>
 
 </body>
