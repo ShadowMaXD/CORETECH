@@ -2340,7 +2340,7 @@ body {
         }
         .g-modal-body {
             background: #fff; color: #000; padding: 35px; border-radius: 35px;
-            max-width: 500px; width: 92%; position: relative;
+            max-width: 500px; width: 92%; position: center;
         }
         .g-modal-body h2 { font-size: 28px; font-weight: 900; margin: 0 0 10px; text-transform: uppercase; }
         .g-copy-area {
@@ -2379,6 +2379,88 @@ body {
         .info-label { color: #a0a0a0; }
         .info-value { color: #fff; text-align: right; }
         .info-value.highlight { color: #00ff88; }
+
+        /* СТИЛИ ДЛЯ ФОРМЫ В ОКНЕ ОФОРМЛЕНИЯ СБОРКИ */
+
+    /* Делаем отступ после кнопок соцсетей, чтобы форма не прилипала */
+    #gBuyModal .g-btn-row {
+        margin-bottom: 25px !important;
+    }
+
+    /* Красивый неоновый/аккуратный разделитель ИЛИ */
+    .g-order-separator {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.4);
+        font-weight: 900;
+        font-size: 11px;
+        margin-bottom: 20px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-family: 'Nunito', sans-serif;
+    }
+
+    .g-order-separator::before,
+    .g-order-separator::after {
+        content: '';
+        flex: 1;
+        border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+    }
+
+    .g-order-separator span {
+        padding: 0 15px;
+    }
+
+    /* Сама форма внутри окна */
+    #gInlineBuyForm {
+        display: flex;
+        flex-direction: column;
+        gap: 12px; /* Расстояние между инпутами */
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Принудительно растягиваем поля на всю ширину окна */
+    #gBuyModal .core-modal-input,
+    #gBuyModal .core-modal-textarea {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box;
+    }
+
+    /* Новая фиолетовая кнопка отправки */
+    #gSubmitInlineOrder {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 50px;
+        margin-top: 5px;
+        background: #7d5fff !important; /* Фирменный фиолетовый */
+        color: #ffffff !important;
+        border: none !important;
+        font-weight: 900 !important;
+        font-family: 'Nunito', sans-serif;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    /* Анимация наведения на фиолетовую кнопку */
+    #gSubmitInlineOrder:hover {
+        background: #6c4bf6 !important;
+        transform: translateY(-2px);
+    }
+
+    #gSubmitInlineOrder:active {
+        transform: translateY(1px);
+    }
+
+        @media (max-width: 768px) {
+            .g-modal-body {
+                background: #fff; color: #000; padding: 35px; border-radius: 35px;
+                max-width: 340px; width: 92%; position: center;
+            }
+        }
     </style>
 
 <!-- БЛОК КАРТОЧКИ ТОВАРОВ -->
@@ -2396,21 +2478,39 @@ body {
     </div>
 </div>
 
-<div id="gBuyModal" class="g-modal-overlay">
-    <div class="g-modal-body">
-        <div style="position:absolute; top:20px; right:20px; cursor:pointer; font-size:24px; font-weight:bold;" onclick="gCloseBuy()">×</div>
-        <h2>Оформление</h2>
-        <p style="font-size:14px; margin-bottom:15px;">Текст вашей заявки:</p>
-        <div class="g-copy-area" id="gOrderText"></div>
-        <div class="g-btn-row">
-            <button class="g-action-btn g-btn-copy" onclick="gCopyText()">
-                <span id="gCopyStatus">КОПИРОВАТЬ</span>
-            </button>
-            <a href="#" class="g-action-btn">AVITO</a>
-            <a href="#" class="g-action-btn">VK</a>
+    <div id="gBuyModal" class="g-modal-overlay">
+        <div class="g-modal-body">
+            <div style="position:absolute; top:20px; right:20px; cursor:pointer; font-size:24px; font-weight:bold;" onclick="gCloseBuy()">×</div>
+            <h2>Оформление</h2>
+            
+            <p style="font-size:14px; margin-bottom:15px;">Текст вашей заявки:</p>
+            <div class="g-copy-area" id="gOrderText"></div>
+            
+            <div class="g-btn-row" style="margin-bottom: 25px;">
+                <button class="g-action-btn g-btn-copy" onclick="gCopyText()">
+                    <span id="gCopyStatus">КОПИРОВАТЬ</span>
+                </button>
+                <a href="#" class="g-action-btn">Напишите нам<br>на AVITO</a>
+                <a href="#" class="g-action-btn">Напишите <br>нам в VK</a>
+            </div>
+
+            <div style="display: flex; align-items: center; text-align: center; color: rgb(0, 0, 0); font-weight: 900; font-size: 12px; margin-bottom: 20px;">
+                <div style="flex: 1; border-bottom: 1px dashed rgba(255,255,255,0.15);"></div>
+                <span style="padding: 0 15px; letter-spacing: 2px;">ИЛИ ОТПРАВИТЬ ЗАЯВКУ СРАЗУ</span>
+                <div style="flex: 1; border-bottom: 1px dashed rgba(255,255,255,0.15);"></div>
+            </div>
+
+            <form id="gInlineBuyForm" style="display: flex; flex-direction: column; gap: 12px; width: 100%;">
+                <input type="text" class="core-modal-input" placeholder="ВАШЕ ИМЯ" required name="user_name">
+                <input type="tel" class="core-modal-input" placeholder="ВАШ ТЕЛЕФОН" required name="user_phone">
+                <textarea class="core-modal-textarea" placeholder="КОММЕНТАРИЙ К ЗАКАЗУ (НЕОБЯЗАТЕЛЬНО)" name="user_comment" rows="2"></textarea>
+                
+                <button type="submit" class="g-action-btn" id="gSubmitInlineOrder" style="width: 100%; max-width: 100%; margin-top: 5px; background: #7d5fff; color: #fff; border: none; font-weight: bold;">
+                    ОТПРАВИТЬ ЗАЯВКУ
+                </button>
+            </form>
         </div>
     </div>
-</div>
 
 <script>
     // 1. СНАЧАЛА ОБЪЯВЛЯЕМ ПЕРЕМЕННЫЕ И ФУНКЦИИ МОДАЛОК
@@ -2478,13 +2578,160 @@ body {
     function gCloseBuy() { document.getElementById('gBuyModal').style.display = 'none'; }
 
     function gCopyText() {
-        const text = document.getElementById('gOrderText').innerText;
+    const text = document.getElementById('gOrderText').innerText;
+    
+    // 1. Твой оригинальный код для ПК и нормальных браузеров
+    if (navigator.clipboard && window.isSecureContext) {
         navigator.clipboard.writeText(text).then(() => {
             const btn = document.getElementById('gCopyStatus');
             btn.innerText = 'ГОТОВО!';
             setTimeout(() => btn.innerText = 'КОПИРОВАТЬ', 2000);
+        }).catch(() => {
+            // Если на телефоне этот метод дал сбой, автоматом идет обходной путь ниже
+            runMobileCopy(text);
+        });
+    } else {
+        // 2. Если открыто на телефоне или без HTTPS — сразу запускаем обходной путь
+        runMobileCopy(text);
+    }
+
+    // Тот самый железобетонный обход блокировок для телефонов
+    function runMobileCopy(textToMobile) {
+        const textArea = document.createElement('textarea');
+        textArea.value = textToMobile;
+        
+        // Абсолютно невидимые стили, чтобы ничего не прыгало на экране смартфона
+        textArea.style.position = 'fixed';
+        textArea.style.top = '0';
+        textArea.style.left = '0';
+        textArea.style.width = '2em';
+        textArea.style.height = '2em';
+        textArea.style.padding = '0';
+        textArea.style.border = 'none';
+        textArea.style.outline = 'none';
+        textArea.style.boxShadow = 'none';
+        textArea.style.background = 'transparent';
+        
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        
+        // Жесткое принудительное выделение текста для iPhone (Safari)
+        if (navigator.userAgent.match(/ipad|ipod|iphone/i)) {
+            const range = document.createRange();
+            range.selectNodeContents(textArea);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            textArea.setSelectionRange(0, 999999);
+        }
+
+        // Физическое копирование в буфер устройства
+        try {
+            const success = document.execCommand('copy');
+            if (success) {
+                const btn = document.getElementById('gCopyStatus');
+                if (btn) {
+                    btn.innerText = 'ГОТОВО!';
+                    setTimeout(() => btn.innerText = 'КОПИРОВАТЬ', 2000);
+                }
+            }
+        } catch (err) {
+            console.error('Ошибка копирования на мобилке:', err);
+        }
+
+        document.body.removeChild(textArea);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const inlineBuyForm = document.getElementById('gInlineBuyForm');
+    
+    if (inlineBuyForm) {
+        inlineBuyForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Запрещаем перезагрузку страницы при отправке
+            
+            // 1. Забираем то, что ввел пользователь в поля
+            const nameInput = inlineBuyForm.querySelector('input[name="user_name"]');
+            const telInput = inlineBuyForm.querySelector('input[name="user_phone"]');
+            const commentInput = inlineBuyForm.querySelector('textarea[name="user_comment"]');
+            const submitBtn = document.getElementById('gSubmitInlineOrder');
+            
+            // 2. Намертво вытаскиваем текст сгенерированной конфигурации ПК прямо из твоего блока gOrderText
+            const orderTextElement = document.getElementById('gOrderText');
+            const pcConfiguration = orderTextElement ? orderTextElement.innerText : 'Конфигурация не определена';
+
+            // Проверка телефона
+            if (!telInput.value.trim()) {
+                alert('Пожалуйста, введите телефон!');
+                return;
+            }
+
+            // Блокируем кнопку на время отправки
+            const originalBtnText = submitBtn.innerText;
+            submitBtn.innerText = 'ОТПРАВКА...';
+            submitBtn.style.pointerEvents = 'none';
+
+            // 3. Формируем единый пакет данных
+            const formData = {
+                name: nameInput ? nameInput.value.trim() : 'Не указано',
+                phone: telInput.value.trim(),
+                comment: commentInput ? commentInput.value.trim() : 'Нет',
+                specs: pcConfiguration // Сюда падает весь скопированный текст ПК
+            };
+
+            // 4. Отправляем методом POST на твой скрипт (например, send.php, который мы делали для почты)
+            // Если используешь Telegram, замени url на отправку в ТГ бот, код отправки одинаковый
+            fetch('send.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    // Если улетело успешно
+                    submitBtn.innerText = 'ЗАЯВКА ПРИНЯТА!';
+                    submitBtn.style.background = '#00ff88'; // Зеленеет при успехе
+                    submitBtn.style.color = '#000000';
+                    inlineBuyForm.reset(); // Чистим поля формы
+
+                    // Через 2 секунды закрываем окно gBuyModal и возвращаем кнопку в исходный вид
+                    setTimeout(function() {
+                        if (typeof gCloseBuy === 'function') {
+                            gCloseBuy(); // Твоя родная функция закрытия этого окна
+                        }
+                        submitBtn.innerText = originalBtnText;
+                        submitBtn.style.background = '#7d5fff';
+                        submitBtn.style.color = '#ffffff';
+                        submitBtn.style.pointerEvents = 'auto';
+                    }, 2000);
+                } else {
+                    alert('Ошибка: ' + data.message);
+                    submitBtn.innerText = originalBtnText;
+                    submitBtn.style.pointerEvents = 'auto';
+                }
+            })
+            .catch(error => {
+                // Если тестируешь на компе без сервера, сработает эта заглушка имитации, чтобы ты видел, как это работает визуально:
+                submitBtn.innerText = 'ЗАЯВКА ПРИНЯТА! (ТЕСТ)';
+                submitBtn.style.background = '#00ff88';
+                submitBtn.style.color = '#000000';
+                inlineBuyForm.reset();
+                
+                setTimeout(function() {
+                    if (typeof gCloseBuy === 'function') gCloseBuy();
+                    submitBtn.innerText = originalBtnText;
+                    submitBtn.style.background = '#7d5fff';
+                    submitBtn.style.color = '#ffffff';
+                    submitBtn.style.pointerEvents = 'auto';
+                }, 2000);
+            });
         });
     }
+});
 
     window.onclick = (e) => { 
         if (e.target == modal) closeModal(); 
@@ -4157,7 +4404,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalImg = document.getElementById('modal-img');
 
     // 1. ДАННЫЕ ОТЗЫВОВ (Добавляй новые тут)
-    const reviewsData = [
+     const reviewsData = [
     { name: "Пользователь",  source:"Avito",img:  "images/reviews/2081715930.png", link: "https://www.avito.ru/brands/i177752551/all?sellerId=4bb001b8fc2a08075dae6b7a921c87d4" },
     { name: "Елена Н.",  source:"OZON",img:  "images/reviews/2081715932.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019d8233-33c6-76ad-9a73-d0ab3364a07b&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
     { name: "Надежда Д.",  source:"OZON",img:  "images/reviews/2081715933.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019d10c5-ca77-779f-adde-da4f91dde3e3&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
@@ -4177,7 +4424,7 @@ document.addEventListener('DOMContentLoaded', () => {
     { name: "Эльдар Ш.",  source:"OZON",img:  "images/reviews/2081715945.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019a5dba-db2e-705c-b2eb-d1319b8aa269&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
     { name: "Всеволод Г.",  source:"OZON",img:  "images/reviews/2081715946.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019b1d84-2e95-7ec1-8d7e-2dc4c3a6ba9b&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
     { name: "Николай",  source:"OZON",img:  "images/reviews/2081715947.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019cfc9e-3b7a-7cf4-9ca3-a1bce1e2fb95&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
-    { name: "Юлия Я.",  source:"OZON",img:  "images/reviews/2081715948.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019d38df-e120-7ba3-92f1-9e03d33660d0&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    /* { name: "Юлия Я.",  source:"OZON",img:  "images/reviews/2081715948.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019d38df-e120-7ba3-92f1-9e03d33660d0&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
     { name: "Руслан С.",  source:"OZON",img:  "images/reviews/2081715949.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019b503c-4d1f-7b96-aa3d-75642c2c073d&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
     { name: "Максим Ч.",  source:"OZON",img:  "images/reviews/2081715950.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-white-amd-ryzen-5-7500f-ram-16-gb-ssd-1024-gb-nvidia-2078221558/reviews/?ruuid=0196c94e-31e0-70ed-9e09-6b19d799631c&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
     { name: "Денис П.",  source:"OZON",img:  "images/reviews/2081715951.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019b1057-305b-78ac-b059-b07934d4def2&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
@@ -4203,7 +4450,9 @@ document.addEventListener('DOMContentLoaded', () => {
     { name: "Виталий Ю.",  source:"ВКонтакте",img:  "images/reviews/2081715975.png", link: "https://vk.com/reviews-226911143" },
     { name: "Александр",  source:"Avito",img:  "images/reviews/2081715982.png", link: "https://www.avito.ru/brands/i177752551/all?sellerId=4bb001b8fc2a08075dae6b7a921c87d4" },
     { name: "Надежда",  source:"Avito",img:  "images/reviews/2081715984.png", link: "https://www.avito.ru/brands/i177752551/all?sellerId=4bb001b8fc2a08075dae6b7a921c87d4" },
-    ];
+    */
+
+    ]; 
 
     // 2. ФУНКЦИЯ ШАБЛОНА
     function createCard(data) {
@@ -4283,13 +4532,264 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 </script>
-</section>
-</script>
 
+</section>
 <div id="image-modal" class="review-modal">
     <span class="modal-close">&times;</span>
     <img id="modal-img" src="" alt="Full view">
 </div>
+
+
+<section class="g-map-section" id="contacts">
+    <div class="g-container-map">
+        <div class="g-map-inner-box">
+            <div class="g-map-info-card">
+                <h2 class="g-map-title">НАШ МАГАЗИН</h2>
+                <p class="g-map-subtitle">Приезжайте в гости за своим мощным ПК или на бесплатную консультацию!</p>
+                
+                <div class="g-map-info-list">
+                    <div class="g-map-info-item">
+                        <span class="g-map-icon"></span>
+                        <div>
+                            <div class="g-map-item-label">Адрес:</div>
+                            <div class="g-map-item-value">г. Таганрог, ул. Пархоменко 2 <br>(помещение возле кофейни)</div>
+                        </div>
+                    </div>
+                    <div class="g-map-info-item">
+                        <span class="g-map-icon"></span>
+                        <div>
+                            <div class="g-map-item-label">Режим работы:</div>
+                            <div class="g-map-item-value">Будни: с 18:00 до 22:00 <br> Выходные: с 12:00 до 20:00</div>
+                        </div>
+                    </div>
+                    <div class="g-map-info-item">
+                        <span class="g-map-icon"></span>
+                        <div>
+                            <div class="g-map-item-label">Телефон:</div>
+                            <div class="g-map-item-value">+7 (999) 000-00-00</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="g-map-buttons-group">
+                    <a href="https://yandex.ru/maps/-/CPXOzRm3" target="_blank" class="g-btn g-map-purple-link g-map-btn">
+                        ОТКРЫТЬ В ЯНДЕКС.КАРТАХ
+                    </a>
+                    <button class="g-btn g-map-order-btn btn-consult g-map-btn">
+                        ЗАКАЗАТЬ КОМПЬЮТЕР
+                    </button>
+                </div>
+            </div>
+
+            <a href="https://yandex.ru/maps/?um=constructor%3A946928e213b36b8a2b53e2499b6ebbac91878f0789e6c5aa97d94f32a3f8e471&amp;source=constructorStatic" target="_blank" class="g-map-static-wrapper">
+                <img src="https://api-maps.yandex.ru/services/constructor/1.0/static/?um=constructor%3A946928e213b36b8a2b53e2499b6ebbac91878f0789e6c5aa97d94f32a3f8e471&amp;width=600&amp;height=450&amp;lang=ru_RU" alt="Карта проезда" class="g-map-static-img" />
+            </a>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* СТИЛИ СЕКЦИИ КАРТЫ */
+    .g-map-section {
+        position: relative;
+        padding: 40px 0;
+        font-family: 'Nunito', sans-serif;
+        z-index: 1;
+        width: 100%;
+        box-sizing: border-box;
+        max-width: 1230px; /* Сюда ставишь ширину своего сайта */
+        margin: 0 auto;
+    }
+
+    .g-map-inner-box {
+        display: flex;
+        flex-direction: row;
+        background: #ffffff;
+        border: 3px solid #000000;
+        border-radius: 24px;
+        box-shadow: 8px 8px 0px #000000;
+        overflow: hidden;
+        min-height: 480px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Левая карточка с текстом */
+    .g-map-info-card {
+        flex: 1;
+        padding: 40px;
+        background: #ffffff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-right: 3px solid #000000;
+        box-sizing: border-box;
+    }
+
+    .g-map-title {
+        font-size: 32px;
+        font-weight: 900;
+        color: #000000;
+        margin: 0 0 10px 0;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .g-map-subtitle {
+        font-size: 16px;
+        font-weight: 800;
+        color: #666666;
+        margin: 0 0 25px 0;
+        line-height: 1.4;
+    }
+
+    .g-map-info-list {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+
+    .g-map-info-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .g-map-icon {
+        font-size: 24px;
+        line-height: 1;
+        padding-top: 2px;
+    }
+
+    .g-map-item-label {
+        font-size: 14px;
+        font-weight: 800;
+        color: #999999;
+        text-transform: uppercase;
+        margin-bottom: 2px;
+    }
+
+    .g-map-item-value {
+        font-size: 16px;
+        font-weight: 900;
+        color: #000000;
+        line-height: 1.3;
+    }
+
+    /* Блок для двух кнопок */
+    .g-map-buttons-group {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+        margin-top: auto;
+    }
+
+    .g-map-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 55px;
+        font-size: 15px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-decoration: none;
+        box-sizing: border-box;
+        width: 100%;
+        font-family: 'Nunito', sans-serif;
+    }
+
+    .g-map-purple-link {
+        background-color: #7d5fff !important;
+        color: #ffffff !important;
+        border: 3px solid #000000 !important;
+        box-shadow: 4px 4px 0px #000000 !important;
+    }
+
+    .g-map-purple-link:hover {
+        background-color: #6c4bf6 !important;
+        transform: translate(-2px, -2px) !important;
+        box-shadow: 6px 6px 0px #000000 !important;
+    }
+
+    .g-map-purple-link:active {
+        transform: translate(2px, 2px) !important;
+        box-shadow: 2px 2px 0px #000000 !important;
+    }
+
+    .g-map-order-btn {
+        background: #ffffff;
+        color: #000000;
+        border: 3px solid #000000;
+        box-shadow: 4px 4px 0px #000000;
+    }
+
+    .g-map-order-btn:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 6px 6px 0px #000000;
+    }
+
+    .g-map-order-btn:active {
+        transform: translate(2px, 2px);
+        box-shadow: 2px 2px 0px #000000;
+    }
+
+    /* Правая часть - контейнер картинки */
+    .g-map-static-wrapper {
+        flex: 1.2;
+        background: #f8f9fa;
+        display: block;
+        overflow: hidden;
+        position: relative;
+    }
+
+    /* Плавное растягивание картинки без деформаций и перегрузки памяти */
+    .g-map-static-img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        border: 0;
+        object-fit: cover; /* Заполняет блок 1:1 без растягивания лиц и шрифтов */
+    }
+
+    /* АДАПТИВ ПОД МОБИЛКИ */
+    @media (max-width: 991px) {
+        .g-map-section {
+            padding: 30px 15px;
+        }
+        
+        .g-map-inner-box {
+            flex-direction: column;
+            min-height: auto;
+        }
+
+        .g-map-info-card {
+            border-right: none;
+            border-bottom: 3px solid #000000;
+            padding: 30px 20px;
+        }
+
+        .g-map-static-wrapper {
+            height: 280px; /* Ограничиваем высоту картинки на телефонах */
+            width: 100%;
+            flex: none;
+        }
+        
+        .g-map-static-img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .g-map-title {
+            font-size: 26px;
+        }
+    }
+</style>
 
 <section class="footer-wrapper">
     <style>
@@ -4702,6 +5202,373 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 </script>
+
+    <!-- ========================================== -->
+    <!-- СЕКЦИЯ: МОДАЛЬНОЕ ОКНО ЗАЯВКИ (CORETECH POPUP) -->
+    <!-- ========================================== -->
+    <div class="core-modal-overlay" id="js-core-modal">
+        <div class="core-modal-window">
+            <!-- Кнопка закрытия (крестик) -->
+            <button class="core-modal-close-btn" id="js-modal-close" aria-label="Закрыть окно">&times;</button>
+            
+            <!-- Заголовок и описание -->
+            <h3 class="core-modal-title">Оставить заявку</h3>
+            <p class="core-modal-subtitle">Заполните форму, и наш инженер свяжется с вами для детальной консультации по вашей будущей сборке.</p>
+            
+            <!-- Форма отправки -->
+            <form class="core-modal-form" action="#" method="POST">
+                <div class="core-modal-field">
+                    <label class="core-modal-label" for="modal-name">Имя</label>
+                    <input class="core-modal-input" type="text" id="modal-name" name="name" placeholder="Как к вам обращаться?" required>
+                </div>
+                
+                <div class="core-modal-field">
+                    <label class="core-modal-label" for="modal-phone">Телефон</label>
+                    <input class="core-modal-input" type="tel" id="modal-phone" name="phone" placeholder="+7 (999) 999-99-99" required>
+                </div>
+                
+                <div class="core-modal-field">
+                    <label class="core-modal-label" for="modal-comment">Комментарий (необязательно)</label>
+                    <textarea class="core-modal-textarea" id="modal-comment" name="comment" placeholder="Напишите ваши пожелания, бюджет или предпочитаемые игры..."></textarea>
+                </div>
+                
+                <button class="core-modal-submit-btn" type="submit">Отправить заявку</button>
+            </form>
+
+            <!-- НОВЫЙ БЛОК: Ссылки на соцсети -->
+            <div class="core-modal-divider"></div>
+            
+            <div class="core-modal-socials-block">
+                <p class="core-modal-socials-text">Хотите сразу же получить ответ? Напишите нам в наши соц. сети по ссылкам ниже. Наш менеджер ответит очень быстро :)</p>
+                <div class="core-modal-socials-buttons">
+                    <!-- Замени '#' на реальную ссылку на ваш паблик ВК -->
+                    <a href="#" target="_blank" class="core-social-btn btn-vk">ВКонтакте</a>
+                    <!-- Замени '#' на реальную ссылку на ваш профиль Авито -->
+                    <a href="#" target="_blank" class="core-social-btn btn-avito">Авито</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* Оверлей (затемненный фон вокруг окна) */
+        .core-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75); /* Плотное красивое затемнение */
+            backdrop-filter: blur(8px); /* Стильное размытие заднего плана */
+            z-index: 9999; /* Поверх абсолютно всего на сайте */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Класс активации модалки (плавное появление) */
+        .core-modal-overlay.is-active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Само модальное окно (дизайн строго по фото) */
+        .core-modal-window {
+            background-color: #0b0b0b; /* Глубокий темный фон как у карточек */
+            border: 1px solid rgba(78, 240, 195, 0.15); /* Фирменная мятная микро-рамка */
+            border-radius: 16px; /* Аккуратные закругления по фото */
+            width: 100%;
+            max-width: 440px; /* Идеальная адаптивная ширина под мобилки и ПК */
+            padding: 40px 30px;
+            box-sizing: border-box;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+        }
+
+        /* Анимация приоткрытия окна (слегка приподнимается и выезжает) */
+        .core-modal-overlay.is-active .core-modal-window {
+            transform: translateY(0);
+        }
+
+        /* Кнопка закрытия (Крестик) */
+        .core-modal-close-btn {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 32px;
+            line-height: 1;
+            cursor: pointer;
+            transition: color 0.2s ease, transform 0.2s ease;
+            padding: 0;
+        }
+        .core-modal-close-btn:hover {
+            color: #4ef0c3; /* Подсветка мятным при наведении */
+            transform: scale(1.1);
+        }
+
+        /* Заголовок модалки */
+        .core-modal-title {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 900;
+            font-size: 28px;
+            color: #ffffff;
+            margin: 0 0 10px 0;
+            text-align: center;
+            letter-spacing: -0.5px;
+        }
+
+        /* Описание под заголовком */
+        .core-modal-subtitle {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            margin: 0 0 30px 0;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        /* Контейнер формы */
+        .core-modal-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Поля ввода и их контейнеры */
+        .core-modal-field {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        /* Текст над инпутами (Имя, Телефон) */
+        .core-modal-label {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding-left: 4px;
+        }
+
+        /* Общие стили для полей ввода (По фото) */
+        .core-modal-input,
+        .core-modal-textarea {
+            background-color: #121212; /* Чуть темнее основного фона окна */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: #ffffff;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+            font-size: 15px;
+            padding: 14px 16px;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            width: 100%;
+        }
+
+        /* Кастомизация плейсхолдера (текста-подсказки) */
+        .core-modal-input::placeholder,
+        .core-modal-textarea::placeholder {
+            color: rgba(255, 255, 255, 0.25);
+            font-weight: 800;
+        }
+
+        /* Эффект фокуса на инпутах — аккуратное неоновое свечение */
+        .core-modal-input:focus,
+        .core-modal-textarea:focus {
+            border-color: #4ef0c3;
+            box-shadow: 0 0 10px rgba(78, 240, 195, 0.15);
+        }
+
+        /* Фиксированная высота для текстового поля */
+        .core-modal-textarea {
+            height: 90px;
+            resize: none; /* Запрещаем растягивать, чтобы не ломать верстку окна */
+        }
+
+        /* Мятная неоновая кнопка отправки (Один в один как твои основные кнопки) */
+        .core-modal-submit-btn {
+            background-color: #4ef0c3;
+            color: #000000;
+            border: none;
+            border-radius: 12px;
+            padding: 16px 20px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 900;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin-top: 10px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .core-modal-submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(78, 240, 195, 0.35);
+        }
+
+        .core-modal-submit-btn:active {
+            transform: translateY(1px);
+        }
+
+        /* Разделительная линия внутри окна */
+        .core-modal-divider {
+            height: 1px;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0));
+            margin: 25px 0 20px 0;
+            width: 100%;
+        }
+
+        /* Блок соцсетей */
+        .core-modal-socials-block {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            text-align: center;
+        }
+
+        /* Текст призыва к действию в соцсетях */
+        .core-modal-socials-text {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+            line-height: 1.5;
+            margin: 0;
+            padding: 0 10px;
+        }
+
+        /* Контейнер для двух кнопок в один ряд */
+        .core-modal-socials-buttons {
+            display: flex;
+            gap: 12px;
+            width: 100%;
+        }
+
+       /* Общие стили для кнопок соцсетей */
+        .core-social-btn {
+            flex: 1; /* Делит место 50/50 автоматически */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 15px;
+            border-radius: 10px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+            font-size: 14px;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+            box-sizing: border-box;
+            position: relative; /* Важно для позиционирования невидимой зоны */
+        }
+
+        /* Создаем невидимую подушку снизу, чтобы кнопка не теряла курсор при подъеме */
+        .core-social-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: calc(100% + 6px); /* Расширяем зону клика чуть ниже кнопки */
+            border-radius: 10px;
+            pointer-events: auto;
+            z-index: -1;
+        }
+
+        /* Стиль для кнопки ВКонтакте */
+        .btn-vk {
+            background-color: #0077ff;
+            color: #ffffff;
+        }
+        .btn-vk:hover {
+            box-shadow: 0 5px 15px rgba(0, 119, 255, 0.3);
+            filter: brightness(1.1);
+            transform: translateY(-3px); /* Смещение теперь мягкое и глубокое */
+        }
+
+        /* Стиль для кнопки Авито */
+        .btn-avito {
+            background-color: #4bac43;
+            color: #ffffff;
+        }
+        .btn-avito:hover {
+            box-shadow: 0 5px 15px rgba(75, 172, 67, 0.3);
+            filter: brightness(1.1);
+            transform: translateY(-3px);
+        }
+        
+        .core-social-btn:active {
+            transform: translateY(1px);
+        }
+
+
+        /* Мягкая адаптация под самые мелкие мобилки */
+        @media (max-width: 480px) {
+            .core-modal-window {
+                padding: 35px 20px 30px;
+            }
+            .core-modal-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('js-core-modal');
+            const closeBtn = document.getElementById('js-modal-close');
+            
+            // Добавили .btn-purple в список через запятую
+            const openButtons = document.querySelectorAll('.hero-action-btn, .configurator-action-btn, .mobile-menu-action-btn, .btn-purple, .btn-consult');
+
+            // 1. Открытие модалки при клике на любую из кнопок
+            openButtons.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault(); // Предотвращаем прыжки, если это ссылки #
+                    modal.classList.add('is-active');
+                    document.body.style.overflow = 'hidden'; // Блокируем скролл сайта под окном
+                });
+            });
+
+            // 2. Функция закрытия
+            function closeModal() {
+                modal.classList.remove('is-active');
+                document.body.style.overflow = ''; // Возвращаем скролл сайта
+            }
+
+            // Закрытие по крестику
+            closeBtn.addEventListener('click', closeModal);
+
+            // Закрытие при клике на темную область (оверлей) вокруг окна
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+
+            // Закрытие при нажатии кнопки Escape на клавиатуре
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.classList.contains('is-active')) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>
