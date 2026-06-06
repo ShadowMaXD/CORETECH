@@ -5216,7 +5216,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <p class="core-modal-subtitle">Заполните форму, и наш инженер свяжется с вами для детальной консультации по вашей будущей сборке.</p>
             
             <!-- Форма отправки -->
-            <form class="core-modal-form" action="#" method="POST">
+            <form class="core-modal-form" action="#" method="POST" id="js-core-modal-form">
                 <div class="core-modal-field">
                     <label class="core-modal-label" for="modal-name">Имя</label>
                     <input class="core-modal-input" type="text" id="modal-name" name="name" placeholder="Как к вам обращаться?" required>
@@ -5249,6 +5249,60 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         </div>
     </div>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script type="text/javascript">
+   (function(){
+      // СЮДА ВСТАВЬ СВОЙ ПУБЛИЧНЫЙ КЛЮЧ ИЗ EMAILJS
+      emailjs.init("yl8cWtX-qkcRYoMOm");
+   })();
+
+   document.addEventListener("DOMContentLoaded", function() {
+       // Находим форму внутри твоего модального окна
+       const modalForm = document.querySelector('.core-modal-form');
+       
+       if (modalForm) {
+           modalForm.addEventListener('submit', function(event) {
+               event.preventDefault(); // Запрещаем перезагрузку страницы
+
+               // Находим кнопку отправки, чтобы изменить текст на время загрузки
+               const submitBtn = modalForm.querySelector('.core-modal-submit-btn');
+               const originalBtnText = submitBtn.textContent;
+               submitBtn.textContent = 'Отправка...';
+               submitBtn.disabled = true;
+
+               // Собираем данные из твоих существующих инпутов
+               const templateParams = {
+                   name: document.getElementById('modal-name').value,
+                   phone: document.getElementById('modal-phone').value,
+                   comment: document.getElementById('modal-comment').value
+               };
+
+               // Отправляем данные через EmailJS
+               // Замени СЕРВИС_ИД и ШАБЛОН_ИД на свои значения из панели
+               emailjs.send('service_62xzspt', 'template_alt7rur', templateParams)
+                   .then(function(response) {
+                       alert('Заявка успешно отправлена! Наш инженер свяжется с вами.');
+                       modalForm.reset(); // Очищаем поля формы
+                       
+                       // Закрываем модальное окно (удаляем класс active или скрываем, если используется ID)
+                       const modalOverlay = document.getElementById('js-core-modal');
+                       if (modalOverlay) {
+                           modalOverlay.style.display = 'none'; // либо modalOverlay.classList.remove('active') смотря как у тебя реализовано закрытие
+                       }
+                   }, function(error) {
+                       alert('Ошибка при отправке: ' + JSON.stringify(error));
+                   })
+                   .finally(function() {
+                       // Возвращаем кнопку в исходное состояние
+                       submitBtn.textContent = originalBtnText;
+                       submitBtn.disabled = false;
+                   });
+           });
+       }
+   });
+</script>
 
     <style>
         /* Оверлей (затемненный фон вокруг окна) */
