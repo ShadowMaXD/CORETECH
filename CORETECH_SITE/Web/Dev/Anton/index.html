@@ -2753,7 +2753,7 @@ document.addEventListener('DOMContentLoaded', function() {
             image: "images/catalog/comp8.png",
             fpsNumber: "145+ FPS",
             fpsBarWidth: "45%",
-            fpsModal: { 'CS 2': '320 FPS', 'Dota 2': '240 FPS', 'Atomic Heart': '90 FPS' },
+            fpsModal: { 'COD Black Ops | Ultra 1440p': '145 FPS', 'PUBG | Ultra 1440p': '239 FPS', 'Cyberpunk 2077 | Ultra 1440p': '116 FPS', 'CS2 | Ultra 1440p': '321 FPS' },
             cpu: "Ryzen 7 9800X3D",
             gpu: "RTX 5080 16Гб",
             ram: "32Гб DDR5 6000 (16Гб х 2)",
@@ -2772,7 +2772,7 @@ document.addEventListener('DOMContentLoaded', function() {
             image: "images/catalog/comp1.png",
             fpsNumber: "210+ FPS",
             fpsBarWidth: "75%",
-            fpsModal: { 'Cyberpunk': '85 FPS', 'Warzone': '140 FPS' },
+            fpsModal: { 'COD Black Ops | Ultra 1440p': '129 FPS', 'Cyberpunk 2077 | Ultra 1440p': '78 FPS', 'RDR2 | Ultra 1440p': '108 FPS', 'CS2 | Ultra 1440p': '232 FPS' },
             cpu: "i5-13600KF",
             gpu: "RTX 5070 12Гб",
             ram: "32Гб DDR4 3200 (16Гб х 2)",
@@ -2791,7 +2791,7 @@ document.addEventListener('DOMContentLoaded', function() {
             image: "images/catalog/comp7.png",
             fpsNumber: "210+ FPS",
             fpsBarWidth: "75%",
-            fpsModal: { 'Cyberpunk': '85 FPS', 'Warzone': '140 FPS' },
+            fpsModal: { 'Cyberpunk 2077 | Ultra 1440p': '102 FPS', 'PUBG | Ultra 1440p': '289 FPS', 'RDR2 | Ultra 1440p': '130 FPS', 'God Of War Ragnarok | Ultra 1440p': '168 FPS' },
             cpu: "Ryzen 7 7800X3D",
             gpu: "RTX 5070 Ti 16Гб",
             ram: "32GB DDR5 6000 (16Гб х 2)",
@@ -2939,6 +2939,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const mainName = nameArray[0] || '';
             const subName = nameArray.slice(1).join(' ') || '';
             const titleHtml = subName ? `${mainName} <span>${subName}</span>` : mainName;
+                  //  <button class="g-btn-buy" onclick="gOpenBuy(this)">Купить</button>
 
             const cardStructure = `
                 <div class="product-card">
@@ -2965,7 +2966,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="product-price">${pc.price}</div>
                     
                     <button class="btn-card" onclick="openSpecsModal(this, ${specsDataStr})">Подробнее</button>
-                    <button class="g-btn-buy" onclick="gOpenBuy(this)">Купить</button>
                 </div>
             `;
             
@@ -5212,7 +5212,7 @@ document.addEventListener('DOMContentLoaded', () => {
     <!-- ========================================== -->
     <!-- СЕКЦИЯ: МОДАЛЬНОЕ ОКНО ЗАЯВКИ (CORETECH POPUP) -->
     <!-- ========================================== -->
-    <div class="core-modal-overlay" id="js-core-modal">
+    <div class="core-modal-overlay" id="js-core-modal" style="display: none;">
         <div class="core-modal-window">
             <!-- Кнопка закрытия (крестик) -->
             <button class="core-modal-close-btn" id="js-modal-close" aria-label="Закрыть окно">&times;</button>
@@ -5230,8 +5230,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 <div class="core-modal-field">
                     <label class="core-modal-label" for="modal-phone">Телефон</label>
-                    <input class="core-modal-input" type="tel" id="modal-phone" name="phone" placeholder="+7 (999) 999-99-99" required>
-                </div>
+                    <input class="core-modal-input" type="tel" id="modal-phone" name="phone" placeholder="+7 (999) 999-99-99" maxlength="18" required>                </div>
                 
                 <div class="core-modal-field">
                     <label class="core-modal-label" for="modal-comment">Комментарий (необязательно)</label>
@@ -5597,52 +5596,130 @@ document.addEventListener('DOMContentLoaded', () => {
     </style>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-    // Находим оверлей по новому классу
-    const modal = document.querySelector('.core-modal-overlay');
-    // Находим кнопку закрытия (крестик)
-    const closeBtn = document.querySelector('.core-modal-close-btn');
-    
-    // Находим ВСЕ кнопки на сайте, которые должны открывать эту модалку
-    const openButtons = document.querySelectorAll('.hero-action-btn, .configurator-action-btn, .mobile-menu-action-btn, .btn-purple, .btn-consult');
+    document.addEventListener('DOMContentLoaded', () => {
 
-    // Проверяем, существует ли модалка на странице, чтобы не ловить ошибки в консоли
-    if (modal) {
-        // 1. Открытие модалки при клике на любую из кнопок
-        openButtons.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault(); // Предотвращаем дефолтное поведение ссылок
-                modal.classList.add('is-active'); // Включаем видимость и кликабельность
-                document.body.style.overflow = 'hidden'; // Блокируем скролл сайта под окном
+const phoneInput = document.getElementById('modal-phone');
+
+if (phoneInput) {
+    // При фокусе на поле, если оно пустое, сразу ставим "+7 ("
+    phoneInput.addEventListener('focus', () => {
+        if (!phoneInput.value) {
+            phoneInput.value = '+7 (';
+        }
+    });
+
+    // Если пользователь кликнул в середину пустого поля, принудительно двигаем курсор в конец
+    phoneInput.addEventListener('click', () => {
+        if (phoneInput.value === '+7 (') {
+            phoneInput.setSelectionRange(4, 4);
+        }
+    });
+
+    phoneInput.addEventListener('input', (e) => {
+        let input = phoneInput.value;
+        
+        // Очищаем всё, кроме цифр. Но сохраняем информацию, если первая цифра была 7 или 8
+        let matrix = '+7 (___) ___-__-__';
+        let i = 0;
+        let def = matrix.replace(/\D/g, '');
+        let val = input.replace(/\D/g, '');
+
+        // Если пользователь пытается стереть +7 или пишет 8 вместо 7
+        if (def.length >= val.length) {
+            val = def;
+        }
+
+        // Проверяем, если первая цифра ввода была 8 (часто начинают с 8) или 9 (сразу код оператора)
+        if (input.replace(/\D/g, '')[0] === '8' && val.length === 2 && e.inputType !== 'deleteContentBackward') {
+            val = '7';
+        }
+
+        // Форматируем по матрице
+        phoneInput.value = matrix.replace(/./g, function(a) {
+            return /[_\d]/.test(a) && i < val.length ? val.charAt(i++) : i >= val.length ? '' : a;
+        });
+
+        // Жестко не даем удалить "+7 ("
+        if (phoneInput.value.length < 4) {
+            phoneInput.value = '+7 (';
+        }
+    });
+
+    // Обрабатываем клавишу Backspace, чтобы удаление символов работало адекватно и не залипало на скобках
+    phoneInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace' && phoneInput.value.length <= 4) {
+            e.preventDefault(); // Запрещаем удалять "+7 ("
+        }
+    });
+
+    // Если пользователь ушел из поля, и там осталось только "+7 (", очищаем поле полностью
+    phoneInput.addEventListener('blur', () => {
+        if (phoneInput.value === '+7 (') {
+            phoneInput.value = '';
+        }
+    });
+}
+
+
+        const modal = document.getElementById('js-core-modal');
+        const closeBtn = document.getElementById('js-modal-close');
+        
+        // Кнопки, которые открывают модалку
+        const openButtons = document.querySelectorAll('.hero-action-btn, .configurator-action-btn, .mobile-menu-action-btn, .btn-purple, .btn-consult');
+
+        if (modal) {
+            // 1. Открытие модалки при клике
+            openButtons.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault(); 
+                    
+                    // ВОТ ЭТА СТРОКА ОЖИВЛЯЕТ ЕЁ В HTML (убирает display: none)
+                    modal.style.display = 'flex'; 
+                    
+                    // Микро-таймаут, чтобы браузер успел понять, что display изменился, 
+                    // и запустил красивую плавную CSS-анимацию через .is-active
+                    setTimeout(() => {
+                        modal.classList.add('is-active');
+                    }, 10);
+                    
+                    document.body.style.overflow = 'hidden'; // Блокируем скролл сайта
+                });
             });
-        });
 
-        // 2. Функция закрытия
-        function closeModal() {
-            modal.classList.remove('is-active'); // Возвращаем pointer-events: none и opacity: 0
-            document.body.style.overflow = ''; // Возвращаем скролл сайта
-        }
-
-        // Закрытие по крестику
-        if (closeBtn) {
-            closeBtn.addEventListener('click', closeModal);
-        }
-
-        // Закрытие при клике на темную область (оверлей) вокруг окна
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                closeModal();
+            // 2. Функция закрытия
+            function closeModal() {
+                modal.classList.remove('is-active');
+                document.body.style.overflow = ''; // Возвращаем скролл сайта
+                
+                // Ждем 300мс (пока идет плавная CSS анимация opacity), 
+                // и только потом полностью гасим ее в display: none, чтобы ничего не прыгало
+                setTimeout(() => {
+                    if (!modal.classList.contains('is-active')) {
+                        modal.style.display = 'none';
+                    }
+                }, 300); 
             }
-        });
 
-        // Закрытие при нажатии кнопки Escape на клавиатуре
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modal.classList.contains('is-active')) {
-                closeModal();
+            // Закрытие по крестику
+            if (closeBtn) {
+                closeBtn.addEventListener('click', closeModal);
             }
-        });
-    }
-});
+
+            // Закрытие при клике на темную область вокруг окна
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+
+            // Закрытие при нажатии кнопки Escape
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.classList.contains('is-active')) {
+                    closeModal();
+                }
+            });
+        }
+    });
     </script>
 
 </body>
