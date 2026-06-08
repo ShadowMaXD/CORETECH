@@ -820,11 +820,11 @@
    <div class="mobile-menu-overlay" id="js-mobile-menu">
         <div class="mobile-menu-container">
             <nav class="mobile-menu-nav">
-                <a href="#block_catalog" class="mobile-menu-link">Каталог ПК</a>
-                <a href="#block_stages" class="mobile-menu-link">Этапы работы</a>
+                <a href="index.html#block_catalog" class="mobile-menu-link">Каталог ПК</a>
+                <a href="index.html#block_stages_m" class="mobile-menu-link">Этапы работы</a>
                 <a href="#block_service" class="mobile-menu-link">Сервис</a>
                 <a href="#block_team" class="mobile-menu-link">Команда</a>
-                <a href="#block_contacts" class="mobile-menu-link">Контакты</a>
+                <a href="#block_contacts_m" class="mobile-menu-link">Контакты</a>
                 <a href="reviews.html" class="mobile-menu-link">Отзывы</a>
                 
                 <div class="mobile-menu-action-wrapper">
@@ -1379,7 +1379,7 @@ body {
                 <div class="hero-description">МЫ — пока еще небольшая команда энтузиастов, которая собирает каждый компьютер как для себя. Внимание к каждой мелочи и желание сделать лучшее для каждого клиента — не дают нам покоя.</div>
 
                 <div class="hero-btns">
-                    <a href="#" class="btn-hero">
+                    <a href="#config-title" class="btn-hero">
                         Собрать ПК
                         <div class="arrow-icon">
                             <img src="https://cdn-icons-png.flaticon.com/512/545/545682.png" alt="->">
@@ -1981,7 +1981,7 @@ body {
     </div>
 </section>
 
-    <div class="container">
+    <div class="container" id="config-title">
         <h1 class="d-config-title">СБОРКА<span> НА ЗАКАЗ</span></h1>
         <h1 class="m-config-title">СБОРКА<span> НА ЗАКАЗ</span></h1>
 
@@ -2198,6 +2198,30 @@ body {
             font-size: 12px; font-weight: 900; z-index: 10;
             text-transform: uppercase;
         }
+        .badge-fullhd {
+            position: absolute;
+            top: 45px; left: 45px;
+            background: #a465ff; color: #fff;
+            padding: 5px 15px; border-radius: 10px;
+            font-size: 12px; font-weight: 900; z-index: 10;
+            text-transform: uppercase;
+        }
+        .badge-2k {
+            position: absolute;
+            top: 45px; left: 45px;
+            background: #a465ff; color: #fff;
+            padding: 5px 15px; border-radius: 10px;
+            font-size: 12px; font-weight: 900; z-index: 10;
+            text-transform: uppercase;
+        }
+        .badge-4k {
+            position: absolute;
+            top: 45px; left: 45px;
+            background: #a465ff; color: #fff;
+            padding: 5px 15px; border-radius: 10px;
+            font-size: 12px; font-weight: 900; z-index: 10;
+            text-transform: uppercase;
+        }
 
         /* Статусы */
         .status {
@@ -2269,10 +2293,17 @@ body {
         .product-name { font-size: 24px; font-weight: 900; margin-bottom: 5px; text-transform: uppercase; }
         .product-name span { color: var(--accent-mint); }
         .product-mini-specs { display: flex; flex-direction: column; gap: 10px; margin: 15px 0 20px 0; flex-grow: 1; }
-        .mini-spec { display: flex; align-items: center; gap: 12px; font-size: 14px; color: #a0a0a0; font-weight: 800; }
+        .mini-spec { display: flex; align-items: center; gap: 12px; font-size: 15px; color: #a0a0a0; font-weight: 800; }
         .spec-icon-img { height: 1.1em; width: auto; }
         .mini-spec span { color: #fff; }
-        .product-price { font-size: 22px; font-weight: 900; margin-bottom: 20px; }
+        .product-price { font-size: 25px; font-weight: 900; margin-bottom: 20px; }
+
+        @media (max-width: 768px) {
+            .mini-spec {
+            font-size: 13px; /* Меньший размер для мобилок */
+            gap: 8px; /* Можно также уменьшить отступы */
+            }
+        }
 
         .btn-card { 
             background: #a465ff; color: #fff; text-align: center; 
@@ -2309,7 +2340,7 @@ body {
         }
         .g-modal-body {
             background: #fff; color: #000; padding: 35px; border-radius: 35px;
-            max-width: 500px; width: 92%; position: relative;
+            max-width: 500px; width: 92%; position: center;
         }
         .g-modal-body h2 { font-size: 28px; font-weight: 900; margin: 0 0 10px; text-transform: uppercase; }
         .g-copy-area {
@@ -2348,6 +2379,88 @@ body {
         .info-label { color: #a0a0a0; }
         .info-value { color: #fff; text-align: right; }
         .info-value.highlight { color: #00ff88; }
+
+        /* СТИЛИ ДЛЯ ФОРМЫ В ОКНЕ ОФОРМЛЕНИЯ СБОРКИ */
+
+    /* Делаем отступ после кнопок соцсетей, чтобы форма не прилипала */
+    #gBuyModal .g-btn-row {
+        margin-bottom: 25px !important;
+    }
+
+    /* Красивый неоновый/аккуратный разделитель ИЛИ */
+    .g-order-separator {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.4);
+        font-weight: 900;
+        font-size: 11px;
+        margin-bottom: 20px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-family: 'Nunito', sans-serif;
+    }
+
+    .g-order-separator::before,
+    .g-order-separator::after {
+        content: '';
+        flex: 1;
+        border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+    }
+
+    .g-order-separator span {
+        padding: 0 15px;
+    }
+
+    /* Сама форма внутри окна */
+    #gInlineBuyForm {
+        display: flex;
+        flex-direction: column;
+        gap: 12px; /* Расстояние между инпутами */
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Принудительно растягиваем поля на всю ширину окна */
+    #gBuyModal .core-modal-input,
+    #gBuyModal .core-modal-textarea {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box;
+    }
+
+    /* Новая фиолетовая кнопка отправки */
+    #gSubmitInlineOrder {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: 50px;
+        margin-top: 5px;
+        background: #7d5fff !important; /* Фирменный фиолетовый */
+        color: #ffffff !important;
+        border: none !important;
+        font-weight: 900 !important;
+        font-family: 'Nunito', sans-serif;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    /* Анимация наведения на фиолетовую кнопку */
+    #gSubmitInlineOrder:hover {
+        background: #6c4bf6 !important;
+        transform: translateY(-2px);
+    }
+
+    #gSubmitInlineOrder:active {
+        transform: translateY(1px);
+    }
+
+        @media (max-width: 768px) {
+            .g-modal-body {
+                background: #fff; color: #000; padding: 35px; border-radius: 35px;
+                max-width: 340px; width: 92%; position: center;
+            }
+        }
     </style>
 
 <!-- БЛОК КАРТОЧКИ ТОВАРОВ -->
@@ -2365,21 +2478,39 @@ body {
     </div>
 </div>
 
-<div id="gBuyModal" class="g-modal-overlay">
-    <div class="g-modal-body">
-        <div style="position:absolute; top:20px; right:20px; cursor:pointer; font-size:24px; font-weight:bold;" onclick="gCloseBuy()">×</div>
-        <h2>Оформление</h2>
-        <p style="font-size:14px; margin-bottom:15px;">Текст вашей заявки:</p>
-        <div class="g-copy-area" id="gOrderText"></div>
-        <div class="g-btn-row">
-            <button class="g-action-btn g-btn-copy" onclick="gCopyText()">
-                <span id="gCopyStatus">КОПИРОВАТЬ</span>
-            </button>
-            <a href="#" class="g-action-btn">AVITO</a>
-            <a href="#" class="g-action-btn">VK</a>
+    <div id="gBuyModal" class="g-modal-overlay">
+        <div class="g-modal-body">
+            <div style="position:absolute; top:20px; right:20px; cursor:pointer; font-size:24px; font-weight:bold;" onclick="gCloseBuy()">×</div>
+            <h2>Оформление</h2>
+            
+            <p style="font-size:14px; margin-bottom:15px;">Текст вашей заявки:</p>
+            <div class="g-copy-area" id="gOrderText"></div>
+            
+            <div class="g-btn-row" style="margin-bottom: 25px;">
+                <button class="g-action-btn g-btn-copy" onclick="gCopyText()">
+                    <span id="gCopyStatus">КОПИРОВАТЬ</span>
+                </button>
+                <a href="#" class="g-action-btn">Напишите нам<br>на AVITO</a>
+                <a href="#" class="g-action-btn">Напишите <br>нам в VK</a>
+            </div>
+
+            <div style="display: flex; align-items: center; text-align: center; color: rgb(0, 0, 0); font-weight: 900; font-size: 12px; margin-bottom: 20px;">
+                <div style="flex: 1; border-bottom: 1px dashed rgba(255,255,255,0.15);"></div>
+                <span style="padding: 0 15px; letter-spacing: 2px;">ИЛИ ОТПРАВИТЬ ЗАЯВКУ СРАЗУ</span>
+                <div style="flex: 1; border-bottom: 1px dashed rgba(255,255,255,0.15);"></div>
+            </div>
+
+            <form id="gInlineBuyForm" style="display: flex; flex-direction: column; gap: 12px; width: 100%;">
+                <input type="text" class="core-modal-input" placeholder="ВАШЕ ИМЯ" required name="user_name">
+                <input type="tel" class="core-modal-input" placeholder="ВАШ ТЕЛЕФОН" required name="user_phone">
+                <textarea class="core-modal-textarea" placeholder="КОММЕНТАРИЙ К ЗАКАЗУ (НЕОБЯЗАТЕЛЬНО)" name="user_comment" rows="2"></textarea>
+                
+                <button type="submit" class="g-action-btn" id="gSubmitInlineOrder" style="width: 100%; max-width: 100%; margin-top: 5px; background: #7d5fff; color: #fff; border: none; font-weight: bold;">
+                    ОТПРАВИТЬ ЗАЯВКУ
+                </button>
+            </form>
         </div>
     </div>
-</div>
 
 <script>
     // 1. СНАЧАЛА ОБЪЯВЛЯЕМ ПЕРЕМЕННЫЕ И ФУНКЦИИ МОДАЛОК
@@ -2447,13 +2578,160 @@ body {
     function gCloseBuy() { document.getElementById('gBuyModal').style.display = 'none'; }
 
     function gCopyText() {
-        const text = document.getElementById('gOrderText').innerText;
+    const text = document.getElementById('gOrderText').innerText;
+    
+    // 1. Твой оригинальный код для ПК и нормальных браузеров
+    if (navigator.clipboard && window.isSecureContext) {
         navigator.clipboard.writeText(text).then(() => {
             const btn = document.getElementById('gCopyStatus');
             btn.innerText = 'ГОТОВО!';
             setTimeout(() => btn.innerText = 'КОПИРОВАТЬ', 2000);
+        }).catch(() => {
+            // Если на телефоне этот метод дал сбой, автоматом идет обходной путь ниже
+            runMobileCopy(text);
+        });
+    } else {
+        // 2. Если открыто на телефоне или без HTTPS — сразу запускаем обходной путь
+        runMobileCopy(text);
+    }
+
+    // Тот самый железобетонный обход блокировок для телефонов
+    function runMobileCopy(textToMobile) {
+        const textArea = document.createElement('textarea');
+        textArea.value = textToMobile;
+        
+        // Абсолютно невидимые стили, чтобы ничего не прыгало на экране смартфона
+        textArea.style.position = 'fixed';
+        textArea.style.top = '0';
+        textArea.style.left = '0';
+        textArea.style.width = '2em';
+        textArea.style.height = '2em';
+        textArea.style.padding = '0';
+        textArea.style.border = 'none';
+        textArea.style.outline = 'none';
+        textArea.style.boxShadow = 'none';
+        textArea.style.background = 'transparent';
+        
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        
+        // Жесткое принудительное выделение текста для iPhone (Safari)
+        if (navigator.userAgent.match(/ipad|ipod|iphone/i)) {
+            const range = document.createRange();
+            range.selectNodeContents(textArea);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            textArea.setSelectionRange(0, 999999);
+        }
+
+        // Физическое копирование в буфер устройства
+        try {
+            const success = document.execCommand('copy');
+            if (success) {
+                const btn = document.getElementById('gCopyStatus');
+                if (btn) {
+                    btn.innerText = 'ГОТОВО!';
+                    setTimeout(() => btn.innerText = 'КОПИРОВАТЬ', 2000);
+                }
+            }
+        } catch (err) {
+            console.error('Ошибка копирования на мобилке:', err);
+        }
+
+        document.body.removeChild(textArea);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const inlineBuyForm = document.getElementById('gInlineBuyForm');
+    
+    if (inlineBuyForm) {
+        inlineBuyForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Запрещаем перезагрузку страницы при отправке
+            
+            // 1. Забираем то, что ввел пользователь в поля
+            const nameInput = inlineBuyForm.querySelector('input[name="user_name"]');
+            const telInput = inlineBuyForm.querySelector('input[name="user_phone"]');
+            const commentInput = inlineBuyForm.querySelector('textarea[name="user_comment"]');
+            const submitBtn = document.getElementById('gSubmitInlineOrder');
+            
+            // 2. Намертво вытаскиваем текст сгенерированной конфигурации ПК прямо из твоего блока gOrderText
+            const orderTextElement = document.getElementById('gOrderText');
+            const pcConfiguration = orderTextElement ? orderTextElement.innerText : 'Конфигурация не определена';
+
+            // Проверка телефона
+            if (!telInput.value.trim()) {
+                alert('Пожалуйста, введите телефон!');
+                return;
+            }
+
+            // Блокируем кнопку на время отправки
+            const originalBtnText = submitBtn.innerText;
+            submitBtn.innerText = 'ОТПРАВКА...';
+            submitBtn.style.pointerEvents = 'none';
+
+            // 3. Формируем единый пакет данных
+            const formData = {
+                name: nameInput ? nameInput.value.trim() : 'Не указано',
+                phone: telInput.value.trim(),
+                comment: commentInput ? commentInput.value.trim() : 'Нет',
+                specs: pcConfiguration // Сюда падает весь скопированный текст ПК
+            };
+
+            // 4. Отправляем методом POST на твой скрипт (например, send.php, который мы делали для почты)
+            // Если используешь Telegram, замени url на отправку в ТГ бот, код отправки одинаковый
+            fetch('send.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    // Если улетело успешно
+                    submitBtn.innerText = 'ЗАЯВКА ПРИНЯТА!';
+                    submitBtn.style.background = '#00ff88'; // Зеленеет при успехе
+                    submitBtn.style.color = '#000000';
+                    inlineBuyForm.reset(); // Чистим поля формы
+
+                    // Через 2 секунды закрываем окно gBuyModal и возвращаем кнопку в исходный вид
+                    setTimeout(function() {
+                        if (typeof gCloseBuy === 'function') {
+                            gCloseBuy(); // Твоя родная функция закрытия этого окна
+                        }
+                        submitBtn.innerText = originalBtnText;
+                        submitBtn.style.background = '#7d5fff';
+                        submitBtn.style.color = '#ffffff';
+                        submitBtn.style.pointerEvents = 'auto';
+                    }, 2000);
+                } else {
+                    alert('Ошибка: ' + data.message);
+                    submitBtn.innerText = originalBtnText;
+                    submitBtn.style.pointerEvents = 'auto';
+                }
+            })
+            .catch(error => {
+                // Если тестируешь на компе без сервера, сработает эта заглушка имитации, чтобы ты видел, как это работает визуально:
+                submitBtn.innerText = 'ЗАЯВКА ПРИНЯТА! (ТЕСТ)';
+                submitBtn.style.background = '#00ff88';
+                submitBtn.style.color = '#000000';
+                inlineBuyForm.reset();
+                
+                setTimeout(function() {
+                    if (typeof gCloseBuy === 'function') gCloseBuy();
+                    submitBtn.innerText = originalBtnText;
+                    submitBtn.style.background = '#7d5fff';
+                    submitBtn.style.color = '#ffffff';
+                    submitBtn.style.pointerEvents = 'auto';
+                }, 2000);
+            });
         });
     }
+});
 
     window.onclick = (e) => { 
         if (e.target == modal) closeModal(); 
@@ -2463,94 +2741,177 @@ body {
     // 2. ДАННЫЕ ДЛЯ КАТАЛОГА ТОВАРОВ
     const myComputers = [
         {
-            name: "CORE START",
-            isHit: true,
-            image: "images/comp1.jpg",
+            name: "CORE ALL-INCLUSIVE",
+            isHit: false,
+            is4K: true,
+            image: "images/catalog/comp8.png",
             fpsNumber: "145+ FPS",
             fpsBarWidth: "45%",
             fpsModal: { 'CS 2': '320 FPS', 'Dota 2': '240 FPS', 'Atomic Heart': '90 FPS' },
-            cpu: "i5-12400F",
-            gpu: "RTX 4060",
-            ram: "16GB DDR4",
+            cpu: "Ryzen 7 9800X3D",
+            gpu: "RTX 5080 16Гб",
+            ram: "32Гб DDR5 6000 (16Гб х 2)",
+            cooling: "GF Eskimo Pro 420",
+            statusClass: "on-order",
+            statusText: "Под заказ",
+            price: "от 279 990 ₽",
+            specsModal: { 'Накопитель': 'M.2 SSD 1Тб на PCI 4.0', 
+            'Блок питания': '1STPlayer NGDP 1000W 80+ GOLD', 
+            'Материнская плата': 'X870 [ATX формфактор]', 
+            'Корпус': 'Geometric Future Model 5'}
+        },
+        {
+            name: "CORE PINK LOVE",
+            isHit: false,
+            image: "images/catalog/comp1.png",
+            fpsNumber: "210+ FPS",
+            fpsBarWidth: "75%",
+            fpsModal: { 'Cyberpunk': '85 FPS', 'Warzone': '140 FPS' },
+            cpu: "i5-13600KF",
+            gpu: "RTX 5070 12Гб",
+            ram: "32Гб DDR4 3200 (16Гб х 2)",
+            cooling: "DEEPCOOL LE720",
+            statusClass: "on-order",
+            statusText: "Под заказ",
+            price: "от 144 990 ₽",
+            specsModal: { 'Накопитель': 'M.2 SSD 1Тб на PCI 4.0', 
+            'Блок питания': '1STPlayer ACK Silver 750W 80+ SILVER', 
+            'Материнская плата': 'B760M D4 [Micro-ATX формфактор]', 
+            'Корпус': 'Zalman Pink'}
+        },
+        {
+            name: "CORE MINI MAXIMUS",
+            isHit: true,
+            image: "images/catalog/comp7.png",
+            fpsNumber: "210+ FPS",
+            fpsBarWidth: "75%",
+            fpsModal: { 'Cyberpunk': '85 FPS', 'Warzone': '140 FPS' },
+            cpu: "Ryzen 7 7800X3D",
+            gpu: "RTX 5070 Ti 16Гб",
+            ram: "32GB DDR5 6000 (16Гб х 2)",
+            cooling: "Ocypus Sigma L24 Pro",
+            statusClass: "on-order",
+            statusText: "Под заказ",
+            price: "от 229 990 ₽",
+            specsModal: { 'Накопитель': 'M.2 SSD 1Тб на PCI 4.0', 
+            'Блок питания': 'Lian Li SP850V2, 850W, 80+ GOLD', 
+            'Материнская плата': 'B850 [Micro-ATX формфактор]', 
+            'Корпус': 'JONSBO Jonsplus Z20'}
+        },
+        {
+            name: "CORE GOLDEN MEAN",
+            isHit: false,
+            image: "images/catalog/comp9.png",
+            fpsNumber: "210+ FPS",
+            fpsBarWidth: "75%",
+            fpsModal: { 'Cyberpunk': '85 FPS', 'Warzone': '140 FPS' },
+            cpu: "i7-14700KF",
+            gpu: "RTX 5070Ti 16Гб",
+            ram: "32GB DDR5 6000 (16Гб х 2)",
+            cooling: "TR Peerless Vision 360",
+            statusClass: "on-order",
+            statusText: "Под заказ",
+            price: "от 239 990 ₽",
+            specsModal: { 'Накопитель': 'M.2 SSD 1Тб на PCI 4.0', 
+            'Блок питания': '1STPlayer NGDP 850W 80+ GOLD', 
+            'Материнская плата': 'B760 DDR5 [Mirco-ATX формфактор]', 
+            'Корпус': 'Lian Li O11 Dynamic MINI V2 Flow'}
+        },
+        {
+            name: "CORE WH OR BL",
+            isHit: false,
+            image: "images/catalog/comp5.png",
+            fpsNumber: "210+ FPS",
+            fpsBarWidth: "75%",
+            fpsModal: { 'Cyberpunk': '85 FPS', 'Warzone': '140 FPS' },
+            cpu: "Ryzen 7 7700",
+            gpu: "RTX 5070 12Гб",
+            ram: "32Гб DDR5 5600 (16Гб х 2)",
+            cooling: "TR Peerless Vision 360",
+            statusClass: "on-order",
+            statusText: "Под заказ",
+            price: "от 183 990 ₽",
+            specsModal: { 'Накопитель': 'M.2 SSD 1Тб на PCI 4.0', 
+            'Блок питания': '1STPlayer NGDP 850W, 80+ GOLD', 
+            'Материнская плата': 'B650 [Micro-ATX формфактор]', 
+            'Корпус': 'Zalman P30 BW'}
+        },
+        {
+            name: "CORE MINI BALANCE",
+            isHit: true,
+            image: "images/catalog/comp6.png",
+            fpsNumber: "210+ FPS",
+            fpsBarWidth: "75%",
+            fpsModal: { 'Cyberpunk': '85 FPS', 'Warzone': '140 FPS' },
+            cpu: "i5-14600KF",
+            gpu: "RTX 5070",
+            ram: "32Гб DDR4 3200 (16Гб х 2)",
+            cooling: "TR Peerless Vision 240",
+            statusClass: "in-stock",
+            statusText: "Готов к сборке",
+            price: "от 149 990 ₽",
+            specsModal: { 'Накопитель': 'M.2 SSD 1Тб на PCI 4.0', 
+            'Блок питания': '1STPlayer ACK SILVER 750W, 80+ SILVER', 
+            'Материнская плата': 'B760 [Micro-ATX формфактор]', 
+            'Корпус': '1STplayer Miku Mi2-A ARGB'}
+        },
+        {
+            name: "CORE HYPER",
+            isHit: true,
+            image: "images/catalog/comp2.png",
+            fpsNumber: "210+ FPS",
+            fpsBarWidth: "75%",
+            fpsModal: { 'Cyberpunk': '85 FPS', 'Warzone': '140 FPS' },
+            cpu: "i5-14400F",
+            gpu: "RTX 5060 8Гб",
+            ram: "32Гб DDR4 3200 (16Гб х 2)",
+            cooling: "ID-Cooling SE-214-XT",
             statusClass: "in-stock",
             statusText: "В наличии",
-            price: "65 900 ₽",
-            specsModal: { 'Накопитель': '500GB NVMe', 'Блок питания': '600W 80+', 'Материнская плата': 'B650' }
+            price: "от 99 990 ₽",
+            specsModal: { 'Накопитель': 'M.2 SSD 1Тб', 
+            'Блок питания': '1STPlayer DK Premium 600W, 80+ BRONZE', 
+            'Материнская плата': 'MSI PRO H610M-G D4', 
+            'Корпус': '1STPlayer MV5-TP с 8ARGB FAN'}
         },
         {
-            name: "CORE PRO",
-            isHit: true,
-            image: "images/comp2.jpg",
+            name: "CORE MINI HYPER",
+            isHit: false,
+            image: "images/catalog/comp3.png",
             fpsNumber: "210+ FPS",
             fpsBarWidth: "75%",
             fpsModal: { 'Cyberpunk': '85 FPS', 'Warzone': '140 FPS' },
-            cpu: "Ryzen 5 7600",
-            gpu: "RTX 4070 Ti",
-            ram: "32GB DDR5",
+            cpu: "Ryzen 5 7500F",
+            gpu: "RTX 5060Ti 8Гб",
+            ram: "16GB DDR5 5600 (8Гб х 2)",
+            cooling: "ID-Coling SE-214-XT",
             statusClass: "on-order",
             statusText: "Под заказ",
-            price: "124 500 ₽",
-            specsModal: { 'SSD': '1TB Gen4', 'Охлаждение': 'СЖО 240мм', 'Материнская плата': 'B650' }
+            price: "от 106 990 ₽",
+            specsModal: { 'Накопитель': 'M.2 SSD 1Тб на PCI 4.0', 
+            'Блок питания': '1STPlayer ACK 650W, 80+ [белый]', 
+            'Материнская плата': 'B650 [Micro-ATX формфактор]', 
+            'Корпус': '1STPlayer Miku Mi2-A ARGB'}
         },
         {
-            name: "CORE PRO",
-            isHit: true,
-            image: "images/pc1.jpg",
+            name: "CORE STANDART",
+            isHit: false,
+            is2K: true,
+            image: "images/catalog/comp4.png",
             fpsNumber: "210+ FPS",
             fpsBarWidth: "75%",
             fpsModal: { 'Cyberpunk': '85 FPS', 'Warzone': '140 FPS' },
-            cpu: "Ryzen 5 7600",
-            gpu: "RTX 4070 Ti",
-            ram: "32GB DDR5",
+            cpu: "Ryzen 5 5500",
+            gpu: "RTX 5050",
+            ram: "16GB DDR4 3200 (8Гб х 2)",
+            cooling: "SE-214-XT",
             statusClass: "on-order",
             statusText: "Под заказ",
-            price: "124 500 ₽",
-            specsModal: { 'SSD': '1TB Gen4', 'Охлаждение': 'СЖО 240мм', 'Материнская плата': 'B650' }
-        },
-        {
-            name: "CORE PRO",
-            isHit: true,
-            image: "images/pc1.jpg",
-            fpsNumber: "210+ FPS",
-            fpsBarWidth: "75%",
-            fpsModal: { 'Cyberpunk': '85 FPS', 'Warzone': '140 FPS' },
-            cpu: "Ryzen 5 7600",
-            gpu: "RTX 4070 Ti",
-            ram: "32GB DDR5",
-            statusClass: "on-order",
-            statusText: "Под заказ",
-            price: "124 500 ₽",
-            specsModal: { 'SSD': '1TB Gen4', 'Охлаждение': 'СЖО 240мм', 'Материнская плата': 'B650' }
-        },
-        {
-            name: "CORE PRO",
-            isHit: true,
-            image: "images/pc1.jpg",
-            fpsNumber: "210+ FPS",
-            fpsBarWidth: "75%",
-            fpsModal: { 'Cyberpunk': '85 FPS', 'Warzone': '140 FPS' },
-            cpu: "Ryzen 5 7600",
-            gpu: "RTX 4070 Ti",
-            ram: "32GB DDR5",
-            statusClass: "on-order",
-            statusText: "Под заказ",
-            price: "124 500 ₽",
-            specsModal: { 'SSD': '1TB Gen4', 'Охлаждение': 'СЖО 240мм', 'Материнская плата': 'B650' }
-        },
-        {
-            name: "CORE PRO",
-            isHit: true,
-            image: "images/pc1.jpg",
-            fpsNumber: "210+ FPS",
-            fpsBarWidth: "75%",
-            fpsModal: { 'Cyberpunk': '85 FPS', 'Warzone': '140 FPS' },
-            cpu: "Ryzen 5 7600",
-            gpu: "RTX 4070 Ti",
-            ram: "32GB DDR5",
-            statusClass: "on-order",
-            statusText: "Под заказ",
-            price: "124 500 ₽",
-            specsModal: { 'SSD': '1TB Gen4', 'Охлаждение': 'СЖО 240мм', 'Материнская плата': 'B650' }
+            price: "от 69 990 ₽",
+            specsModal: { 'Накопитель': 'M.2 SSD 512Гб', 
+            'Блок питания': '1STPlayer DK Premium 600W, 80+ BRONZE', 
+            'Материнская плата': 'A520 [Micro-ATX формфактор]', 
+            'Корпус': 'HSPD'}
         }
     ];
 
@@ -2563,6 +2924,7 @@ body {
 
         myComputers.forEach(pc => {
             const badge = pc.isHit ? `<div class="badge-hit">ХИТ</div>` : '';
+    
             
             const fpsDataStr = JSON.stringify(pc.fpsModal).replace(/"/g, '&quot;');
             const specsDataStr = JSON.stringify(pc.specsModal).replace(/"/g, '&quot;');
@@ -2589,7 +2951,8 @@ body {
                     <div class="product-mini-specs">
                         <div class="mini-spec"><img src="images/cpu.png" class="spec-icon-img"> Процессор: <span>${pc.cpu}</span></div>
                         <div class="mini-spec"><img src="images/gpu.png" class="spec-icon-img"> Видеокарта: <span>${pc.gpu}</span></div>
-                        <div class="mini-spec"><img src="images/ram.png" class="spec-icon-img"> Оперативная память: <span>${pc.ram}</span></div>
+                        <div class="mini-spec"><img src="images/ram.png" class="spec-icon-img"> ОЗУ: <span>${pc.ram}</span></div>
+                        <div class="mini-spec"><img src="images/cooling.png" class="spec-icon-img"> Охлаждение: <span>${pc.cooling}</span></div>
                     </div>
                     
                     <div class="status ${pc.statusClass}">${pc.statusText}</div>
@@ -2615,7 +2978,7 @@ body {
             /* НАСТРОЙКИ КАРТИНКИ ПК (pc3.png) */
             --steps-pc-width: 100%;    /* Ширина картинки */
             --steps-pc-offset-x: -10%;  /* Смещение по горизонтали (<0 влево, >0 вправо) */
-            --steps-pc-offset-y: -150px;  /* Смещение по вертикали */
+            --steps-pc-offset-y: 0px;  /* Смещение по вертикали */
         }
 
         .steps-section {
@@ -2629,7 +2992,7 @@ body {
             justify-content: space-between;
             align-items: flex-start;
             gap: 40px;
-            margin-bottom: -200px;
+            margin-bottom: 0px;
         }
 
         .steps-visual {
@@ -2709,7 +3072,7 @@ body {
 
     <div class="steps-visual">
         <h2>Этапы<br><span>Работы</span></h2>
-        <img src="images/pc3.png" alt="Процесс сборки" class="steps-pc-image">
+        <img src="images/comp gl.png" alt="Процесс сборки" class="steps-pc-image">
     </div>
 
     <div class="steps-content">
@@ -2718,7 +3081,7 @@ body {
             <p class="step-description">Анализируем ваши потребности и формируем оптимальный сетап железа. Разрабатываем уникальный дизайн-макет и визуальный стиль вашего будущего ПК.</p>
         </div>
         <div class="step-item step-02">
-            <span class="step-number">[ 02 / НЖЕНЕРИЯ И СБОРКА ]</span>
+            <span class="step-number">[ 02 / ИНЖЕНЕРИЯ И СБОРКА ]</span>
             <p class="step-description">Кастом переходит в руки профи. Собираем систему с филигранной точностью, обеспечивая идеальный кабель-менеджмент и правильный воздушный поток.</p>
         </div>
         <div class="step-item step-03">
@@ -2733,7 +3096,7 @@ body {
 </section>
 
 
-<section class="steps-mobile-only">
+<section class="steps-mobile-only" id="block_stages_m">
     <style>
         .m-steps-section {
             width: 100%;
@@ -2844,23 +3207,23 @@ body {
             </div>
             
             <div class="m-step-box m-step-01 m-left">
-                <span class="m-step-box-num">/ 01 ПОДБОР И КОНЦЕПТ</span>
-                <p class="m-step-box-desc">Изучаем ваши задачи, подбираем идеальную связку комплектующих. Создаем визуальный концепт будущей сборки.</p>
+                <span class="m-step-box-num">[ 01 / ВАША ИДЕЯ И НАШЕ ПРОЕКТИРОВАНИЕ ]</span>
+                <p class="m-step-box-desc">Анализируем ваши потребности и формируем оптимальный сетап железа. Разрабатываем уникальный дизайн-макет и визуальный стиль вашего будущего ПК.</p>
             </div>
             
             <div class="m-step-box m-step-02 m-right">
-                <span class="m-step-box-num">/ 02 СБОРКА И УКЛАДКА</span>
-                <p class="m-step-box-desc">Наши инженеры приступают к работе. Безупречный кабель-менеджмент и внимание к каждой детали.</p>
+                <span class="m-step-box-num">[ 02 / ИНЖЕНЕРИЯ И СБОРКА ]</span>
+                <p class="m-step-box-desc">Кастом переходит в руки профи. Собираем систему с филигранной точностью, обеспечивая идеальный кабель-менеджмент и правильный воздушный поток.</p>
             </div>
             
             <div class="m-step-box m-step-03 m-left">
-                <span class="m-step-box-num">/ 03 НАСТРОЙКА И ТЕСТЫ</span>
-                <p class="m-step-box-desc">Настраиваем BIOS, тайминги памяти и прогоняем ПК через самые тяжелые стресс-тесты.</p>
+                <span class="m-step-box-num">[ 03 / ОПТИМИЗАЦИЯ И СТРЕСС-ТЕСТЫ ]</span>
+                <p class="m-step-box-desc">Выжимаем максимум производительности: калибруем BIOS, настраиваем тайминги ОЗУ и тестируем систему под экстремальными нагрузками на стабильность.</p>
             </div>
             
             <div class="m-step-box m-step-04 m-right">
-                <span class="m-step-box-num">/ 04 ФИНАЛЬНЫЙ РЕЗУЛЬТАТ</span>
-                <p class="m-step-box-desc">Вы получаете мощный и тихий компьютер, готовый к любым играм прямо из коробки.</p>
+                <span class="m-step-box-num">[ 04 / ГОТОВ К СРАЖЕНИЯМ ]</span>
+                <p class="m-step-box-desc">На выходе — бескомпромиссно мощная, тихая и полностью настроенная машина. Никаких лишних действий: распаковывай, включай и доминируй в играх.</p>
             </div>
 
         </div>
@@ -3285,31 +3648,33 @@ document.addEventListener("DOMContentLoaded", function() {
             .team-container { flex-direction: column; }
             .team-info { padding: 40px 30px; order: 2; }
             .team-slider { height: 400px; order: 1; }
-            .team-title { font-size: 32px; }
+            .team-title { font-size: 25px; }
+            .team-label {font-size: 16px; }
         }
     </style>
 
     <div class="team-container">
         <div class="team-info">
-            <span class="team-label">Наша команда</span>
-            <h2 class="team-title">Эксперты в области<br>технологий</h2>
+            <span class="team-label">Собрано профи. Подтверждено делом.</span>
+            <h2 class="team-title">Архитекторы вашей<br>производительности</h2>
             <p class="team-description">
-                За каждой сборкой стоит профессионал. Мы не просто собираем ПК, мы создаем инструмент для ваших побед и работы.
+                За каждым винтиком и ваттом питания стоит человек, который фанатеет от результата.
+                Мы создаём фундамент для ваших побед: в киберспорте, творчестве или бизнесе.
             </p>
             
             <div class="team-stats">
                 <div style="display: flex; gap: 40px;">
                     <div>
                         <div style="font-size: 36px; font-weight: 900; color: #1a1a1a;">500<span style="color: var(--accent-mint, #7B61FF);">+</span></div>
-                        <div style="font-size: 13px; font-weight: 800; color: #888; text-transform: uppercase;">Сборок</div>
+                        <div style="font-size: 13px; font-weight: 800; color: #888; text-transform: uppercase;">собранных нами ПК</div>
                     </div>
                     <div>
-                        <div style="font-size: 36px; font-weight: 900; color: #1a1a1a;">10<span style="color: var(--accent-mint, #7B61FF);">+</span></div>
-                        <div style="font-size: 13px; font-weight: 800; color: #888; text-transform: uppercase;">Мастеров</div>
+                        <div style="font-size: 36px; font-weight: 900; color: var(--accent-mint);"> > <span style="color: hsl(0, 0%, 10%);">5</span></div>
+                        <div style="font-size: 13px; font-weight: 800; color: #888; text-transform: uppercase;">лет опыта работы</div>
                     </div>
                     <div>
-                        <div style="font-size: 36px; font-weight: 900; color: #1a1a1a;">10<span style="color: var(--accent-mint, #7B61FF);">+</span></div>
-                        <div style="font-size: 13px; font-weight: 800; color: #888; text-transform: uppercase;">Мастеров</div>
+                        <div style="font-size: 36px; font-weight: 900; color: #1a1a1a;">100<span style="color: var(--accent-mint, #7B61FF);">+</span></div>
+                        <div style="font-size: 13px; font-weight: 800; color: #888; text-transform: uppercase;">отзывов</div>
                     </div>
                 </div>
             </div>
@@ -3386,7 +3751,7 @@ document.addEventListener("DOMContentLoaded", function() {
         <h2 class="social-mega-title">СЛЕДИТЕ ЗА НАМИ <span class="accent">В СОЦ. СЕТЯХ</span></h2>
         
         <div class="social-mega-grid">
-            <a href="#" class="social-mega-card">
+            <a href="https://vk.com/coretech_pc" class="social-mega-card">
                 <div class="card-content">
                     <span class="card-label">Перейти в группу</span>
                     <h3 class="card-name">ВКонтакте</h3>
@@ -3396,9 +3761,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 </div>
             </a>
 
-            <a href="#" class="social-mega-card">
+            <a href="https://www.avito.ru/brands/i177752551" class="social-mega-card">
                 <div class="card-content">
-                    <span class="card-label">Наш профиль</span>
+                    <span class="card-label">Перейти в профиль</span>
                     <h3 class="card-name">Авито</h3>
                 </div>
                 <div class="card-image-wrapper">
@@ -3406,9 +3771,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 </div>
             </a>
 
-            <a href="#" class="social-mega-card">
+            <a href="https://ozon.ru/s/coretech" class="social-mega-card">
                 <div class="card-content">
-                    <span class="card-label">Магазин</span>
+                    <span class="card-label">Перейти в наш магазин</span>
                     <h3 class="card-name">OZON</h3>
                 </div>
                 <div class="card-image-wrapper">
@@ -3416,25 +3781,25 @@ document.addEventListener("DOMContentLoaded", function() {
                 </div>
             </a>
 
-            <a href="#" class="social-mega-card">
+            <a href="https://www.youtube.com/@coretech-store" class="social-mega-card">
                 <div class="card-content">
-                    <span class="card-label">Витрина</span>
-                    <h3 class="card-name">Wildberries</h3>
+                    <span class="card-label">Смотри наши видео</span>
+                    <h3 class="card-name">YouTube</h3>
                 </div>
                 <div class="card-image-wrapper">
-                    <img src="images/logo_wb.png" alt="Wildberries" class="floating-icon">
+                    <img src="images/logo_youtube.png" alt="Wildberries" class="floating-icon">
                 </div>
             </a>
         </div>
     </div>
 </section>
 
-<section class="social-mega-section-mobile sm-mobile-only">
+<section class="social-mega-section-mobile sm-mobile-only" id="block_contacts_m">
     <div class="m-social-container">
         <h2 class="m-social-title">СЛЕДИТЕ ЗА НАМИ <span class="accent">В СОЦ. СЕТЯХ</span></h2>
         
         <div class="m-social-grid">
-            <a href="#" class="m-social-card">
+            <a href="https://vk.com/coretech_pc" class="m-social-card">
                 <div class="m-card-content">
                     <span class="m-card-label">Перейти в группу</span>
                     <h3 class="m-card-name">ВКонтакте</h3>
@@ -3444,9 +3809,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 </div>
             </a>
 
-            <a href="#" class="m-social-card">
+            <a href="https://www.avito.ru/brands/i177752551" class="m-social-card">
                 <div class="m-card-content">
-                    <span class="m-card-label">Наш профиль</span>
+                    <span class="m-card-label">Перейти в профиль</span>
                     <h3 class="m-card-name">Авито</h3>
                 </div>
                 <div class="m-card-image-wrapper">
@@ -3454,9 +3819,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 </div>
             </a>
 
-            <a href="#" class="m-social-card">
+            <a href="https://ozon.ru/s/coretech" class="m-social-card">
                 <div class="m-card-content">
-                    <span class="m-card-label">Магазин</span>
+                    <span class="m-card-label">Перейти в наш магазин</span>
                     <h3 class="m-card-name">OZON</h3>
                 </div>
                 <div class="m-card-image-wrapper">
@@ -3464,13 +3829,13 @@ document.addEventListener("DOMContentLoaded", function() {
                 </div>
             </a>
 
-            <a href="#" class="m-social-card">
+            <a href="https://www.youtube.com/@coretech-store" class="m-social-card">
                 <div class="m-card-content">
-                    <span class="m-card-label">Витрина</span>
-                    <h3 class="m-card-name">Wildberries</h3>
+                    <span class="m-card-label">Смотри наши видео</span>
+                    <h3 class="m-card-name">YouTube</h3>
                 </div>
                 <div class="m-card-image-wrapper">
-                    <img src="images/logo_wb.png" alt="Wildberries" class="m-floating-icon">
+                    <img src="images/logo_youtube.png" alt="Wildberries" class="m-floating-icon">
                 </div>
             </a>
         </div>
@@ -3622,7 +3987,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     .m-social-title {
         color: #1a1a1a;
-        font-size: 26px; /* Адаптивный размер шрифта под мобилки */
+        font-size: 36px; /* Адаптивный размер шрифта под мобилки */
         font-weight: 900;
         text-transform: uppercase;
         margin-bottom: 30px;
@@ -3643,7 +4008,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     .m-social-card {
         position: relative;
-        height: 260px; /* Оптимальная высота, чтобы поместиться в ширину экрана 2х2 */
+        height: 180px; /* Оптимальная высота, чтобы поместиться в ширину экрана 2х2 */
         background: #f8f9fa;
         border-radius: 20px;
         padding: 20px;
@@ -4039,39 +4404,55 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalImg = document.getElementById('modal-img');
 
     // 1. ДАННЫЕ ОТЗЫВОВ (Добавляй новые тут)
-    const reviewsData = [
-        { name: "Александр П.", source: "Telegram", img: "images/reviews/r1.png", link: "https://t.me/your_link1" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-        { name: "Иван И.", source: "WhatsApp", img: "images/reviews/r1.png", link: "https://wa.me/your_link2" },
-    ];
+     const reviewsData = [
+    { name: "Пользователь",  source:"Avito",img:  "images/reviews/2081715930.png", link: "https://www.avito.ru/brands/i177752551/all?sellerId=4bb001b8fc2a08075dae6b7a921c87d4" },
+    { name: "Елена Н.",  source:"OZON",img:  "images/reviews/2081715932.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019d8233-33c6-76ad-9a73-d0ab3364a07b&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Надежда Д.",  source:"OZON",img:  "images/reviews/2081715933.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019d10c5-ca77-779f-adde-da4f91dde3e3&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Naum",  source:"Avito",img:  "images/reviews/2081716004.png", link: "https://www.avito.ru/brands/i177752551/all?sellerId=4bb001b8fc2a08075dae6b7a921c87d4" },
+    { name: "Андрей Е.",  source:"OZON",img:  "images/reviews/2081715934.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=0196b601-9736-7b43-85a6-597ead466e99&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Игорь Д.",  source:"OZON",img:  "images/reviews/2081715935.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019d9083-a54b-7b91-b8d5-016f48e58dbb&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Леонид",  source:"Avito",img:  "images/reviews/2081716003.png", link: "https://www.avito.ru/brands/i177752551/all?sellerId=4bb001b8fc2a08075dae6b7a921c87d4" },
+    { name: "Ольга Ш.",  source:"OZON",img:  "images/reviews/2081715936.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019d7370-4f25-7c15-b799-871891428b22&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Вадим Т.",  source:"ВКонтакте",img:  "images/reviews/2081715978.png", link: "https://vk.com/reviews-226911143" },
+    { name: "Вячеслав П..",  source:"OZON",img:  "images/reviews/2081715937.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-i3-intel-core-i3-12100f-ram-16-gb-ssd-512-gb-2031690485/reviews/?ruuid=01964876-b315-7bcd-8e0a-76cf6029fe3e&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Максим Е.",  source:"OZON",img:  "images/reviews/2081715938.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-i3-intel-core-i3-12100f-ram-16-gb-ssd-512-gb-2031690485/reviews/?ruuid=01964523-8900-7043-be69-0bcb334a3bdc&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Мухаммад",  source:"Avito",img:  "images/reviews/2081716001.png", link: "https://www.avito.ru/brands/i177752551/all?sellerId=4bb001b8fc2a08075dae6b7a921c87d4" },
+    { name: "Игорь А.",  source:"OZON",img:  "images/reviews/2081715939.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i3-12100f-ram-16-gb-ssd-512-gb-nvidia-2078221567/reviews/?ruuid=01969ef0-1f73-737f-a003-479c00663c30&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Шевченко К.",  source:"Avito",img:  "images/reviews/2081716000.png", link: "https://www.avito.ru/brands/i177752551/all?sellerId=4bb001b8fc2a08075dae6b7a921c87d4" },
+    { name: "Владислав",  source:"Avito",img:  "images/reviews/2081715999.png", link: "https://www.avito.ru/brands/i177752551/all?sellerId=4bb001b8fc2a08075dae6b7a921c87d4" },
+    { name: "Сергей К.",  source:"OZON",img:  "images/reviews/2081715940.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-16-gb-ssd-1024-gb-1974227228/reviews/?ruuid=0197249d-07a9-7e2d-b6fb-6dc239c19f11&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Эльдар Ш.",  source:"OZON",img:  "images/reviews/2081715945.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019a5dba-db2e-705c-b2eb-d1319b8aa269&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Всеволод Г.",  source:"OZON",img:  "images/reviews/2081715946.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019b1d84-2e95-7ec1-8d7e-2dc4c3a6ba9b&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Николай",  source:"OZON",img:  "images/reviews/2081715947.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019cfc9e-3b7a-7cf4-9ca3-a1bce1e2fb95&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    /* { name: "Юлия Я.",  source:"OZON",img:  "images/reviews/2081715948.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019d38df-e120-7ba3-92f1-9e03d33660d0&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Руслан С.",  source:"OZON",img:  "images/reviews/2081715949.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019b503c-4d1f-7b96-aa3d-75642c2c073d&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Максим Ч.",  source:"OZON",img:  "images/reviews/2081715950.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-white-amd-ryzen-5-7500f-ram-16-gb-ssd-1024-gb-nvidia-2078221558/reviews/?ruuid=0196c94e-31e0-70ed-9e09-6b19d799631c&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Денис П.",  source:"OZON",img:  "images/reviews/2081715951.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019b1057-305b-78ac-b059-b07934d4def2&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Павел К.",  source:"OZON",img:  "images/reviews/2081715952.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019c4650-9bc8-76cc-993c-fb2de564a534&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "No More-Cash. ",  source:"ВКонтакте",img:  "images/reviews/2081715974.png", link: "https://vk.com/reviews-226911143" },
+    { name: "Натали К.",  source:"OZON",img:  "images/reviews/2081715954.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019ab65d-576e-76d7-8e60-e0037ce5c982&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Максим С.",  source:"OZON",img:  "images/reviews/2081715955.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019c22b6-2cf8-7143-9a5a-2a6ef9e49cd0&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Наталья Г.",  source:"OZON",img:  "images/reviews/2081715956.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019ae9f9-e786-7cee-8598-08c29e7e8b14&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Юлия Г.",  source:"OZON",img:  "images/reviews/2081715957.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019a7d21-449d-792a-a43f-f1bc4723adf7&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Vyacheslav M.",  source:"OZON",img:  "images/reviews/2081715958.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019e1b9f-4aa0-7c95-9b02-5f799d41d580&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Максим Т.",  source:"OZON",img:  "images/reviews/2081715959.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019e497d-f81a-7453-997a-21d9c852232b&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Вадим С.",  source:"OZON",img:  "images/reviews/2081715960.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019ba08a-7dfe-704c-b102-b63a0458f4c4&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Андрей П.",  source:"OZON",img:  "images/reviews/2081715961.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019d01cc-5a40-7d4d-83d6-f615c9406542&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Виталий С.",  source:"OZON",img:  "images/reviews/2081715962.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-magic-one-intel-core-i5-13400f-ram-32-gb-ssd-960-gb-2595941619/reviews/?ruuid=0198e99f-e730-7832-82d7-dc89d079dcaa&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Александр К.",  source:"OZON",img:  "images/reviews/2081715963.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=01969ad9-847f-7626-8871-e393e0f7c35d&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Вечер Добрый",  source:"ВКонтакте",img:  "images/reviews/2081715967.png", link: "https://vk.com/reviews-226911143" },
+    { name: "Вячеслав П.",  source:"Вконтакте",img:  "images/reviews/2081715968.png", link: "https://vk.com/reviews-226911143" },
+    { name: "Ilya M..",  source:"ВКонтакте",img:  "images/reviews/2081715969.png", link: "https://vk.com/reviews-226911143" },
+    { name: "Алекс С.",  source:"ВКонтакте",img:  "images/reviews/2081715970.png", link: "https://vk.com/reviews-226911143" },
+    { name: "Владислав Г.",  source:"ВКонтакте",img:  "images/reviews/2081715971.png", link: "https://vk.com/reviews-226911143" },
+    { name: "Макс А.",  source:"ВКонтакте",img:  "images/reviews/2081715972.png", link: "https://vk.com/reviews-226911143" },
+    { name: "Евгений П.",  source:"OZON",img:  "images/reviews/2081715973.png", link: "https://www.ozon.ru/product/sistemnyy-blok-igrovoy-kompyuter-coretech-hyper-k3-intel-core-i5-14400f-ram-32-gb-ssd-1024-gb-1974233294/reviews/?ruuid=019dfc28-9e33-71b5-9bed-34f059cf7484&utm_campaign=reviews_link&utm_medium=share_button&utm_source=smm" },
+    { name: "Виталий Ю.",  source:"ВКонтакте",img:  "images/reviews/2081715975.png", link: "https://vk.com/reviews-226911143" },
+    { name: "Александр",  source:"Avito",img:  "images/reviews/2081715982.png", link: "https://www.avito.ru/brands/i177752551/all?sellerId=4bb001b8fc2a08075dae6b7a921c87d4" },
+    { name: "Надежда",  source:"Avito",img:  "images/reviews/2081715984.png", link: "https://www.avito.ru/brands/i177752551/all?sellerId=4bb001b8fc2a08075dae6b7a921c87d4" },
+    */
+
+    ]; 
 
     // 2. ФУНКЦИЯ ШАБЛОНА
     function createCard(data) {
@@ -4151,13 +4532,264 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 </script>
-</section>
-</script>
 
+</section>
 <div id="image-modal" class="review-modal">
     <span class="modal-close">&times;</span>
     <img id="modal-img" src="" alt="Full view">
 </div>
+
+
+<section class="g-map-section" id="contacts">
+    <div class="g-container-map">
+        <div class="g-map-inner-box">
+            <div class="g-map-info-card">
+                <h2 class="g-map-title">НАШ МАГАЗИН</h2>
+                <p class="g-map-subtitle">Приезжайте в гости за своим мощным ПК или на бесплатную консультацию!</p>
+                
+                <div class="g-map-info-list">
+                    <div class="g-map-info-item">
+                        <span class="g-map-icon"></span>
+                        <div>
+                            <div class="g-map-item-label">Адрес:</div>
+                            <div class="g-map-item-value">г. Таганрог, ул. Пархоменко 2 <br>(помещение возле кофейни)</div>
+                        </div>
+                    </div>
+                    <div class="g-map-info-item">
+                        <span class="g-map-icon"></span>
+                        <div>
+                            <div class="g-map-item-label">Режим работы:</div>
+                            <div class="g-map-item-value">Будни: с 18:00 до 22:00 <br> Выходные: с 12:00 до 20:00</div>
+                        </div>
+                    </div>
+                    <div class="g-map-info-item">
+                        <span class="g-map-icon"></span>
+                        <div>
+                            <div class="g-map-item-label">Телефон:</div>
+                            <div class="g-map-item-value">+7 (999) 000-00-00</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="g-map-buttons-group">
+                    <a href="https://yandex.ru/maps/-/CPXOzRm3" target="_blank" class="g-btn g-map-purple-link g-map-btn">
+                        ОТКРЫТЬ В ЯНДЕКС.КАРТАХ
+                    </a>
+                    <button class="g-btn g-map-order-btn btn-consult g-map-btn">
+                        ЗАКАЗАТЬ КОМПЬЮТЕР
+                    </button>
+                </div>
+            </div>
+
+            <a href="https://yandex.ru/maps/?um=constructor%3A946928e213b36b8a2b53e2499b6ebbac91878f0789e6c5aa97d94f32a3f8e471&amp;source=constructorStatic" target="_blank" class="g-map-static-wrapper">
+                <img src="https://api-maps.yandex.ru/services/constructor/1.0/static/?um=constructor%3A946928e213b36b8a2b53e2499b6ebbac91878f0789e6c5aa97d94f32a3f8e471&amp;width=600&amp;height=450&amp;lang=ru_RU" alt="Карта проезда" class="g-map-static-img" />
+            </a>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* СТИЛИ СЕКЦИИ КАРТЫ */
+    .g-map-section {
+        position: relative;
+        padding: 40px 0;
+        font-family: 'Nunito', sans-serif;
+        z-index: 1;
+        width: 100%;
+        box-sizing: border-box;
+        max-width: 1230px; /* Сюда ставишь ширину своего сайта */
+        margin: 0 auto;
+    }
+
+    .g-map-inner-box {
+        display: flex;
+        flex-direction: row;
+        background: #ffffff;
+        border: 3px solid #000000;
+        border-radius: 24px;
+        box-shadow: 8px 8px 0px #000000;
+        overflow: hidden;
+        min-height: 480px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Левая карточка с текстом */
+    .g-map-info-card {
+        flex: 1;
+        padding: 40px;
+        background: #ffffff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-right: 3px solid #000000;
+        box-sizing: border-box;
+    }
+
+    .g-map-title {
+        font-size: 32px;
+        font-weight: 900;
+        color: #000000;
+        margin: 0 0 10px 0;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .g-map-subtitle {
+        font-size: 16px;
+        font-weight: 800;
+        color: #666666;
+        margin: 0 0 25px 0;
+        line-height: 1.4;
+    }
+
+    .g-map-info-list {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+
+    .g-map-info-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .g-map-icon {
+        font-size: 24px;
+        line-height: 1;
+        padding-top: 2px;
+    }
+
+    .g-map-item-label {
+        font-size: 14px;
+        font-weight: 800;
+        color: #999999;
+        text-transform: uppercase;
+        margin-bottom: 2px;
+    }
+
+    .g-map-item-value {
+        font-size: 16px;
+        font-weight: 900;
+        color: #000000;
+        line-height: 1.3;
+    }
+
+    /* Блок для двух кнопок */
+    .g-map-buttons-group {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+        margin-top: auto;
+    }
+
+    .g-map-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 55px;
+        font-size: 15px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-decoration: none;
+        box-sizing: border-box;
+        width: 100%;
+        font-family: 'Nunito', sans-serif;
+    }
+
+    .g-map-purple-link {
+        background-color: #7d5fff !important;
+        color: #ffffff !important;
+        border: 3px solid #000000 !important;
+        box-shadow: 4px 4px 0px #000000 !important;
+    }
+
+    .g-map-purple-link:hover {
+        background-color: #6c4bf6 !important;
+        transform: translate(-2px, -2px) !important;
+        box-shadow: 6px 6px 0px #000000 !important;
+    }
+
+    .g-map-purple-link:active {
+        transform: translate(2px, 2px) !important;
+        box-shadow: 2px 2px 0px #000000 !important;
+    }
+
+    .g-map-order-btn {
+        background: #ffffff;
+        color: #000000;
+        border: 3px solid #000000;
+        box-shadow: 4px 4px 0px #000000;
+    }
+
+    .g-map-order-btn:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 6px 6px 0px #000000;
+    }
+
+    .g-map-order-btn:active {
+        transform: translate(2px, 2px);
+        box-shadow: 2px 2px 0px #000000;
+    }
+
+    /* Правая часть - контейнер картинки */
+    .g-map-static-wrapper {
+        flex: 1.2;
+        background: #f8f9fa;
+        display: block;
+        overflow: hidden;
+        position: relative;
+    }
+
+    /* Плавное растягивание картинки без деформаций и перегрузки памяти */
+    .g-map-static-img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        border: 0;
+        object-fit: cover; /* Заполняет блок 1:1 без растягивания лиц и шрифтов */
+    }
+
+    /* АДАПТИВ ПОД МОБИЛКИ */
+    @media (max-width: 991px) {
+        .g-map-section {
+            padding: 30px 15px;
+        }
+        
+        .g-map-inner-box {
+            flex-direction: column;
+            min-height: auto;
+        }
+
+        .g-map-info-card {
+            border-right: none;
+            border-bottom: 3px solid #000000;
+            padding: 30px 20px;
+        }
+
+        .g-map-static-wrapper {
+            height: 280px; /* Ограничиваем высоту картинки на телефонах */
+            width: 100%;
+            flex: none;
+        }
+        
+        .g-map-static-img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .g-map-title {
+            font-size: 26px;
+        }
+    }
+</style>
 
 <section class="footer-wrapper">
     <style>
@@ -4570,6 +5202,427 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 </script>
+
+    <!-- ========================================== -->
+    <!-- СЕКЦИЯ: МОДАЛЬНОЕ ОКНО ЗАЯВКИ (CORETECH POPUP) -->
+    <!-- ========================================== -->
+    <div class="core-modal-overlay" id="js-core-modal">
+        <div class="core-modal-window">
+            <!-- Кнопка закрытия (крестик) -->
+            <button class="core-modal-close-btn" id="js-modal-close" aria-label="Закрыть окно">&times;</button>
+            
+            <!-- Заголовок и описание -->
+            <h3 class="core-modal-title">Оставить заявку</h3>
+            <p class="core-modal-subtitle">Заполните форму, и наш инженер свяжется с вами для детальной консультации по вашей будущей сборке.</p>
+            
+            <!-- Форма отправки -->
+            <form class="core-modal-form" action="#" method="POST" id="js-core-modal-form">
+                <div class="core-modal-field">
+                    <label class="core-modal-label" for="modal-name">Имя</label>
+                    <input class="core-modal-input" type="text" id="modal-name" name="name" placeholder="Как к вам обращаться?" required>
+                </div>
+                
+                <div class="core-modal-field">
+                    <label class="core-modal-label" for="modal-phone">Телефон</label>
+                    <input class="core-modal-input" type="tel" id="modal-phone" name="phone" placeholder="+7 (999) 999-99-99" required>
+                </div>
+                
+                <div class="core-modal-field">
+                    <label class="core-modal-label" for="modal-comment">Комментарий (необязательно)</label>
+                    <textarea class="core-modal-textarea" id="modal-comment" name="comment" placeholder="Напишите ваши пожелания, бюджет или предпочитаемые игры..."></textarea>
+                </div>
+                
+                <button class="core-modal-submit-btn" type="submit">Отправить заявку</button>
+            </form>
+
+            <!-- НОВЫЙ БЛОК: Ссылки на соцсети -->
+            <div class="core-modal-divider"></div>
+            
+            <div class="core-modal-socials-block">
+                <p class="core-modal-socials-text">Хотите сразу же получить ответ? Напишите нам в наши соц. сети по ссылкам ниже. Наш менеджер ответит очень быстро :)</p>
+                <div class="core-modal-socials-buttons">
+                    <!-- Замени '#' на реальную ссылку на ваш паблик ВК -->
+                    <a href="#" target="_blank" class="core-social-btn btn-vk">ВКонтакте</a>
+                    <!-- Замени '#' на реальную ссылку на ваш профиль Авито -->
+                    <a href="#" target="_blank" class="core-social-btn btn-avito">Авито</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script type="text/javascript">
+   (function(){
+      // СЮДА ВСТАВЬ СВОЙ ПУБЛИЧНЫЙ КЛЮЧ ИЗ EMAILJS
+      emailjs.init("yl8cWtX-qkcRYoMOm");
+   })();
+
+   document.addEventListener("DOMContentLoaded", function() {
+       // Находим форму внутри твоего модального окна
+       const modalForm = document.querySelector('.core-modal-form');
+       
+       if (modalForm) {
+           modalForm.addEventListener('submit', function(event) {
+               event.preventDefault(); // Запрещаем перезагрузку страницы
+
+               // Находим кнопку отправки, чтобы изменить текст на время загрузки
+               const submitBtn = modalForm.querySelector('.core-modal-submit-btn');
+               const originalBtnText = submitBtn.textContent;
+               submitBtn.textContent = 'Отправка...';
+               submitBtn.disabled = true;
+
+               // Собираем данные из твоих существующих инпутов
+               const templateParams = {
+                   name: document.getElementById('modal-name').value,
+                   phone: document.getElementById('modal-phone').value,
+                   comment: document.getElementById('modal-comment').value
+               };
+
+               // Отправляем данные через EmailJS
+               // Замени СЕРВИС_ИД и ШАБЛОН_ИД на свои значения из панели
+               emailjs.send('service_62xzspt', 'template_alt7rur', templateParams)
+                   .then(function(response) {
+                       alert('Заявка успешно отправлена! Наш инженер свяжется с вами.');
+                       modalForm.reset(); // Очищаем поля формы
+                       
+                       // Закрываем модальное окно (удаляем класс active или скрываем, если используется ID)
+                       const modalOverlay = document.getElementById('js-core-modal');
+                       if (modalOverlay) {
+                           modalOverlay.style.display = 'none'; // либо modalOverlay.classList.remove('active') смотря как у тебя реализовано закрытие
+                       }
+                   }, function(error) {
+                       alert('Ошибка при отправке: ' + JSON.stringify(error));
+                   })
+                   .finally(function() {
+                       // Возвращаем кнопку в исходное состояние
+                       submitBtn.textContent = originalBtnText;
+                       submitBtn.disabled = false;
+                   });
+           });
+       }
+   });
+</script>
+
+    <style>
+        /* Оверлей (затемненный фон вокруг окна) */
+        .core-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75); /* Плотное красивое затемнение */
+            backdrop-filter: blur(8px); /* Стильное размытие заднего плана */
+            z-index: 9999; /* Поверх абсолютно всего на сайте */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Класс активации модалки (плавное появление) */
+        .core-modal-overlay.is-active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Само модальное окно (дизайн строго по фото) */
+        .core-modal-window {
+            background-color: #0b0b0b; /* Глубокий темный фон как у карточек */
+            border: 1px solid rgba(78, 240, 195, 0.15); /* Фирменная мятная микро-рамка */
+            border-radius: 16px; /* Аккуратные закругления по фото */
+            width: 100%;
+            max-width: 440px; /* Идеальная адаптивная ширина под мобилки и ПК */
+            padding: 40px 30px;
+            box-sizing: border-box;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+        }
+
+        /* Анимация приоткрытия окна (слегка приподнимается и выезжает) */
+        .core-modal-overlay.is-active .core-modal-window {
+            transform: translateY(0);
+        }
+
+        /* Кнопка закрытия (Крестик) */
+        .core-modal-close-btn {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 32px;
+            line-height: 1;
+            cursor: pointer;
+            transition: color 0.2s ease, transform 0.2s ease;
+            padding: 0;
+        }
+        .core-modal-close-btn:hover {
+            color: #4ef0c3; /* Подсветка мятным при наведении */
+            transform: scale(1.1);
+        }
+
+        /* Заголовок модалки */
+        .core-modal-title {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 900;
+            font-size: 28px;
+            color: #ffffff;
+            margin: 0 0 10px 0;
+            text-align: center;
+            letter-spacing: -0.5px;
+        }
+
+        /* Описание под заголовком */
+        .core-modal-subtitle {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            margin: 0 0 30px 0;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        /* Контейнер формы */
+        .core-modal-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Поля ввода и их контейнеры */
+        .core-modal-field {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        /* Текст над инпутами (Имя, Телефон) */
+        .core-modal-label {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding-left: 4px;
+        }
+
+        /* Общие стили для полей ввода (По фото) */
+        .core-modal-input,
+        .core-modal-textarea {
+            background-color: #121212; /* Чуть темнее основного фона окна */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: #ffffff;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+            font-size: 15px;
+            padding: 14px 16px;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            width: 100%;
+        }
+
+        /* Кастомизация плейсхолдера (текста-подсказки) */
+        .core-modal-input::placeholder,
+        .core-modal-textarea::placeholder {
+            color: rgba(255, 255, 255, 0.25);
+            font-weight: 800;
+        }
+
+        /* Эффект фокуса на инпутах — аккуратное неоновое свечение */
+        .core-modal-input:focus,
+        .core-modal-textarea:focus {
+            border-color: #4ef0c3;
+            box-shadow: 0 0 10px rgba(78, 240, 195, 0.15);
+        }
+
+        /* Фиксированная высота для текстового поля */
+        .core-modal-textarea {
+            height: 90px;
+            resize: none; /* Запрещаем растягивать, чтобы не ломать верстку окна */
+        }
+
+        /* Мятная неоновая кнопка отправки (Один в один как твои основные кнопки) */
+        .core-modal-submit-btn {
+            background-color: #4ef0c3;
+            color: #000000;
+            border: none;
+            border-radius: 12px;
+            padding: 16px 20px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 900;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin-top: 10px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .core-modal-submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(78, 240, 195, 0.35);
+        }
+
+        .core-modal-submit-btn:active {
+            transform: translateY(1px);
+        }
+
+        /* Разделительная линия внутри окна */
+        .core-modal-divider {
+            height: 1px;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0));
+            margin: 25px 0 20px 0;
+            width: 100%;
+        }
+
+        /* Блок соцсетей */
+        .core-modal-socials-block {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            text-align: center;
+        }
+
+        /* Текст призыва к действию в соцсетях */
+        .core-modal-socials-text {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+            line-height: 1.5;
+            margin: 0;
+            padding: 0 10px;
+        }
+
+        /* Контейнер для двух кнопок в один ряд */
+        .core-modal-socials-buttons {
+            display: flex;
+            gap: 12px;
+            width: 100%;
+        }
+
+       /* Общие стили для кнопок соцсетей */
+        .core-social-btn {
+            flex: 1; /* Делит место 50/50 автоматически */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 15px;
+            border-radius: 10px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+            font-size: 14px;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+            box-sizing: border-box;
+            position: relative; /* Важно для позиционирования невидимой зоны */
+        }
+
+        /* Создаем невидимую подушку снизу, чтобы кнопка не теряла курсор при подъеме */
+        .core-social-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: calc(100% + 6px); /* Расширяем зону клика чуть ниже кнопки */
+            border-radius: 10px;
+            pointer-events: auto;
+            z-index: -1;
+        }
+
+        /* Стиль для кнопки ВКонтакте */
+        .btn-vk {
+            background-color: #0077ff;
+            color: #ffffff;
+        }
+        .btn-vk:hover {
+            box-shadow: 0 5px 15px rgba(0, 119, 255, 0.3);
+            filter: brightness(1.1);
+            transform: translateY(-3px); /* Смещение теперь мягкое и глубокое */
+        }
+
+        /* Стиль для кнопки Авито */
+        .btn-avito {
+            background-color: #4bac43;
+            color: #ffffff;
+        }
+        .btn-avito:hover {
+            box-shadow: 0 5px 15px rgba(75, 172, 67, 0.3);
+            filter: brightness(1.1);
+            transform: translateY(-3px);
+        }
+        
+        .core-social-btn:active {
+            transform: translateY(1px);
+        }
+
+
+        /* Мягкая адаптация под самые мелкие мобилки */
+        @media (max-width: 480px) {
+            .core-modal-window {
+                padding: 35px 20px 30px;
+            }
+            .core-modal-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('js-core-modal');
+            const closeBtn = document.getElementById('js-modal-close');
+            
+            // Добавили .btn-purple в список через запятую
+            const openButtons = document.querySelectorAll('.hero-action-btn, .configurator-action-btn, .mobile-menu-action-btn, .btn-purple, .btn-consult');
+
+            // 1. Открытие модалки при клике на любую из кнопок
+            openButtons.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault(); // Предотвращаем прыжки, если это ссылки #
+                    modal.classList.add('is-active');
+                    document.body.style.overflow = 'hidden'; // Блокируем скролл сайта под окном
+                });
+            });
+
+            // 2. Функция закрытия
+            function closeModal() {
+                modal.classList.remove('is-active');
+                document.body.style.overflow = ''; // Возвращаем скролл сайта
+            }
+
+            // Закрытие по крестику
+            closeBtn.addEventListener('click', closeModal);
+
+            // Закрытие при клике на темную область (оверлей) вокруг окна
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+
+            // Закрытие при нажатии кнопки Escape на клавиатуре
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.classList.contains('is-active')) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>
