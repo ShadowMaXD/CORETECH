@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <!-- Основной favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  
+  <!-- Для современных браузеров (PNG) -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Игровые компьютеры от CORETECH</title>
@@ -5532,16 +5538,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         /* Создаем невидимую подушку снизу, чтобы кнопка не теряла курсор при подъеме */
+        /* По умолчанию, когда модалка скрыта, полностью отключаем клики для этой подушки */
         .core-social-btn::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: calc(100% + 6px); /* Расширяем зону клика чуть ниже кнопки */
+            height: calc(100% + 6px);
             border-radius: 10px;
-            pointer-events: auto;
             z-index: -1;
+            
+            /* ВОТ ЭТО ОТКЛЮЧИТ КЛИКИ НАГЛУХО */
+            pointer-events: none; 
+        }
+
+        /* Включаем кликабельность подушки ТОЛЬКО тогда, когда у модалки есть класс .is-active */
+        .core-modal-overlay.is-active .core-social-btn::before {
+            pointer-events: auto;
         }
 
         /* Стиль для кнопки ВКонтакте */
@@ -5584,44 +5598,51 @@ document.addEventListener('DOMContentLoaded', () => {
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const modal = document.getElementById('js-core-modal');
-            const closeBtn = document.getElementById('js-modal-close');
-            
-            // Добавили .btn-purple в список через запятую
-            const openButtons = document.querySelectorAll('.hero-action-btn, .configurator-action-btn, .mobile-menu-action-btn, .btn-purple, .btn-consult');
+    // Находим оверлей по новому классу
+    const modal = document.querySelector('.core-modal-overlay');
+    // Находим кнопку закрытия (крестик)
+    const closeBtn = document.querySelector('.core-modal-close-btn');
+    
+    // Находим ВСЕ кнопки на сайте, которые должны открывать эту модалку
+    const openButtons = document.querySelectorAll('.hero-action-btn, .configurator-action-btn, .mobile-menu-action-btn, .btn-purple, .btn-consult');
 
-            // 1. Открытие модалки при клике на любую из кнопок
-            openButtons.forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    e.preventDefault(); // Предотвращаем прыжки, если это ссылки #
-                    modal.classList.add('is-active');
-                    document.body.style.overflow = 'hidden'; // Блокируем скролл сайта под окном
-                });
-            });
-
-            // 2. Функция закрытия
-            function closeModal() {
-                modal.classList.remove('is-active');
-                document.body.style.overflow = ''; // Возвращаем скролл сайта
-            }
-
-            // Закрытие по крестику
-            closeBtn.addEventListener('click', closeModal);
-
-            // Закрытие при клике на темную область (оверлей) вокруг окна
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    closeModal();
-                }
-            });
-
-            // Закрытие при нажатии кнопки Escape на клавиатуре
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && modal.classList.contains('is-active')) {
-                    closeModal();
-                }
+    // Проверяем, существует ли модалка на странице, чтобы не ловить ошибки в консоли
+    if (modal) {
+        // 1. Открытие модалки при клике на любую из кнопок
+        openButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault(); // Предотвращаем дефолтное поведение ссылок
+                modal.classList.add('is-active'); // Включаем видимость и кликабельность
+                document.body.style.overflow = 'hidden'; // Блокируем скролл сайта под окном
             });
         });
+
+        // 2. Функция закрытия
+        function closeModal() {
+            modal.classList.remove('is-active'); // Возвращаем pointer-events: none и opacity: 0
+            document.body.style.overflow = ''; // Возвращаем скролл сайта
+        }
+
+        // Закрытие по крестику
+        if (closeBtn) {
+            closeBtn.addEventListener('click', closeModal);
+        }
+
+        // Закрытие при клике на темную область (оверлей) вокруг окна
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Закрытие при нажатии кнопки Escape на клавиатуре
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('is-active')) {
+                closeModal();
+            }
+        });
+    }
+});
     </script>
 
 </body>
