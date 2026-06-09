@@ -2500,13 +2500,13 @@ body {
                 <a href="#" class="g-action-btn">Напишите <br>нам в VK</a>
             </div>
 
-            <div style="display: flex; align-items: center; text-align: center; color: rgb(0, 0, 0); font-weight: 900; font-size: 12px; margin-bottom: 20px;">
+            <!-- <div style="display: flex; align-items: center; text-align: center; color: rgb(0, 0, 0); font-weight: 900; font-size: 12px; margin-bottom: 20px;">
                 <div style="flex: 1; border-bottom: 1px dashed rgba(255,255,255,0.15);"></div>
                 <span style="padding: 0 15px; letter-spacing: 2px;">ИЛИ ОТПРАВИТЬ ЗАЯВКУ СРАЗУ</span>
                 <div style="flex: 1; border-bottom: 1px dashed rgba(255,255,255,0.15);"></div>
-            </div>
+            </div> -->
 
-            <form id="gInlineBuyForm" style="display: flex; flex-direction: column; gap: 12px; width: 100%;">
+            <!-- <form id="gInlineBuyForm" style="display: flex; flex-direction: column; gap: 12px; width: 100%;">
                 <input type="text" class="core-modal-input" placeholder="ВАШЕ ИМЯ" required name="user_name">
                 <input type="tel" class="core-modal-input" placeholder="ВАШ ТЕЛЕФОН" required name="user_phone">
                 <textarea class="core-modal-textarea" placeholder="КОММЕНТАРИЙ К ЗАКАЗУ (НЕОБЯЗАТЕЛЬНО)" name="user_comment" rows="2"></textarea>
@@ -2514,7 +2514,7 @@ body {
                 <button type="submit" class="g-action-btn" id="gSubmitInlineOrder" style="width: 100%; max-width: 100%; margin-top: 5px; background: #7d5fff; color: #fff; border: none; font-weight: bold;">
                     ОТПРАВИТЬ ЗАЯВКУ
                 </button>
-            </form>
+            </form> -->
         </div>
     </div>
 
@@ -2938,8 +2938,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const nameArray = pc.name.split(' ');
             const mainName = nameArray[0] || '';
             const subName = nameArray.slice(1).join(' ') || '';
-            const titleHtml = subName ? `${mainName} <span>${subName}</span>` : mainName;
-                  //  <button class="g-btn-buy" onclick="gOpenBuy(this)">Купить</button>
+            const titleHtml = subName ? `${mainName} <span>${subName}</span>` : mainName;  
 
             const cardStructure = `
                 <div class="product-card">
@@ -2966,6 +2965,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="product-price">${pc.price}</div>
                     
                     <button class="btn-card" onclick="openSpecsModal(this, ${specsDataStr})">Подробнее</button>
+                    <button class="g-btn-buy" onclick="gOpenBuy(this)">Купить</button>
                 </div>
             `;
             

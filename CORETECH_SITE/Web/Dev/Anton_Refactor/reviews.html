@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Отзывы клиентов — CORETECH</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/reviews.js" defer></script>
+</head>
+<body class="reviews-page">
+
+  <div class="bg-container"><div class="main-background"></div></div>
+
+  <header class="site-header">
+    <a href="index.html" class="logo">CORE<span>TECH</span></a>
+    <nav class="nav-links">
+      <a href="index.html">Главная</a>
+      <a href="index.html#block_catalog">Сборки</a>
+      <a href="reviews.html" style="color: #4ef0c3;">Отзывы</a>
+    </nav>
+  </header>
+
+  <section class="reviews-page-section">
+    <div class="reviews-header">
+      <a href="index.html" class="back-to-main-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg> Вернуться на сайт
+      </a>
+      <h2>Отзывы клиентов</h2>
+    </div>
+
+    <div class="reviews-subtitle">Честные отзывы от реальных покупателей наших мощных игровых машин</div>
+    
+    <div class="total-rating-container">
+      <div class="total-rating-score">
+        <div class="total-score-digit">5.0</div>
+        <div class="total-score-stars">★★★★★</div>
+        <div class="total-score-count">на основе отзывов</div>
+      </div>
+      <div class="total-rating-stars-list">
+        <div class="rating-bar-row"><span class="rating-bar-number">5</span><div class="rating-bar-track"><div class="rating-bar-fill-5"></div></div><span class="rating-bar-percent">100%</span></div>
+        <div class="rating-bar-row"><span class="rating-bar-number">4</span><div class="rating-bar-track"><div class="rating-bar-fill-empty"></div></div><span class="rating-bar-percent">0%</span></div>
+        <div class="rating-bar-row"><span class="rating-bar-number">3</span><div class="rating-bar-track"><div class="rating-bar-fill-empty"></div></div><span class="rating-bar-percent">0%</span></div>
+        <div class="rating-bar-row"><span class="rating-bar-number">2</span><div class="rating-bar-track"><div class="rating-bar-fill-empty"></div></div><span class="rating-bar-percent">0%</span></div>
+        <div class="rating-bar-row"><span class="rating-bar-number">1</span><div class="rating-bar-track"><div class="rating-bar-fill-empty"></div></div><span class="rating-bar-percent">0%</span></div>
+      </div>
+    </div>
+    
+    <div class="reviews-grid" id="js-reviews-page-grid"></div>
+  </section>
+
+  <div class="review-modal" id="reviewModal" onclick="closeReviewModal()">
+    <span class="modal-close">&times;</span>
+    <img id="modalImg" src="" alt="Отзыв крупно">
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-block footer-brand">
+        <div class="footer-logo">CORE<span>TECH</span></div>
+        <div class="footer-text">Создаем кастомные игровые компьютеры высшего уровня качества и производительности. Надежность, проверенная временем.</div>
+      </div>
+      <div class="footer-block">
+        <div class="footer-label">Реквизиты</div>
+        <div class="footer-requisites">
+          <p>ИП Музыкин Егор Анатольевич</p>
+          <p>ИНН 123456789012</p>
+          <p>ОГРНИП 123456789012345</p>
+          <span class="date-small">от 01.01.2024</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">
+      <div class="footer-disclaimer">Используя сайт, вы соглашаетесь с офертой и политикой конфиденциальности, в том числе с обработкой персональных данных. Информация на сайте не является публичной офертой.</div>
+      <div class="footer-bottom-right">
+        <div class="footer-copy">© 2026 Все права защищены | <b>Ваш надежный партнер</b></div>
+        <div class="footer-dev">Сайт разработали — <span>CORETECH</span></div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
