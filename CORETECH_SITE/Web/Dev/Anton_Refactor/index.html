@@ -1,374 +1,428 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Игровые компьютеры от CORETECH</title>
-  <link rel="icon" type="image/x-icon" href="/favicon.ico">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css">
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script src="assets/js/main.js" defer></script>
-</head>
-<body class="index-page">
-
-  <div class="white-stars-background" id="js-stars-space"></div>
-  <div class="bg-container"><div class="main-background"></div></div>
-
-  <header class="site-header">
-    <div class="header-logo"><img src="images/logo_ct.png" alt="CT"></div>
-    <nav class="header-nav">
-      <a href="#block_catalog">Каталог ПК</a>
-      <a href="#block_stages">Этапы работы</a>
-      <a href="#block_service">Сервис</a>
-      <a href="#block_team">Команда</a>
-      <a href="#block_social">Контакты</a>
-      <a href="reviews.html">Отзывы</a>
-    </nav>
-    <div class="header-actions">
-      <div class="social-circle1"><a href="https://vk.com/coretech_pc" target="_blank" style="display:flex;width:100%;height:100%;align-items:center;justify-content:center;text-decoration:none;"><img src="images/mini_logo_avito.png" alt="Avito"></a></div>
-      <div class="social-circle2"><a href="https://vk.com/coretech_pc" target="_blank" style="display:flex;width:100%;height:100%;align-items:center;justify-content:center;text-decoration:none;"><img src="images/mini_logo_vk.png" alt="VK"></a></div>
-      <a href="#consult" class="btn-consult">Консультация <span>→</span></a>
-      <button class="mobile-menu-toggle" id="js-mobile-toggle" aria-label="Открыть меню"><span></span><span></span><span></span></button>
-    </div>
-  </header>
-
-  <div class="mobile-menu-overlay" id="js-mobile-menu">
-    <div class="mobile-menu-container">
-      <nav class="mobile-menu-nav">
-        <a href="#block_catalog" class="mobile-menu-link">Каталог ПК</a>
-        <a href="#block_stages_m" class="mobile-menu-link">Этапы работы</a>
-        <a href="#block_service" class="mobile-menu-link">Сервис</a>
-        <a href="#block_team" class="mobile-menu-link">Команда</a>
-        <a href="#block_contacts_m" class="mobile-menu-link">Контакты</a>
-        <a href="reviews.html" class="mobile-menu-link">Отзывы</a>
-        <div class="mobile-menu-action-wrapper"><a href="#block_consultation" class="mobile-menu-action-btn">Подобрать компьютер</a></div>
-      </nav>
-    </div>
-  </div>
-
-  <section class="hero-section">
-    <div class="hero-content">
-      <div class="hero-subtitle">Кабель-менеджмент, подбор, качественная сборка и гарантия</div>
-      <div class="hero-title">Индивидуальная</div>
-      <div class="hero-title2">Сборка компьютеров</div>
-      <div class="hero-description">МЫ — пока еще небольшая команда энтузиастов, которая собирает каждый компьютер как для себя. Внимание к каждой мелочи и желание сделать лучшее для каждого клиента — не дают нам покоя.</div>
-      <div class="hero-btns">
-        <a href="#config-title" class="btn-hero">Собрать ПК <div class="arrow-icon"><img src="https://cdn-icons-png.flaticon.com/512/545/545682.png" alt="->"></div></a>
-        <a href="#block_catalog" class="btn-hero">Готовые сборки <div class="arrow-icon"><img src="https://cdn-icons-png.flaticon.com/512/545/545682.png" alt="->"></div></a>
-      </div>
-    </div>  
-    <div class="hero-image"><img src="images/pc2.png" alt="Custom PC"></div>   
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Игровые компьютеры от CORETECH</title>
     
-    <div class="promo-container">
-      <div class="promo-grid">
-        <div class="promo-card big-card">
-          <img src="images/pc1.jpg" alt="Акция" class="promo-img">
-          <div class="promo-overlay"></div>
-          <div class="promo-content">
-            <div class="promo-badge">Товар недели</div>
-            <h3 class="promo-title">Забирай <span>CORE PRO</span><br>со скидкой 10%</h3>
-            <p class="promo-desc">Максимальный FPS на ультра-настройках в 2К разрешении. Только до конца недели.</p>
-          </div>
-        </div>
-        <div class="promo-right-column">
-          <div class="promo-card">
-            <img src="images/pc1.jpg" alt="Трейд-ин" class="promo-img">
-            <div class="promo-overlay"></div>
-            <div class="promo-content">
-              <div class="promo-badge">Трейд-ин</div>
-              <h3 class="promo-title">Обнови свой <span>ПК</span></h3>
-              <p class="promo-desc">Сдай старый ПК и получи скидку.</p>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+    <div class="white-stars-background" id="js-stars-space"></div>
+    <div class="bg-container"><div class="main-background"></div></div>
+
+    <header class="site-header">
+        <div class="header-logo"><img src="images/logo_ct.png" alt="CT"></div>
+        <nav class="header-nav">
+            <a href="index.html#block_catalog">Catalog PC</a>
+            <a href="index.html#block_stages">Stages of work</a>
+            <a href="index.html#block_service">Service</a>
+            <a href="index.html#block_team">Team</a>
+            <a href="index.html#block_social">Contacts</a>
+            <a href="reviews.html">Reviews</a>
+        </nav>
+        <div class="header-actions">
+            <div class="social-circle1">
+                <a href="https://vk.com/coretech_pc" target="_blank" style="display: flex; width: 100%; height: 100%; align-items: center; justify-content: center; text-decoration: none;">
+                    <img src="images/mini_logo_avito.png" alt="Avito">
+                </a>
             </div>
-          </div>
-          <div class="promo-card">
-            <img src="images/pc1.jpg" alt="Кастомизация" class="promo-img">
-            <div class="promo-overlay"></div>
-            <div class="promo-content">
-              <div class="promo-badge">Кастом</div>
-              <h3 class="promo-title">Уникальный <span>дизайн</span></h3>
-              <p class="promo-desc">Кастомные кабеля и гравировка под твой стиль.</p>
+            <div class="social-circle2">
+                <a href="https://vk.com/coretech_pc" target="_blank" style="display: flex; width: 100%; height: 100%; align-items: center; justify-content: center; text-decoration: none;">
+                    <img src="images/mini_logo_vk.png" alt="VK">
+                </a>
             </div>
-          </div>
+            <a href="#consult" class="btn-consult">Консультация <span>→</span></a>
+            <button class="mobile-menu-toggle" id="js-mobile-toggle" aria-label="Открыть меню">
+                <span></span><span></span><span></span>
+            </button>
         </div>
-      </div>
-    </div>
-  </section>
-  
-  <section class="m-hero-section-standalone">
-    <div class="m-hero-inner-container">
-      <div class="m-hero-img-centered"><img src="images/pc2.png" alt="Игровой ПК"></div>
-      <div class="m-hero-text-block">
-        <span class="m-hero-lbl">Игровые компьютеры от CORETECH</span>
-        <h1 class="m-hero-t1">Мощные решения</h1>
-        <h2 class="m-hero-t2">для любых задач</h2>
-        <p class="m-hero-tx-desc">Мы создаем индивидуальные конфигурации ПК, которые выжимают максимум FPS в любых современных играх и обеспечивают стабильность в тяжелом софте.</p>
-      </div>
-      <div class="m-hero-btns-box">
-        <a href="#catalog" class="m-btn-hero-click">Открыть каталог <div class="m-arrow-circle"><img src="images/arrow_icon.png" alt="→"></div></a>
-        <a href="#configurator" class="m-btn-hero-sec">Конфигуратор</a>
-      </div>
-      <div class="m-hero-promo-grid">
-        <div class="m-promo-card-wide">
-          <div>
-            <span class="m-promo-badge">Конфиг для тебя</span>
-            <h3 class="m-promo-title">Индивидуальный подбор</h3>
-            <p class="m-promo-desc">Соберем компьютер под твои задачи и бюджет за 3 дня</p>
-          </div>
-          <a href="#consult" class="m-promo-link">Рассчитать ПК <span>→</span></a>
+    </header>
+
+    <div class="mobile-menu-overlay" id="js-mobile-menu">
+        <div class="mobile-menu-container">
+            <nav class="mobile-menu-nav">
+                <a href="index.html#block_catalog" class="mobile-menu-link">Catalog PC</a>
+                <a href="index.html#block_stages_m" class="mobile-menu-link">Stages of work</a>
+                <a href="#block_service" class="mobile-menu-link">Service</a>
+                <a href="#block_team" class="mobile-menu-link">Team</a>
+                <a href="#block_contacts_m" class="mobile-menu-link">Contacts</a>
+                <a href="reviews.html" class="mobile-menu-link">Reviews</a>
+                <div class="mobile-menu-action-wrapper">
+                    <a href="#block_consultation" class="mobile-menu-action-btn">Подобрать компьютер</a>
+                </div>
+            </nav>
         </div>
-        <div class="m-promo-subrow">
-          <div class="m-promo-card-small">
-            <h3 class="m-small-promo-title">АКЦИЯ МЕСЯЦА</h3>
-            <p class="m-small-promo-desc">Настройка и Windows 11 Pro в подарок!</p>
-          </div>
-          <div class="m-promo-card-small m-purple-border">
-            <h3 class="m-small-promo-title">ДОСТАВКА</h3>
-            <p class="m-small-promo-desc">Бережная доставка по всей РФ бесплатно</p>
-          </div>
+    </div>
+
+    <section class="hero-section">
+        <div class="hero-content">
+            <div class="hero-subtitle">Кабель-менеджмент, подбор, качественная сборка и гарантия</div>
+            <div class="hero-title">Индивидуальная</div>
+            <div class="hero-title2">Сборка компьютеров</div>
+            <div class="hero-description">МЫ — пока еще небольшая команда энтузиастов, которая собирает каждый компьютер как для себя. Внимание к каждой мелочи и желание сделать лучшее для каждого клиента — не дают нам покоя.</div>
+            <div class="hero-btns">
+                <a href="#config-title" class="btn-hero">Собрать ПК<div class="arrow-icon"><img src="https://cdn-icons-png.flaticon.com/512/545/545682.png" alt="->"></div></a>
+                <a href="index.html#block_catalog" class="btn-hero">Готовые сборки<div class="arrow-icon"><img src="https://cdn-icons-png.flaticon.com/512/545/545682.png" alt="->"></div></a>
+            </div>
+        </div>  
+        <div class="hero-image"><img src="images/pc2.png" alt="Custom PC"></div>   
+        
+        <div class="promo-container">
+            <div class="promo-grid">
+                <div class="promo-card big-card">
+                    <img src="images/pc1.jpg" alt="Акция" class="promo-img">
+                    <div class="promo-overlay"></div>
+                    <div class="promo-content">
+                        <div class="promo-badge">Товар недели</div>
+                        <h3 class="promo-title">Забирай <span>CORE PRO</span><br>со скидкой 10%</h3>
+                        <p class="promo-desc">Максимальный FPS на ультра-настройках в 2К разрешении. Только до конца недели.</p>
+                    </div>
+                </div>
+                <div class="promo-right-column">
+                    <div class="promo-card">
+                        <img src="images/pc1.jpg" alt="Трейд-ин" class="promo-img">
+                        <div class="promo-overlay"></div>
+                        <div class="promo-content">
+                            <div class="promo-badge">Трейд-ин</div>
+                            <h3 class="promo-title">Обнови свой <span>ПК</span></h3>
+                            <p class="promo-desc">Сдай старый ПК и получи скидку.</p>
+                        </div>
+                    </div>
+                    <div class="promo-card">
+                        <img src="images/pc1.jpg" alt="Кастомизация" class="promo-img">
+                        <div class="promo-overlay"></div>
+                        <div class="promo-content">
+                            <div class="promo-badge">Кастом</div>
+                            <h3 class="promo-title">Уникальный <span>дизайн</span></h3>
+                            <p class="promo-desc">Кастомные кабеля и гравировка под твой стиль.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <div class="container" id="config-title">
-    <h1 class="d-config-title">СБОРКА<span> НА ЗАКАЗ</span></h1>
-    <h1 class="m-config-title">СБОРКА<span> НА ЗАКАЗ</span></h1>
-    <div class="widgets-wrapper">
-      <div class="card main-widget">
-        <div class="pc-image-container"><img src="images/pc1.jpg" alt="PC Image"></div>
-        <div class="config-info">
-          <div>
-            <h2>КОНФИГ<br><span>ДЛЯ ТЕБЯ</span></h2>
-            <div class="badge">✓ ЛЮБЫЕ ЗАДАЧИ</div>
-          </div>
-          <div>
-            <div class="price-text">Любой бюджет</div>
-            <div class="sub-text">● Индивидуальная сборка</div>
-            <div class="btn-anchor"><button class="btn-purple">Собрать компьютер <span>→</span></button></div>
-          </div>
+    <section class="m-hero-section-standalone">
+        <div class="m-hero-inner-container">
+            <div class="m-hero-img-centered"><img src="images/pc2.png" alt="Игровой ПК"></div>
+            <div class="m-hero-text-block">
+                <span class="m-hero-lbl">Игровые компьютеры от CORETECH</span>
+                <h1 class="m-hero-t1">Мощные решения</h1>
+                <h2 class="m-hero-t2">для любых задач</h2>
+                <p class="m-hero-tx-desc">Мы создаем индивидуальные конфигурации ПК, которые выжимают максимум FPS в любых современных играх и обеспечивают стабильность в тяжелом софте.</p>
+            </div>
+            <div class="m-hero-btns-box">
+                <a href="#catalog" class="m-btn-hero-click">Открыть каталог<div class="m-arrow-circle"><img src="images/arrow_icon.png" alt="→"></div></a>
+                <a href="#configurator" class="m-btn-hero-sec">Конфигуратор</a>
+            </div>
+            <div class="m-hero-promo-grid">
+                <div class="m-promo-card-wide">
+                    <div>
+                        <span class="m-promo-badge">Конфиг для тебя</span>
+                        <h3 class="m-promo-title">Индивидуальный подбор</h3>
+                        <p class="m-promo-desc">Соберем компьютер под твои задачи и бюджет за 3 дня</p>
+                    </div>
+                    <a href="#consult" class="m-promo-link">Рассчитать ПК <span>→</span></a>
+                </div>
+                <div class="m-promo-subrow">
+                    <div class="m-promo-card-small">
+                        <h3 class="m-small-promo-title">АКЦИЯ МЕСЯЦА</h3>
+                        <p class="m-small-promo-desc">Настройка и Windows 11 Pro в подарок!</p>
+                    </div>
+                    <div class="m-promo-card-small m-purple-border">
+                        <h3 class="m-small-promo-title">ДОСТАВКА</h3>
+                        <p class="m-small-promo-desc">Бережная доставка по всей РФ бесплатно</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="specs-list">
-          <div class="specs-header">⚙ ПРИМЕРЫ СБОРОК</div>
-          <div class="spec-item"><div class="spec-icon">🧠</div><div><div class="spec-label">ПРОЦЕССОР</div><div class="spec-value" id="cpu-val"></div></div></div>
-          <div class="spec-item"><div class="spec-icon">📺</div><div><div class="spec-label">ВИДЕОКАРТА</div><div class="spec-value" id="gpu-val"></div></div></div>
-          <div class="spec-item"><div class="spec-icon">📼</div><div><div class="spec-label">ПАМЯТЬ</div><div class="spec-value" id="ram-val"></div></div></div>
-          <div class="spec-item"><div class="spec-icon">❄</div><div><div class="spec-label">ОХЛАЖДЕНИЕ</div><div class="spec-value" id="cool-val"></div></div></div>
+    </section>
+
+    <div class="container" id="config-title">
+        <h1 class="d-config-title">СБОРКА<span> НА ЗАКАЗ</span></h1>
+        <h1 class="m-config-title">СБОРКА<span> НА ЗАКАЗ</span></h1>
+        <div class="widgets-wrapper">
+            <div class="card main-widget">
+                <div class="pc-image-container"><img src="images/pc1.jpg" alt="PC Image"></div>
+                <div class="config-info">
+                    <div><h2>КОНФИГ<br><span>ДЛЯ ТЕБЯ</span></h2><div class="badge">✓ ЛЮБЫЕ ЗАДАЧИ</div></div>
+                    <div>
+                        <div class="price-text">Любой бюджет</div>
+                        <div class="sub-text">● Индивидуальная сборка</div>
+                        <div class="btn-anchor"><button class="btn-purple">Собрать компьютер <span>→</span></button></div>
+                    </div>
+                </div>
+                <div class="specs-list">
+                    <div class="specs-header">⚙ ПРИМЕРЫ СБОРОК</div>
+                    <div class="spec-item"><div class="spec-icon">🧠</div><div><div class="spec-label">ПРОЦЕССОР</div><div class="spec-value" id="cpu-val"></div></div></div>
+                    <div class="spec-item"><div class="spec-icon">📺</div><div><div class="spec-label">ВИДЕОКАРТА</div><div class="spec-value" id="gpu-val"></div></div></div>
+                    <div class="spec-item"><div class="spec-icon">📼</div><div><div class="spec-label">ПАМЯТЬ</div><div class="spec-value" id="ram-val"></div></div></div>
+                    <div class="spec-item"><div class="spec-icon">❄</div><div><div class="spec-label">ОХЛАЖДЕНИЕ</div><div class="spec-value" id="cool-val"></div></div></div>
+                </div>
+            </div>
+            <div class="card side-widget">
+                <div><h3>Не разбираешься<br>в комплектующих?</h3><p>Мы подберем лучшее решение для ваших целей и задач.</p></div>
+                <div class="social-buttons">
+                    <a href="https://vk.com/coretech_pc" class="btn-social avito">Написать на Avito</a>
+                    <a href="https://vk.com/coretech_pc" class="btn-social vk">Написать в VK</a>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="card side-widget">
-        <div><h3>Не разбираешься<br>в&nbsp;комплектующих?</h3><p>Мы подберем лучшее решение для ваших целей и задач.</p></div>
-        <div class="social-buttons">
-          <a href="https://vk.com/coretech_pc" class="btn-social avito">Написать на Avito</a>
-          <a href="https://vk.com/coretech_pc" class="btn-social vk">Написать в VK</a>
+    </div>
+
+    <section id="block_catalog" class="catalog-section">
+        <h1 class="d-config-title">ГОТОВЫЕ<span> СБОРКИ</span></h1>
+        <h1 class="m-config-title">ГОТОВЫЕ<span> СБОРКИ</span></h1>
+        <div class="catalog-grid" id="js-catalog-grid"></div>
+    </section>
+
+    <div id="infoModal" class="custom-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div id="modalTitle" class="modal-title">Инфо</div>
+            <div id="modalDataContainer"></div>
         </div>
-      </div>
     </div>
-  </div>
-
-  <div class="catalog-section" id="block_catalog">
-    <h1 class="d-config-title">ГОТОВЫЕ<span> СБОРКИ</span></h1>
-    <h1 class="m-config-title">ГОТОВЫЕ<span> СБОРКИ</span></h1>
-    <div class="catalog-grid" id="js-catalog-grid"></div>
-  </div>
-
-  <div id="infoModal" class="custom-modal">
-    <div class="modal-content">
-      <span class="close-modal" onclick="closeModal()">&times;</span>
-      <div id="modalTitle" class="modal-title">Инфо</div>
-      <div id="modalDataContainer"></div>
-    </div>
-  </div>
-  <div id="gBuyModal" class="g-modal-overlay">
-    <div class="g-modal-body">
-      <div style="position:absolute; top:20px; right:20px; cursor:pointer; font-size:24px; font-weight:bold;" onclick="gCloseBuy()">×</div>
-      <h2>Оформление</h2>
-      <p style="font-size:14px; margin-bottom:15px;">Текст вашей заявки:</p>
-      <div class="g-copy-area" id="gOrderText"></div>
-      <div class="g-btn-row" style="margin-bottom: 25px;">
-        <button class="g-action-btn g-btn-copy" onclick="gCopyText()"><span id="gCopyStatus">КОПИРОВАТЬ</span></button>
-        <a href="#" class="g-action-btn">Напишите нам<br>на AVITO</a>
-        <a href="#" class="g-action-btn">Напишите <br>нам в VK</a>
-      </div>
-      <div class="g-order-separator"><span>ИЛИ ОТПРАВИТЬ ЗАЯВКУ СРАЗУ</span></div>
-      <form id="gInlineBuyForm">
-        <input type="text" class="core-modal-input" placeholder="ВАШЕ ИМЯ" required name="user_name">
-        <input type="tel" class="core-modal-input" placeholder="ВАШ ТЕЛЕФОН" required name="user_phone">
-        <textarea class="core-modal-textarea" placeholder="КОММЕНТАРИЙ К ЗАКАЗУ (НЕОБЯЗАТЕЛЬНО)" name="user_comment" rows="2"></textarea>
-        <button type="submit" class="g-action-btn" id="gSubmitInlineOrder">ОТПРАВИТЬ ЗАЯВКУ</button>
-      </form>
-    </div>
-  </div>
-
-  <section class="steps-section steps-desktop-only" id="block_stages">
-    <div class="steps-visual">
-      <h2>Этапы<br><span>Работы</span></h2>
-      <img src="images/comp gl.png" alt="Процесс сборки" class="steps-pc-image">
-    </div>
-    <div class="steps-content">
-      <div class="step-item step-01"><span class="step-number">[ 01 / ВАША ИДЕЯ И НАШЕ ПРОЕКТИРОВАНИЕ ]</span><p class="step-description">Анализируем ваши потребности и формируем оптимальный сетап железа. Разрабатываем уникальный дизайн-макет и визуальный стиль вашего будущего ПК.</p></div>
-      <div class="step-item step-02"><span class="step-number">[ 02 / ИНЖЕНЕРИЯ И СБОРКА ]</span><p class="step-description">Кастом переходит в руки профи. Собираем систему с филигранной точностью, обеспечивая идеальный кабель-менеджмент и правильный воздушный поток.</p></div>
-      <div class="step-item step-03"><span class="step-number">[ 03 / ОПТИМИЗАЦИЯ И СТРЕСС-ТЕСТЫ ]</span><p class="step-description">Выжимаем максимум производительности: калибруем BIOS, настраиваем тайминги ОЗУ и тестируем систему под экстремальными нагрузками на стабильность.</p></div>
-      <div class="step-item step-04"><span class="step-number">[ 04 / ГОТОВ К СРАЖЕНИЯМ ]</span><p class="step-description">На выходе — бескомпромиссно мощная, тихая и полностью настроенная машина. Никаких лишних действий: распаковывай, включай и доминируй в играх.</p></div>
-    </div>
-  </section>
-
-  <section class="steps-mobile-only" id="block_stages_m">
-    <div class="m-steps-section">
-      <div class="m-steps-container">
-        <h2 class="m-steps-title">Этапы <span>Работы</span></h2>
-        <div class="m-steps-img-top"><img src="images/pc3.png" alt="Процесс сборки"></div>
-        <div class="m-step-box m-step-01 m-left"><span class="m-step-box-num">[ 01 / ВАША ИДЕЯ И НАШЕ ПРОЕКТИРОВАНИЕ ]</span><p class="m-step-box-desc">Анализируем ваши потребности и формируем оптимальный сетап железа. Разрабатываем уникальный дизайн-макет и визуальный стиль вашего будущего ПК.</p></div>
-        <div class="m-step-box m-step-02 m-right"><span class="m-step-box-num">[ 02 / ИНЖЕНЕРИЯ И СБОРКА ]</span><p class="m-step-box-desc">Кастом переходит в руки профи. Собираем систему с филигранной точностью, обеспечивая идеальный кабель-менеджмент и правильный воздушный поток.</p></div>
-        <div class="m-step-box m-step-03 m-left"><span class="m-step-box-num">[ 03 / ОПТИМИЗАЦИЯ И СТРЕСС-ТЕСТЫ ]</span><p class="m-step-box-desc">Выжимаем максимум производительности: калибруем BIOS, настраиваем тайминги ОЗУ и тестируем систему под экстремальными нагрузками на стабильность.</p></div>
-        <div class="m-step-box m-step-04 m-right"><span class="m-step-box-num">[ 04 / ГОТОВ К СРАЖЕНИЯМ ]</span><p class="m-step-box-desc">На выходе — бескомпромиссно мощная, тихая и полностью настроенная машина. Никаких лишних действий: распаковывай, включай и доминируй в играх.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="value-proposition-container" id="block_service">
-    <div class="value-proposition">
-      <div class="stars-layer s1"></div><div class="stars-layer s2"></div><div class="stars-layer s3"></div>
-      <div class="vp-header"><h2>Почему не «просто сборка»</h2><p>Новый стандарт качества</p></div>
-      <div class="vp-grid">
-        <div class="vp-row"><div class="vp-number">01</div><div class="vp-info"><h3>Честная гарантия 12 месяцев</h3><p>Мы берем на себя полную ответственность за каждый собранный компьютер и предоставляем официальную годовую гарантию на всю систему в сборе. Вам не придется самостоятельно разбираться с сервисными центрами отдельных производителей комплектующих в случае проблем. Мы оперативно берем решение любого гарантийного случая на себя, обеспечивая быструю диагностику и замену деталей.</p></div><div class="vp-icon">⚙️</div></div>
-        <div class="vp-row reverse"><div class="vp-number">02</div><div class="vp-info"><h3>Техническая поддержка и ведение клиента</h3><p>Наш сервис не заканчивается в момент передачи коробки с компьютером. На протяжении всего гарантийного срока вы получаете приоритетную выделенную линию связи с нашими инженерами для решения любых вопросов. Поможем обновить драйверы, настроить софт для стриминга, подключить периферию или провести удаленную диагностику, если что-то пошло не так.</p></div><div class="vp-icon">🛠️</div></div>
-        <div class="vp-row"><div class="vp-number">03</div><div class="vp-info"><h3>«Бронированная» упаковка Safe-Transit</h3><p>Мы знаем, как работают службы доставки, поэтому разработали собственную многоуровневую систему защиты ПК при транспортировке. Внутрь корпуса устанавливается специальный надувной пакет-паропласт, который намертво фиксирует тяжелую видеокарту и кулер, защищая материнскую плату от изломов. Снаружи компьютер заматывается в несколько толстых слоев премиальной воздушно-пузырьковой пленки и помещается в жесткий противоударный короб, полностью исключающий любые повреждения.</p></div><div class="vp-icon">🛡️</div></div>
-        <div class="vp-row reverse"><div class="vp-number">04</div><div class="vp-info"><h3>Компьютер готов к работе сразу после распаковки</h3><p>Мы передаем вам систему, полностью готовую к работе: с чистой операционной системой, актуальными драйверами и базовым набором необходимого софта. Никакого мусора и рекламных программ — только чистая производительность прямо из коробки. Каждый компьютер сопровождается отчетом о стабильной работе. Как говорится, просто включил и кайфуешь!</p></div><div class="vp-icon">🔌</div></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="team-section" id="block_team">
-    <div class="team-container">
-      <div class="team-info">
-        <span class="team-label">Собрано профи. Подтверждено делом.</span>
-        <h2 class="team-title">Архитекторы вашей<br>производительности</h2>
-        <p class="team-description">За каждым винтиком и ваттом питания стоит человек, который фанатеет от результата. Мы создаём фундамент для ваших побед: в киберспорте, творчестве или бизнесе.</p>
-        <div class="team-stats">
-          <div style="display: flex; gap: 40px;">
-            <div><div style="font-size: 36px; font-weight: 900; color: #1a1a1a;">500<span style="color: var(--accent-mint);">+</span></div><div style="font-size: 13px; font-weight: 800; color: #888; text-transform: uppercase;">собранных нами ПК</div></div>
-            <div><div style="font-size: 36px; font-weight: 900; color: var(--accent-mint);"> > <span style="color: hsl(0, 0%, 10%);">5</span></div><div style="font-size: 13px; font-weight: 800; color: #888; text-transform: uppercase;">лет опыта работы</div></div>
-            <div><div style="font-size: 36px; font-weight: 900; color: #1a1a1a;">100<span style="color: var(--accent-mint);">+</span></div><div style="font-size: 13px; font-weight: 800; color: #888; text-transform: uppercase;">отзывов</div></div>
-          </div>
+    <div id="gBuyModal" class="g-modal-overlay">
+        <div class="g-modal-body">
+            <div style="position:absolute; top:20px; right:20px; cursor:pointer; font-size:24px; font-weight:bold;" onclick="gCloseBuy()">×</div>
+            <h2>Оформление</h2>
+            <p style="font-size:14px; margin-bottom:15px;">Текст вашей заявки:</p>
+            <div class="g-copy-area" id="gOrderText"></div>
+            <div class="g-btn-row" style="margin-bottom: 25px;">
+                <button class="g-action-btn g-btn-copy" onclick="gCopyText()"><span id="gCopyStatus">КОПИРОВАТЬ</span></button>
+                <a href="#" class="g-action-btn">Напишите нам<br>на AVITO</a>
+                <a href="#" class="g-action-btn">Напишите <br>нам в VK</a>
+            </div>
         </div>
-      </div>
-      <div class="team-slider">
-        <div class="slider-wrapper" id="sliderWrapper">
-          <div class="slide"><img src="images/team1.jpg" alt="Team 1"></div>
-          <div class="slide"><img src="images/team2.jpg" alt="Team 2"></div>
-          <div class="slide"><img src="images/team3.jpg" alt="Team 3"></div>
-          <div class="slide"><img src="images/team4.jpg" alt="Team 4"></div>
+    </div>
+
+    <section class="steps-section steps-desktop-only" id="block_stages">
+        <div class="steps-visual">
+            <h2>Этапы<br><span>Работы</span></h2>
+            <img src="images/comp gl.png" alt="Процесс сборки" class="steps-pc-image">
         </div>
-        <div class="slider-dots" id="sliderDots"></div>
-        <div class="slider-nav"><button class="nav-btn" onclick="moveSlide(-1)">←</button><button class="nav-btn" onclick="moveSlide(1)">→</button></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="social-mega-section sm-desktop-only" id="block_social">
-    <div class="social-mega-container">
-      <h2 class="social-mega-title">СЛЕДИТЕ ЗА НАМИ <span class="accent">В СОЦ. СЕТЯХ</span></h2>
-      <div class="social-mega-grid">
-        <a href="https://vk.com/coretech_pc" class="social-mega-card"><div class="card-content"><span class="card-label">Перейти в группу</span><h3 class="card-name">ВКонтакте</h3></div><div class="card-image-wrapper"><img src="images/logo_vk.png" alt="VK" class="floating-icon-vk"></div></a>
-        <a href="https://www.avito.ru/brands/i177752551" class="social-mega-card"><div class="card-content"><span class="card-label">Перейти в профиль</span><h3 class="card-name">Авито</h3></div><div class="card-image-wrapper"><img src="images/logo_avito.png" alt="Avito" class="floating-icon-av"></div></a>
-        <a href="https://ozon.ru/s/coretech" class="social-mega-card"><div class="card-content"><span class="card-label">Перейти в наш магазин</span><h3 class="card-name">OZON</h3></div><div class="card-image-wrapper"><img src="images/logo_ozon.png" alt="OZON" class="floating-icon"></div></a>
-        <a href="https://www.youtube.com/@coretech-store" class="social-mega-card"><div class="card-content"><span class="card-label">Смотри наши видео</span><h3 class="card-name">YouTube</h3></div><div class="card-image-wrapper"><img src="images/logo_youtube.png" alt="YouTube" class="floating-icon"></div></a>
-      </div>
-    </div>
-  </section>
-
-  <section class="social-mega-section-mobile sm-mobile-only" id="block_contacts_m">
-    <div class="m-social-container">
-      <h2 class="m-social-title">СЛЕДИТЕ ЗА НАМИ <span class="accent">В СОЦ. СЕТЯХ</span></h2>
-      <div class="m-social-grid">
-        <a href="https://vk.com/coretech_pc" class="m-social-card"><div class="m-card-content"><span class="m-card-label">Перейти в группу</span><h3 class="m-card-name">ВКонтакте</h3></div><div class="m-card-image-wrapper"><img src="images/logo_vk.png" alt="VK" class="m-floating-icon-vk"></div></a>
-        <a href="https://www.avito.ru/brands/i177752551" class="m-social-card"><div class="m-card-content"><span class="m-card-label">Перейти в профиль</span><h3 class="m-card-name">Авито</h3></div><div class="m-card-image-wrapper"><img src="images/logo_avito.png" alt="Avito" class="m-floating-icon-av"></div></a>
-        <a href="https://ozon.ru/s/coretech" class="m-social-card"><div class="m-card-content"><span class="m-card-label">Перейти в наш магазин</span><h3 class="m-card-name">OZON</h3></div><div class="m-card-image-wrapper"><img src="images/logo_ozon.png" alt="OZON" class="m-floating-icon"></div></a>
-        <a href="https://www.youtube.com/@coretech-store" class="m-social-card"><div class="m-card-content"><span class="m-card-label">Смотри наши видео</span><h3 class="m-card-name">YouTube</h3></div><div class="m-card-image-wrapper"><img src="images/logo_youtube.png" alt="YouTube" class="m-floating-icon"></div></a>
-      </div>
-    </div>
-  </section>
-
-  <section class="reviews-section" id="block_reviews">
-    <div class="stars-container" id="stars"></div>
-    <div class="blue-glow"></div>
-    <div class="reviews-header"><h2>Что о нас говорят</h2><p>Более 40 довольных клиентов уже собрали свой идеальный ПК</p></div>
-    <div class="reviews-footer"><a href="reviews.html" class="view-all-btn">Посмотреть все отзывы <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></div>
-    <div class="reviews-marquee" id="marquee-container"><div class="reviews-track" id="reviews-track"></div></div>
-  </section>
-  
-  <div id="image-modal" class="review-modal"><span class="modal-close">&times;</span><img id="modal-img" src="" alt="Full view"></div>
-
-  <section class="g-map-section" id="contacts">
-    <div class="g-container-map">
-      <div class="g-map-inner-box">
-        <div class="g-map-info-card">
-          <h2 class="g-map-title">НАШ МАГАЗИН</h2>
-          <p class="g-map-subtitle">Приезжайте в гости за своим мощным ПК или на бесплатную консультацию!</p>
-          <div class="g-map-info-list">
-            <div class="g-map-info-item"><span class="g-map-icon"></span><div><div class="g-map-item-label">Адрес:</div><div class="g-map-item-value">г. Таганрог, ул. Пархоменко 2 <br>(помещение возле кофейни)</div></div></div>
-            <div class="g-map-info-item"><span class="g-map-icon"></span><div><div class="g-map-item-label">Режим работы:</div><div class="g-map-item-value">Будни: с 18:00 до 22:00 <br> Выходные: с 12:00 до 20:00</div></div></div>
-            <div class="g-map-info-item"><span class="g-map-icon"></span><div><div class="g-map-item-label">Телефон:</div><div class="g-map-item-value">+7 (999) 000-00-00</div></div></div>
-          </div>
-          <div class="g-map-buttons-group">
-            <a href="https://yandex.ru/maps/-/CPXOzRm3" target="_blank" class="g-btn g-map-purple-link g-map-btn">ОТКРЫТЬ В ЯНДЕКС.КАРТАХ</a>
-            <button class="g-btn g-map-order-btn btn-consult g-map-btn">ЗАКАЗАТЬ КОМПЬЮТЕР</button>
-          </div>
+        <div class="steps-content">
+            <div class="step-item step-01"><span class="step-number">[ 01 / ВАША ИДЕЯ И НАШЕ ПРОЕКТИРОВАНИЕ ]</span><p class="step-description">Анализируем ваши потребности и формируем оптимальный сетап железа. Разрабатываем уникальный дизайн-макет и визуальный стиль вашего будущего ПК.</p></div>
+            <div class="step-item step-02"><span class="step-number">[ 02 / ИНЖЕНЕРИЯ И СБОРКА ]</span><p class="step-description">Кастом переходит в руки профи. Собираем систему с филигранной точностью, обеспечивая идеальный кабель-менеджмент и правильный воздушный поток.</p></div>
+            <div class="step-item step-03"><span class="step-number">[ 03 / ОПТИМИЗАЦИЯ И СТРЕСС-ТЕСТЫ ]</span><p class="step-description">Выжимаем максимум производительности: калибруем BIOS, настраиваем тайминги ОЗУ и тестируем систему под экстремальными нагрузками на стабильность.</p></div>
+            <div class="step-item step-04"><span class="step-number">[ 04 / ГОТОВ К СРАЖЕНИЯМ ]</span><p class="step-description">На выходе — бескомпромиссно мощная, тихая и полностью настроенная машина. Никаких лишних действий: распаковывай, включай и доминируй в играх.</p></div>
         </div>
-        <a href="https://yandex.ru/maps/?um=constructor%3A946928e213b36b8a2b53e2499b6ebbac91878f0789e6c5aa97d94f32a3f8e471&amp;source=constructorStatic" target="_blank" class="g-map-static-wrapper">
-          <img src="https://api-maps.yandex.ru/services/constructor/1.0/static/?um=constructor%3A946928e213b36b8a2b53e2499b6ebbac91878f0789e6c5aa97d94f32a3f8e471&amp;width=600&amp;height=450&amp;lang=ru_RU" alt="Карта проезда" class="g-map-static-img" />
-        </a>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="footer-wrapper">
-    <div class="footer-island">
-      <div class="footer-top">
-        <div class="footer-docs-container"><div class="footer-label">Документы</div><nav class="footer-docs"><a href="oferta.html">Публичная оферта</a><a href="privacy.html">Политика конфиденциальности<br>и согласие на обработку ПД</a></nav></div>
-        <div class="footer-requisites-container"><div class="footer-label">Реквизиты</div><div class="footer-requisites"><p>ИП Музыкин Егор Анатольевич</p><p>ИНН 123456789012</p><p>ОГРНИП 123456789012345</p><span class="date-small">от 01.01.2024</span></div></div>
-      </div>
-      <div class="footer-divider"></div>
-      <div class="footer-bottom">
-        <div class="footer-disclaimer">Используя сайт, вы соглашаетесь с офертой и политикой конфиденциальности, в том числе с обработкой персональных данных. Информация на сайте не является публичной офертой.</div>
-        <div class="footer-bottom-right">
-          <div class="footer-copy">© 2025 Все права защищены | <b>Ваш надежный партнер</b></div>
-          <div class="footer-dev">Сайт разработали — <span>CORETECH</span></div>
-          <a href="#" class="btn-up" title="Наверх"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg></a>
+    <section class="steps-mobile-only" id="block_stages_m">
+        <div class="m-steps-section">
+            <div class="m-steps-container">
+                <h2 class="m-steps-title">Этапы <span>Работы</span></h2>
+                <div class="m-steps-img-top"><img src="images/pc3.png" alt="Процесс сборки"></div>
+                <div class="m-step-box m-step-01 m-left"><span class="m-step-box-num">[ 01 / ПРОЕКТИРОВАНИЕ ]</span><p class="m-step-box-desc">Анализируем ваши потребности...</p></div>
+                <div class="m-step-box m-step-02 m-right"><span class="m-step-box-num">[ 02 / СБОРКА ]</span><p class="m-step-box-desc">Кастом переходит в руки профи...</p></div>
+                <div class="m-step-box m-step-03 m-left"><span class="m-step-box-num">[ 03 / СТРЕСС-ТЕСТЫ ]</span><p class="m-step-box-desc">Выжимаем максимум...</p></div>
+                <div class="m-step-box m-step-04 m-right"><span class="m-step-box-num">[ 04 / ГОТОВ К СРАЖЕНИЯМ ]</span><p class="m-step-box-desc">На выходе мощная машина...</p></div>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <div id="cookieNotice" class="cookie-notice">
-    <div class="cookie-text">Мы используем <span>куки-файлы</span>, чтобы сделать твое пребывание на сайте максимально комфортным. Продолжая просматривать сайт, ты соглашаешься с нашей <a href="#">Политикой конфиденциальности</a>.</div>
-    <button class="cookie-btn" onclick="acceptCookies()">Принять</button>
-  </div>
-
-  <div class="core-modal-overlay" id="js-core-modal" style="display: none;">
-    <div class="core-modal-window">
-      <button class="core-modal-close-btn" id="js-modal-close" aria-label="Закрыть окно">&times;</button>
-      <h3 class="core-modal-title">Оставить заявку</h3>
-      <p class="core-modal-subtitle">Заполните форму, и наш инженер свяжется с вами для детальной консультации по вашей будущей сборке.</p>
-      <form class="core-modal-form" action="#" method="POST" id="js-core-modal-form">
-        <div class="core-modal-field"><label class="core-modal-label" for="modal-name">Имя</label><input class="core-modal-input" type="text" id="modal-name" name="name" placeholder="Как к вам обращаться?" required></div>
-        <div class="core-modal-field"><label class="core-modal-label" for="modal-phone">Телефон</label><input class="core-modal-input" type="tel" id="modal-phone" name="phone" placeholder="+7 (999) 999-99-99" maxlength="18" required></div>
-        <div class="core-modal-field"><label class="core-modal-label" for="modal-comment">Комментарий (необязательно)</label><textarea class="core-modal-textarea" id="modal-comment" name="comment" placeholder="Напишите ваши пожелания, бюджет или предпочитаемые игры..."></textarea></div>
-        <button class="core-modal-submit-btn" type="submit">Отправить заявку</button>
-      </form>
-      <div class="core-modal-divider"></div>
-      <div class="core-modal-socials-block">
-        <p class="core-modal-socials-text">Хотите сразу же получить ответ? Напишите нам в наши соц. сети по ссылкам ниже. Наш менеджер ответит очень быстро :)</p>
-        <div class="core-modal-socials-buttons">
-          <a href="#" target="_blank" class="core-social-btn btn-vk">ВКонтакте</a>
-          <a href="#" target="_blank" class="core-social-btn btn-avito">Авито</a>
+    <section class="value-proposition-container" id="block_service">
+        <div class="value-proposition">
+            <div class="stars-layer s1"></div><div class="stars-layer s2"></div><div class="stars-layer s3"></div>
+            <div class="vp-header">
+                <h2>Почему не «просто сборка»</h2>
+                <p>Новый стандарт качества</p>
+            </div>
+            <div class="vp-grid">
+                <div class="vp-row">
+                    <div class="vp-number">01</div>
+                    <div class="vp-info"><h3>Честная гарантия 12 месяцев</h3><p>Мы берем на себя полную ответственность...</p></div>
+                    <div class="vp-icon">⚙️</div>
+                </div>
+                <div class="vp-row reverse">
+                    <div class="vp-number">02</div>
+                    <div class="vp-info"><h3>Техническая поддержка</h3><p>Наш сервис не заканчивается в момент передачи...</p></div>
+                    <div class="vp-icon">🛠️</div>
+                </div>
+                <div class="vp-row">
+                    <div class="vp-number">03</div>
+                    <div class="vp-info"><h3>Упаковка Safe-Transit</h3><p>Мы знаем, как работают службы доставки...</p></div>
+                    <div class="vp-icon">🛡️</div>
+                </div>
+                <div class="vp-row reverse">
+                    <div class="vp-number">04</div>
+                    <div class="vp-info"><h3>Готов к работе</h3><p>Мы передаем вам систему, полностью готовую к работе...</p></div>
+                    <div class="vp-icon">🔌</div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
+    </section>
 
+    <section class="team-section" id="block_team">
+        <div class="team-container">
+            <div class="team-info">
+                <span class="team-label">Собрано профи. Подтверждено делом.</span>
+                <h2 class="team-title">Архитекторы вашей<br>производительности</h2>
+                <p class="team-description">За каждым винтиком и ваттом питания стоит человек, который фанатеет от результата.</p>
+                <div class="team-stats">
+                    <div style="display: flex; gap: 40px;">
+                        <div><div style="font-size: 36px; font-weight: 900; color: #1a1a1a;">500<span style="color: var(--accent-mint, #7B61FF);">+</span></div><div style="font-size: 13px; font-weight: 800; color: #888; text-transform: uppercase;">собранных нами ПК</div></div>
+                        <div><div style="font-size: 36px; font-weight: 900; color: #4ce2b8;"> > <span style="color: hsl(0, 0%, 10%);">5</span></div><div style="font-size: 13px; font-weight: 800; color: #888; text-transform: uppercase;">лет опыта работы</div></div>
+                        <div><div style="font-size: 36px; font-weight: 900; color: #1a1a1a;">100<span style="color: var(--accent-mint, #7B61FF);">+</span></div><div style="font-size: 13px; font-weight: 800; color: #888; text-transform: uppercase;">отзывов</div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="team-slider">
+                <div class="slider-wrapper" id="sliderWrapper">
+                    <div class="slide"><img src="images/team1.jpg" alt="Team 1"></div>
+                    <div class="slide"><img src="images/team2.jpg" alt="Team 2"></div>
+                    <div class="slide"><img src="images/team3.jpg" alt="Team 3"></div>
+                    <div class="slide"><img src="images/team4.jpg" alt="Team 4"></div>
+                </div>
+                <div class="slider-dots" id="sliderDots"></div>
+                <div class="slider-nav">
+                    <button class="nav-btn" onclick="moveSlide(-1)">←</button>
+                    <button class="nav-btn" onclick="moveSlide(1)">→</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="social-mega-section sm-desktop-only" id="block_social">
+        <div class="social-mega-container">
+            <h2 class="social-mega-title">СЛЕДИТЕ ЗА НАМИ <span class="accent">В СОЦ. СЕТЯХ</span></h2>
+            <div class="social-mega-grid">
+                <a href="https://vk.com/coretech_pc" class="social-mega-card"><div class="card-content"><span class="card-label">Перейти в группу</span><h3 class="card-name">ВКонтакте</h3></div><div class="card-image-wrapper"><img src="images/logo_vk.png" alt="VK" class="floating-icon-vk"></div></a>
+                <a href="https://www.avito.ru/brands/i177752551" class="social-mega-card"><div class="card-content"><span class="card-label">Перейти в профиль</span><h3 class="card-name">Авито</h3></div><div class="card-image-wrapper"><img src="images/logo_avito.png" alt="Avito" class="floating-icon-av"></div></a>
+                <a href="https://ozon.ru/s/coretech" class="social-mega-card"><div class="card-content"><span class="card-label">Перейти в наш магазин</span><h3 class="card-name">OZON</h3></div><div class="card-image-wrapper"><img src="images/logo_ozon.png" alt="OZON" class="floating-icon"></div></a>
+                <a href="https://www.youtube.com/@coretech-store" class="social-mega-card"><div class="card-content"><span class="card-label">Смотри наши видео</span><h3 class="card-name">YouTube</h3></div><div class="card-image-wrapper"><img src="images/logo_youtube.png" alt="YouTube" class="floating-icon"></div></a>
+            </div>
+        </div>
+    </section>
+    
+    <section class="social-mega-section-mobile sm-mobile-only" id="block_contacts_m">
+        <div class="m-social-container">
+            <h2 class="m-social-title">СЛЕДИТЕ ЗА НАМИ <span class="accent">В СОЦ. СЕТЯХ</span></h2>
+            <div class="m-social-grid">
+                <a href="https://vk.com/coretech_pc" class="m-social-card"><div class="m-card-content"><span class="m-card-label">Перейти в группу</span><h3 class="m-card-name">ВКонтакте</h3></div><div class="m-card-image-wrapper"><img src="images/logo_vk.png" alt="VK" class="m-floating-icon-vk"></div></a>
+                <a href="https://www.avito.ru/brands/i177752551" class="m-social-card"><div class="m-card-content"><span class="m-card-label">Перейти в профиль</span><h3 class="m-card-name">Авито</h3></div><div class="m-card-image-wrapper"><img src="images/logo_avito.png" alt="Avito" class="m-floating-icon-av"></div></a>
+                <a href="https://ozon.ru/s/coretech" class="m-social-card"><div class="m-card-content"><span class="m-card-label">Перейти в магазин</span><h3 class="m-card-name">OZON</h3></div><div class="m-card-image-wrapper"><img src="images/logo_ozon.png" alt="OZON" class="m-floating-icon"></div></a>
+                <a href="https://www.youtube.com/@coretech-store" class="m-social-card"><div class="m-card-content"><span class="m-card-label">Смотри наши видео</span><h3 class="m-card-name">YouTube</h3></div><div class="m-card-image-wrapper"><img src="images/logo_youtube.png" alt="YouTube" class="m-floating-icon"></div></a>
+            </div>
+        </div>
+    </section>
+
+    <section class="reviews-section" id="block_reviews">
+        <div class="stars-container" id="stars"></div>
+        <div class="blue-glow"></div>
+        <div class="reviews-header">
+            <h2>Что о нас говорят</h2>
+            <p>Более 40 довольных клиентов уже собрали свой идеальный ПК</p>
+        </div>
+        <div class="reviews-footer">
+            <a href="reviews.html" class="view-all-btn">Посмотреть все отзывы <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+        </div>
+        <div class="reviews-marquee" id="marquee-container">
+            <div class="reviews-track" id="reviews-track"></div> 
+        </div>
+    </section>
+    <div id="image-modal" class="review-modal"><span class="modal-close">&times;</span><img id="modal-img" src="" alt="Full view"></div>
+
+    <section class="g-map-section" id="contacts">
+        <div class="g-container-map">
+            <div class="g-map-inner-box">
+                <div class="g-map-info-card">
+                    <h2 class="g-map-title">НАШ МАГАЗИН</h2>
+                    <p class="g-map-subtitle">Приезжайте в гости за своим мощным ПК или на бесплатную консультацию!</p>
+                    <div class="g-map-info-list">
+                        <div class="g-map-info-item"><span class="g-map-icon"></span><div><div class="g-map-item-label">Адрес:</div><div class="g-map-item-value">г. Таганрог, ул. Пархоменко 2 <br>(помещение возле кофейни)</div></div></div>
+                        <div class="g-map-info-item"><span class="g-map-icon"></span><div><div class="g-map-item-label">Режим работы:</div><div class="g-map-item-value">Будни: с 18:00 до 22:00 <br> Выходные: с 12:00 до 20:00</div></div></div>
+                        <div class="g-map-info-item"><span class="g-map-icon"></span><div><div class="g-map-item-label">Телефон:</div><div class="g-map-item-value">+7 (999) 000-00-00</div></div></div>
+                    </div>
+                    <div class="g-map-buttons-group">
+                        <a href="https://yandex.ru/maps/-/CPXOzRm3" target="_blank" class="g-btn g-map-purple-link g-map-btn">ОТКРЫТЬ В ЯНДЕКС.КАРТАХ</a>
+                        <button class="g-btn g-map-order-btn btn-consult g-map-btn">ЗАКАЗАТЬ КОМПЬЮТЕР</button>
+                    </div>
+                </div>
+                <a href="https://yandex.ru/maps/?um=constructor%3A946928e213b36b8a2b53e2499b6ebbac91878f0789e6c5aa97d94f32a3f8e471&amp;source=constructorStatic" target="_blank" class="g-map-static-wrapper">
+                    <img src="https://api-maps.yandex.ru/services/constructor/1.0/static/?um=constructor%3A946928e213b36b8a2b53e2499b6ebbac91878f0789e6c5aa97d94f32a3f8e471&amp;width=600&amp;height=450&amp;lang=ru_RU" alt="Карта проезда" class="g-map-static-img" />
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="footer-wrapper">
+        <div class="footer-island">
+            <div class="footer-top">
+                <div class="footer-docs-container">
+                    <div class="footer-label">Документы</div>
+                    <nav class="footer-docs">
+                        <a href="oferta.html">Публичная оферта</a>
+                        <a href="privacy.html">Политика конфиденциальности<br>и согласие на обработку ПД</a>
+                    </nav>
+                </div>
+                <div class="footer-requisites-container">
+                    <div class="footer-label">Реквизиты</div>
+                    <div class="footer-requisites">
+                        <p>ИП Музыкин Егор Анатольевич</p>
+                        <p>ИНН 123456789012</p>
+                        <p>ОГРНИП 123456789012345</p>
+                        <span class="date-small">от 01.01.2024</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-divider"></div>
+            <div class="footer-bottom">
+                <div class="footer-disclaimer">Используя сайт, вы соглашаетесь с офертой и политикой конфиденциальности. Информация не является публичной офертой.</div>
+                <div class="footer-bottom-right">
+                    <div class="footer-copy">© 2026 Все права защищены | <b>Ваш надежный партнер</b></div>
+                    <div class="footer-dev">Сайт разработали — <span>CORETECH</span></div>
+                    <a href="#" class="btn-up" title="Наверх"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="cookieNotice" class="cookie-notice">
+        <div class="cookie-text">Мы используем <span>куки-файлы</span>, чтобы сделать твое пребывание на сайте максимально комфортным. Продолжая просматривать сайт, ты соглашаешься с нашей <a href="#">Политикой конфиденциальности</a>.</div>
+        <button class="cookie-btn" onclick="acceptCookies()">Принять</button>
+    </div>
+
+    <div class="core-modal-overlay" id="js-core-modal" style="display: none;">
+        <div class="core-modal-window">
+            <button class="core-modal-close-btn" id="js-modal-close" aria-label="Закрыть окно">&times;</button>
+            <h3 class="core-modal-title">Оставить заявку</h3>
+            <p class="core-modal-subtitle">Заполните форму, и наш инженер свяжется с вами для детальной консультации по вашей будущей сборке.</p>
+            <form class="core-modal-form" id="js-core-modal-form">
+                <div class="core-modal-field">
+                    <label class="core-modal-label" for="modal-name">Имя</label>
+                    <input class="core-modal-input" type="text" id="modal-name" name="name" placeholder="Как к вам обращаться?" required>
+                </div>
+                <div class="core-modal-field">
+                    <label class="core-modal-label" for="modal-phone">Телефон</label>
+                    <input class="core-modal-input" type="tel" id="modal-phone" name="phone" placeholder="+7 (999) 999-99-99" maxlength="18" required>                </div>
+                <div class="core-modal-field">
+                    <label class="core-modal-label" for="modal-comment">Комментарий (необязательно)</label>
+                    <textarea class="core-modal-textarea" id="modal-comment" name="comment" placeholder="Напишите ваши пожелания, бюджет или предпочитаемые игры..."></textarea>
+                </div>
+                <button class="core-modal-submit-btn" type="submit">Отправить заявку</button>
+            </form>
+            <div class="core-modal-divider"></div>
+            <div class="core-modal-socials-block">
+                <p class="core-modal-socials-text">Хотите сразу же получить ответ? Напишите нам в наши соц. сети.</p>
+                <div class="core-modal-socials-buttons">
+                    <a href="https://vk.com/coretech_pc" target="_blank" class="core-social-btn btn-vk">ВКонтакте</a>
+                    <a href="https://www.avito.ru/brands/i177752551" target="_blank" class="core-social-btn btn-avito">Авито</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
